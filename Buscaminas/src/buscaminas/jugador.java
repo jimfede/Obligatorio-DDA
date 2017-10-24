@@ -9,6 +9,53 @@ package buscaminas;
  *
  * @author Federico
  */
-public class jugador extends usuario{
-    
+public class jugador extends usuario {
+
+    Double credito;
+
+    public jugador() {
+        this.rolUsuario = RolSingleton.getInstance().getRolJugador();
+        this.credito = 0.0;
+    }
+
+    public Double getCredito() {
+        return credito;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public String getRolUsuario() {
+        return rolUsuario;
+    }
+
+    public void setCredito(Double credito) {
+        this.credito = credito;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
+
+    public void setRolUsuario(String rolUsuario) {
+        this.rolUsuario = rolUsuario;
+    }
+
 }

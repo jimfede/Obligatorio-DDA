@@ -9,8 +9,11 @@ package buscaminas;
  *
  * @author Federico
  */
-public class usuario {
+abstract class usuario {
+
     String nombreUsuario;
     String clave;
     String nombreCompleto;
+    String rolUsuario;
+
 }

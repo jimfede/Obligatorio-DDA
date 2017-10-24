@@ -16,6 +16,12 @@ public class Buscaminas {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+
+        jugador nuevoJugador = new jugador();
+        administrador nuevoAdministrador = new administrador();
+        System.out.println(nuevoJugador.getRolUsuario());
+        System.out.println(nuevoAdministrador.getRolUsuario());
+
     }
-    
+
 }
