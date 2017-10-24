@@ -10,6 +10,7 @@ package buscaminas;
  * @author Federico
  */
 public class Casillero {
+
     private int coordenadaX;
     private int coordenadaY;
     private Mina mina;
@@ -17,6 +18,11 @@ public class Casillero {
     public Casillero(int coordenadaX, int coordenadaY) {
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;
+    }
+
+    //SOLO PARA PRUEBAS
+    public String toString() {
+        return String.valueOf(this.coordenadaX + " " + this.coordenadaY);
     }
 
     public int getCoordenadaX() {
@@ -42,5 +48,5 @@ public class Casillero {
     public void setMina(Mina mina) {
         this.mina = mina;
     }
-    
+
 }

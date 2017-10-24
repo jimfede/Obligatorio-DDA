@@ -30,11 +30,13 @@ public class Buscaminas {
         administrador adm1 = new administrador("admin", "admin", "Stanton Tregunnah");
 
         Partida primeraPartida = new Partida(j1, new Tablero(3, 3));
+
+        //PRUEBAS
         for (Casillero k : primeraPartida.getTablero().getCasilleros()) {
-            
             if (k.getMina() != null) {
                 System.out.println("KBoom en " + k.getCoordenadaX() + " " + k.getCoordenadaY());
             }
+            System.out.println(k);
         }
 
     }
