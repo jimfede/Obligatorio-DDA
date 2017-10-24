@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buscaminas;
+package IUConsola;
+
+import buscaminas.*;
+import java.util.ArrayList;
 
 /**
  *
  * @author Federico
  */
-public class usuario {
-
-    String nombreUsuario;
-    String clave;
-    String nombreCompleto;
-    String rolUsuario;
-
+public class Controladora {
+    private static ArrayList<usuario> lstUsuarios = new ArrayList<usuario>();    
 }
