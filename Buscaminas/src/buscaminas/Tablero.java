@@ -5,16 +5,17 @@
  */
 package buscaminas;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Federico
  */
-public class usuario {
+public class Tablero {
 
-    String nombreUsuario;
-    String clave;
-    String nombreCompleto;
-    String rolUsuario;
-    boolean sesioniniciada;
-
+    int casillerosX;
+    int casillerosY;
+    String color1;
+    String color2;
+    ArrayList<Mina> minas = new ArrayList<>();
 }

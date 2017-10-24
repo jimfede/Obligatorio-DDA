@@ -9,12 +9,7 @@ package buscaminas;
  *
  * @author Federico
  */
-public class usuario {
-
-    String nombreUsuario;
-    String clave;
-    String nombreCompleto;
-    String rolUsuario;
-    boolean sesioniniciada;
-
+public class Mina {
+    int coordenadaX;
+    int coordenadaY;
 }

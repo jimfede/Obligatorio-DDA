@@ -11,8 +11,12 @@ package buscaminas;
  */
 public class administrador extends usuario{
 
-    public administrador() {
+    public administrador(String nombreUsuario, String clave, String nombreCompleto) {
+        this.nombreUsuario = nombreUsuario;
+        this.clave = clave;
+        this.nombreCompleto = nombreCompleto;
         this.rolUsuario = RolSingleton.getInstance().getRolAdministrador();
+        this.sesioniniciada = false;
     }
 
     public String getNombreUsuario() {

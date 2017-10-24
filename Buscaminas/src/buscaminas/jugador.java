@@ -13,8 +13,12 @@ public class jugador extends usuario {
 
     Double credito;
 
-    public jugador() {
+    public jugador(String nombreUsuario, String clave, String nombreCompleto) {
+        this.nombreUsuario = nombreUsuario;
+        this.clave = clave;
+        this.nombreCompleto = nombreCompleto;
         this.rolUsuario = RolSingleton.getInstance().getRolJugador();
+        this.sesioniniciada = false;
         this.credito = 0.0;
     }
 

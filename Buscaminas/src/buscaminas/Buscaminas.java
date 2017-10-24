@@ -17,10 +17,14 @@ public class Buscaminas {
     public static void main(String[] args) {
         // TODO code application logic here
 
-        jugador nuevoJugador = new jugador();
-        administrador nuevoAdministrador = new administrador();
-        System.out.println(nuevoJugador.getRolUsuario());
-        System.out.println(nuevoAdministrador.getRolUsuario());
+        jugador j1 = new jugador("BB", "bb", "Babita Bernardotti");
+        jugador j2 = new jugador("CD", "cd", "Chrysa Darridon");
+        jugador j3 = new jugador("NR", "nr", "Nerty Raittie");
+        jugador j4 = new jugador("KP", "kp", "Katerine Pigeram");
+        jugador j5 = new jugador("LB", "lb", "Lindy Belamy");
+        jugador j6 = new jugador("CC", "cc", "Carr Cordelet");
+
+        administrador adm1 = new administrador("admin", "admin", "Stanton Tregunnah");
 
     }
 
