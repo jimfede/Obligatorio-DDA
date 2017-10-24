@@ -5,6 +5,9 @@
  */
 package buscaminas;
 
+import buscaminas.usuarios.administrador;
+import buscaminas.usuarios.jugador;
+
 /**
  *
  * @author Federico
@@ -25,6 +28,14 @@ public class Buscaminas {
         jugador j6 = new jugador("CC", "cc", "Carr Cordelet");
 
         administrador adm1 = new administrador("admin", "admin", "Stanton Tregunnah");
+
+        Partida primeraPartida = new Partida(j1, new Tablero(3, 3));
+        for (Casillero k : primeraPartida.getTablero().getCasilleros()) {
+            
+            if (k.getMina() != null) {
+                System.out.println("KBoom en " + k.getCoordenadaX() + " " + k.getCoordenadaY());
+            }
+        }
 
     }
 

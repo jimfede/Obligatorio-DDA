@@ -9,13 +9,26 @@ package buscaminas;
  *
  * @author Federico
  */
-public class Mina {
+public class Casillero {
     private int coordenadaX;
     private int coordenadaY;
+    private Mina mina;
 
-    public Mina(int coordenadaX, int coordenadaY) {
+    public Casillero(int coordenadaX, int coordenadaY) {
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;
+    }
+
+    public int getCoordenadaX() {
+        return coordenadaX;
+    }
+
+    public int getCoordenadaY() {
+        return coordenadaY;
+    }
+
+    public Mina getMina() {
+        return mina;
     }
 
     public void setCoordenadaX(int coordenadaX) {
@@ -26,12 +39,8 @@ public class Mina {
         this.coordenadaY = coordenadaY;
     }
 
-    public int getCoordenadaX() {
-        return coordenadaX;
-    }
-
-    public int getCoordenadaY() {
-        return coordenadaY;
+    public void setMina(Mina mina) {
+        this.mina = mina;
     }
     
 }

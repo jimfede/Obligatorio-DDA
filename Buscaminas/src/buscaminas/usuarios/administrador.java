@@ -3,27 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buscaminas;
+package buscaminas.usuarios;
 
 /**
  *
  * @author Federico
  */
-public class jugador extends usuario {
+public class administrador extends usuario{
 
-    Double credito;
-
-    public jugador(String nombreUsuario, String clave, String nombreCompleto) {
+    public administrador(String nombreUsuario, String clave, String nombreCompleto) {
         this.nombreUsuario = nombreUsuario;
         this.clave = clave;
         this.nombreCompleto = nombreCompleto;
-        this.rolUsuario = RolSingleton.getInstance().getRolJugador();
+        this.rolUsuario = RolSingleton.getInstance().getRolAdministrador();
         this.sesioniniciada = false;
-        this.credito = 0.0;
-    }
-
-    public Double getCredito() {
-        return credito;
     }
 
     public String getNombreUsuario() {
@@ -42,10 +35,6 @@ public class jugador extends usuario {
         return rolUsuario;
     }
 
-    public void setCredito(Double credito) {
-        this.credito = credito;
-    }
-
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
     }
@@ -61,5 +50,5 @@ public class jugador extends usuario {
     public void setRolUsuario(String rolUsuario) {
         this.rolUsuario = rolUsuario;
     }
-
+    
 }
