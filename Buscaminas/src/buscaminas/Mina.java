@@ -10,8 +10,12 @@ package buscaminas;
  * @author Federico
  */
 public class Mina {
+
     private int coordenadaX;
     private int coordenadaY;
+
+    public Mina() {
+    }
 
     public Mina(int coordenadaX, int coordenadaY) {
         this.coordenadaX = coordenadaX;
@@ -33,5 +37,5 @@ public class Mina {
     public int getCoordenadaY() {
         return coordenadaY;
     }
-    
+
 }

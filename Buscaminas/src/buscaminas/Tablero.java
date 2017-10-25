@@ -33,12 +33,27 @@ public class Tablero {
             j = 1;
             i++;
         }
-        Mina minaInicial = new Mina((int) (Math.random() * casillerosX) + 1, (int) (Math.random() * casillerosY) + 1);
-        for (Casillero k : casilleros) {
-            if (k.getCoordenadaX() == minaInicial.getCoordenadaX() && k.getCoordenadaY() == minaInicial.getCoordenadaY()) {
-                k.setMina(minaInicial);
+        insertarMina(casillerosX, casillerosY);
+    }
+
+    public void insertarMina(int casillerosX, int casillerosY) {
+        Mina nuevaMina = minaRandom(casillerosX, casillerosY);
+        boolean minaInsertada = false;
+        do {
+            for (Casillero k : casilleros) {
+                if (k.getMina() == null) {
+                    if (k.getCoordenadaX() == nuevaMina.getCoordenadaX() && k.getCoordenadaY() == nuevaMina.getCoordenadaY()) {
+                        k.setMina(nuevaMina);
+                        minaInsertada = true;
+                    }
+                }
             }
-        }
+        } while (minaInsertada == false);
+    }
+
+    public Mina minaRandom(int casillerosX, int casillerosY) {
+        Mina nuevaMina = new Mina((int) (Math.random() * casillerosX) + 1, (int) (Math.random() * casillerosY) + 1);
+        return nuevaMina;
     }
 
     public int getCasillerosX() {

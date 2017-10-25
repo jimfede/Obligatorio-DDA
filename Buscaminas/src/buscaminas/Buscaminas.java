@@ -34,7 +34,7 @@ public class Buscaminas {
         //PRUEBAS
         for (Casillero k : primeraPartida.getTablero().getCasilleros()) {
             if (k.getMina() != null) {
-                System.out.println("KBoom en " + k.getCoordenadaX() + " " + k.getCoordenadaY());
+                System.out.print("KBoom en ");
             }
             System.out.println(k);
         }
