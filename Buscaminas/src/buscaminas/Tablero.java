@@ -36,12 +36,20 @@ public class Tablero {
         insertarMina(casillerosX, casillerosY);
     }
 
+    public boolean checkMedidasTablero(int casillerosX, int casillerosY) {
+        if (casillerosX * casillerosY >= 9 || casillerosX * casillerosY <= 100) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void insertarMina(int casillerosX, int casillerosY) {
         Mina nuevaMina = minaRandom(casillerosX, casillerosY);
         boolean minaInsertada = false;
         do {
             for (Casillero k : casilleros) {
-                if (k.getMina() == null) {
+                if (k.getMina() == null && !k.isDescubierto()) {
                     if (k.getCoordenadaX() == nuevaMina.getCoordenadaX() && k.getCoordenadaY() == nuevaMina.getCoordenadaY()) {
                         k.setMina(nuevaMina);
                         minaInsertada = true;

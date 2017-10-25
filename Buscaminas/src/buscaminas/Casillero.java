@@ -13,11 +13,13 @@ public class Casillero {
 
     private int coordenadaX;
     private int coordenadaY;
+    private boolean descubierto;
     private Mina mina;
 
     public Casillero(int coordenadaX, int coordenadaY) {
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;
+        this.descubierto = false;
     }
 
     //SOLO PARA PRUEBAS
@@ -33,10 +35,6 @@ public class Casillero {
         return coordenadaY;
     }
 
-    public Mina getMina() {
-        return mina;
-    }
-
     public void setCoordenadaX(int coordenadaX) {
         this.coordenadaX = coordenadaX;
     }
@@ -47,6 +45,18 @@ public class Casillero {
 
     public void setMina(Mina mina) {
         this.mina = mina;
+    }
+
+    public Mina getMina() {
+        return mina;
+    }
+
+    public boolean isDescubierto() {
+        return descubierto;
+    }
+
+    public void setDescubierto(boolean descubierto) {
+        this.descubierto = descubierto;
     }
 
 }
