@@ -21,6 +21,8 @@ public class jugador extends usuario {
         this.sesioniniciada = false;
         this.credito = 0.0;
     }
+    
+    
 
     public Double getCredito() {
         return credito;

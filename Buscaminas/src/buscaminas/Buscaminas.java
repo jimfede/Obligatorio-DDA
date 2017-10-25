@@ -5,6 +5,8 @@
  */
 package buscaminas;
 
+import buscaminas.tablero.Tablero;
+import buscaminas.tablero.Casillero;
 import buscaminas.usuarios.administrador;
 import buscaminas.usuarios.jugador;
 
@@ -29,9 +31,11 @@ public class Buscaminas {
 
         administrador adm1 = new administrador("admin", "admin", "Stanton Tregunnah");
 
-        Partida primeraPartida = new Partida(j1, new Tablero(3, 3));
+        Partida primeraPartida = new Partida(j1, new Tablero(3, 3), 500);
 
         //PRUEBAS
+        System.out.print("JUGADOR 1: " + primeraPartida.getJugador1().getNombreCompleto() + " ");
+        System.out.println("POZO: " + primeraPartida.getPozo());
         for (Casillero k : primeraPartida.getTablero().getCasilleros()) {
             if (k.getMina() != null) {
                 System.out.print("KBoom en ");

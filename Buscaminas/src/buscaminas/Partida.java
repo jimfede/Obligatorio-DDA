@@ -5,6 +5,7 @@
  */
 package buscaminas;
 
+import buscaminas.tablero.Tablero;
 import buscaminas.usuarios.jugador;
 
 /**
@@ -18,11 +19,13 @@ public class Partida {
     private int turnosJugados;
     private jugador turnoJugador;
     private Tablero tablero;
+    private double pozo;
 
-    public Partida(jugador jugador1, Tablero tablero) {
+    public Partida(jugador jugador1, Tablero tablero, double apuestaInicial) {
         this.jugador1 = jugador1;
         this.tablero = tablero;
         this.turnosJugados = 0;
+        this.pozo = apuestaInicial;
     }
 
     public jugador getJugador1() {
@@ -69,4 +72,13 @@ public class Partida {
     public void setTablero(Tablero tablero) {
         this.tablero = tablero;
     }
+
+    public double getPozo() {
+        return pozo;
+    }
+
+    public void setPozo(double pozo) {
+        this.pozo = pozo;
+    }
+
 }
