@@ -31,13 +31,22 @@ public final class Partida {
         this.turnosJugados = 0;
         this.pozo = new Pozo();
         this.pozo.recibirApuesta(apuestaInicial);
-        ControladoraSingleton.getInstance().actualizarSaldo(jugador1, apuestaInicial.getMonto());
+        actualizarSaldo(jugador1, apuestaInicial.getMonto());
+    }
+
+    public boolean pagarApuestaInicial(jugador jugadorInvitado) {
+        if (saldoSuficiente(jugadorInvitado, this.pozo.totalPozo())) {
+            actualizarSaldo(jugadorInvitado, this.pozo.totalPozo());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void nuevaApuesta(jugador apostador, double monto) {
         if (saldoSuficiente(apostador, monto)) {
             this.pozo.recibirApuesta(new Apuesta(apostador, monto));
-            ControladoraSingleton.getInstance().actualizarSaldo(apostador, monto);
+            actualizarSaldo(apostador, monto);
         }
     }
 
@@ -45,7 +54,16 @@ public final class Partida {
         return monto <= apostador.getCredito();
     }
 
+    public void actualizarSaldo(jugador apostador, double monto) {
+        apostador.setCredito(apostador.getCredito() - monto);
+    }
 
+    public void setSaldoFinal() {
+        this.saldoJ1 = this.jugador1.getCredito();
+        this.saldoJ2 = this.jugador2.getCredito();
+    }
+
+    ;
 
     public jugador getJugador1() {
         return jugador1;

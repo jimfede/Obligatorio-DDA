@@ -30,10 +30,6 @@ public class ControladoraSingleton {
         return instance;
     }
 
-    public void actualizarSaldo(jugador apostador, double monto) {
-        apostador.setCredito(apostador.getCredito() - monto);
-    }
-
     public ArrayList<usuario> getUsuarios() {
         return usuarios;
     }
