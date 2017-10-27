@@ -7,6 +7,7 @@ package buscaminas;
 
 import buscaminas.apuestas.Apuesta;
 import buscaminas.apuestas.Pozo;
+import buscaminas.tablero.Casillero;
 import buscaminas.tablero.Tablero;
 import buscaminas.usuarios.jugador;
 
@@ -24,6 +25,7 @@ public final class Partida {
     private Pozo pozo;
     private double saldoJ1;
     private double saldoJ2;
+    private jugador ganador;
 
     public Partida(jugador jugador1, Tablero tablero, Apuesta apuestaInicial) {
         this.jugador1 = jugador1;
@@ -43,10 +45,13 @@ public final class Partida {
         }
     }
 
-    public void nuevaApuesta(jugador apostador, double monto) {
-        if (saldoSuficiente(apostador, monto)) {
+    public boolean nuevaApuesta(jugador apostador, double monto) {
+        if (saldoSuficiente(apostador, monto) && this.turnoJugador == apostador) {
             this.pozo.recibirApuesta(new Apuesta(apostador, monto));
             actualizarSaldo(apostador, monto);
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -63,7 +68,24 @@ public final class Partida {
         this.saldoJ2 = this.jugador2.getCredito();
     }
 
-    ;
+    public boolean jugarTurno(jugador jugador, Casillero casillero) {
+        if (this.turnoJugador == jugador) {
+            turnoJugadoPor(jugador);
+            this.turnosJugados++;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void turnoJugadoPor(jugador jugador) {
+        if (jugador == jugador1) {
+            this.turnoJugador = this.jugador2;
+        }
+        if (jugador == jugador2) {
+            this.turnoJugador = this.jugador1;
+        }
+    }
 
     public jugador getJugador1() {
         return jugador1;
@@ -127,6 +149,14 @@ public final class Partida {
 
     public void setSaldoJ2(double saldoJ2) {
         this.saldoJ2 = saldoJ2;
+    }
+
+    public jugador getGanador() {
+        return ganador;
+    }
+
+    public void setGanador(jugador ganador) {
+        this.ganador = ganador;
     }
 
 }
