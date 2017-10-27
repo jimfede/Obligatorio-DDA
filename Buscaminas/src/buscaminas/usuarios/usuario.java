@@ -14,7 +14,11 @@ public class usuario {
     String nombreUsuario;
     String clave;
     String nombreCompleto;
-    String rolUsuario;
+    rol rolUsuario;
     boolean sesioniniciada;
+
+    enum rol {
+        administrador, jugador
+    }
 
 }

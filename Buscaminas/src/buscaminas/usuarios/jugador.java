@@ -17,7 +17,7 @@ public class jugador extends usuario {
         this.nombreUsuario = nombreUsuario;
         this.clave = clave;
         this.nombreCompleto = nombreCompleto;
-        this.rolUsuario = RolSingleton.getInstance().getRolJugador();
+        this.rolUsuario = rol.jugador;
         this.sesioniniciada = false;
         this.credito = 0.0;
     }
@@ -40,10 +40,6 @@ public class jugador extends usuario {
         return nombreCompleto;
     }
 
-    public String getRolUsuario() {
-        return rolUsuario;
-    }
-
     public void setCredito(Double credito) {
         this.credito = credito;
     }
@@ -60,8 +56,22 @@ public class jugador extends usuario {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public void setRolUsuario(String rolUsuario) {
+    public rol getRolUsuario() {
+        return rolUsuario;
+    }
+
+    public boolean isSesioniniciada() {
+        return sesioniniciada;
+    }
+
+    public void setRolUsuario(rol rolUsuario) {
         this.rolUsuario = rolUsuario;
     }
+
+    public void setSesioniniciada(boolean sesioniniciada) {
+        this.sesioniniciada = sesioniniciada;
+    }
+
+  
 
 }

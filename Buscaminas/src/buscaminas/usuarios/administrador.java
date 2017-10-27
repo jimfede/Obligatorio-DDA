@@ -15,7 +15,7 @@ public class administrador extends usuario{
         this.nombreUsuario = nombreUsuario;
         this.clave = clave;
         this.nombreCompleto = nombreCompleto;
-        this.rolUsuario = RolSingleton.getInstance().getRolAdministrador();
+        this.rolUsuario = rol.administrador;
         this.sesioniniciada = false;
     }
 
@@ -31,10 +31,6 @@ public class administrador extends usuario{
         return nombreCompleto;
     }
 
-    public String getRolUsuario() {
-        return rolUsuario;
-    }
-
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
     }
@@ -47,8 +43,20 @@ public class administrador extends usuario{
         this.nombreCompleto = nombreCompleto;
     }
 
-    public void setRolUsuario(String rolUsuario) {
+    public rol getRolUsuario() {
+        return rolUsuario;
+    }
+
+    public boolean isSesioniniciada() {
+        return sesioniniciada;
+    }
+
+    public void setRolUsuario(rol rolUsuario) {
         this.rolUsuario = rolUsuario;
     }
-    
+
+    public void setSesioniniciada(boolean sesioniniciada) {
+        this.sesioniniciada = sesioniniciada;
+    }
+   
 }
