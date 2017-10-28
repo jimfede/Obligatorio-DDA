@@ -9,9 +9,9 @@ package buscaminas.usuarios;
  *
  * @author Federico
  */
-public class administrador extends usuario{
+public class Administrador extends Usuario{
 
-    public administrador(String nombreUsuario, String clave, String nombreCompleto) {
+    public Administrador(String nombreUsuario, String clave, String nombreCompleto) {
         this.nombreUsuario = nombreUsuario;
         this.clave = clave;
         this.nombreCompleto = nombreCompleto;

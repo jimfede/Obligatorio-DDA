@@ -9,7 +9,7 @@ import buscaminas.apuestas.Apuesta;
 import buscaminas.apuestas.Pozo;
 import buscaminas.tablero.Casillero;
 import buscaminas.tablero.Tablero;
-import buscaminas.usuarios.jugador;
+import buscaminas.usuarios.Jugador;
 
 /**
  *
@@ -17,18 +17,26 @@ import buscaminas.usuarios.jugador;
  */
 public final class Partida {
 
-    private jugador jugador1;
-    private jugador jugador2;
+    private Jugador jugador1;
+    private Jugador jugador2;
     private int turnosJugados;
-    private jugador turnoJugador;
+    private Jugador turnoJugador;
     private Tablero tablero;
     private Pozo pozo;
     private double saldoJ1;
     private double saldoJ2;
-    private jugador ganador;
+    private Jugador ganador;
 
-    public Partida(jugador jugador1, Tablero tablero, Apuesta apuestaInicial) {
+    /**
+     * Documen
+     * @param jugador1
+     * @param tablero
+     * @param apuestaInicial 
+     */
+    public Partida(Jugador jugador1, Tablero tablero, Apuesta apuestaInicial) {
         this.jugador1 = jugador1;
+        this.jugador2 = null;
+        this.turnoJugador = jugador2;
         this.tablero = tablero;
         this.turnosJugados = 0;
         this.pozo = new Pozo();
@@ -36,7 +44,7 @@ public final class Partida {
         actualizarSaldo(jugador1, apuestaInicial.getMonto());
     }
 
-    public boolean pagarApuestaInicial(jugador jugadorInvitado) {
+    public boolean pagarApuestaInicial(Jugador jugadorInvitado) {
         if (saldoSuficiente(jugadorInvitado, this.pozo.totalPozo())) {
             actualizarSaldo(jugadorInvitado, this.pozo.totalPozo());
             return true;
@@ -45,7 +53,7 @@ public final class Partida {
         }
     }
 
-    public boolean nuevaApuesta(jugador apostador, double monto) {
+    public boolean nuevaApuesta(Jugador apostador, double monto) {
         if (saldoSuficiente(apostador, monto) && this.turnoJugador == apostador) {
             this.pozo.recibirApuesta(new Apuesta(apostador, monto));
             actualizarSaldo(apostador, monto);
@@ -55,11 +63,11 @@ public final class Partida {
         }
     }
 
-    public boolean saldoSuficiente(jugador apostador, double monto) {
+    public boolean saldoSuficiente(Jugador apostador, double monto) {
         return monto <= apostador.getCredito();
     }
 
-    public void actualizarSaldo(jugador apostador, double monto) {
+    public void actualizarSaldo(Jugador apostador, double monto) {
         apostador.setCredito(apostador.getCredito() - monto);
     }
 
@@ -68,17 +76,29 @@ public final class Partida {
         this.saldoJ2 = this.jugador2.getCredito();
     }
 
-    public boolean jugarTurno(jugador jugador, Casillero casillero) {
+    public boolean jugarTurno(Jugador jugador, Casillero casillero) {
         if (this.turnoJugador == jugador) {
-            turnoJugadoPor(jugador);
-            this.turnosJugados++;
-            return true;
+            if (casillero.isDescubierto() == false) {
+                if (casillero.getMina() == null) {
+                    casillero.setDescubierto(true);
+                    turnoJugadoPor(jugador);
+                    this.turnosJugados++;
+                    if (this.turnosJugados % 2 == 0) {
+                        this.getTablero().insertarMina();
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
     }
 
-    public void turnoJugadoPor(jugador jugador) {
+    public void turnoJugadoPor(Jugador jugador) {
         if (jugador == jugador1) {
             this.turnoJugador = this.jugador2;
         }
@@ -87,11 +107,11 @@ public final class Partida {
         }
     }
 
-    public jugador getJugador1() {
+    public Jugador getJugador1() {
         return jugador1;
     }
 
-    public jugador getJugador2() {
+    public Jugador getJugador2() {
         return jugador2;
     }
 
@@ -99,7 +119,7 @@ public final class Partida {
         return turnosJugados;
     }
 
-    public jugador getTurnoJugador() {
+    public Jugador getTurnoJugador() {
         return turnoJugador;
     }
 
@@ -107,11 +127,11 @@ public final class Partida {
         return tablero;
     }
 
-    public void setJugador1(jugador jugador1) {
+    public void setJugador1(Jugador jugador1) {
         this.jugador1 = jugador1;
     }
 
-    public void setJugador2(jugador jugador2) {
+    public void setJugador2(Jugador jugador2) {
         this.jugador2 = jugador2;
     }
 
@@ -119,7 +139,7 @@ public final class Partida {
         this.turnosJugados = turnosJugados;
     }
 
-    public void setTurnoJugador(jugador turnoJugador) {
+    public void setTurnoJugador(Jugador turnoJugador) {
         this.turnoJugador = turnoJugador;
     }
 
@@ -151,11 +171,11 @@ public final class Partida {
         this.saldoJ2 = saldoJ2;
     }
 
-    public jugador getGanador() {
+    public Jugador getGanador() {
         return ganador;
     }
 
-    public void setGanador(jugador ganador) {
+    public void setGanador(Jugador ganador) {
         this.ganador = ganador;
     }
 

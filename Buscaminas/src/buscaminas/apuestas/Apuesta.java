@@ -5,7 +5,7 @@
  */
 package buscaminas.apuestas;
 
-import buscaminas.usuarios.jugador;
+import buscaminas.usuarios.Jugador;
 
 /**
  *
@@ -13,15 +13,15 @@ import buscaminas.usuarios.jugador;
  */
 public class Apuesta {
 
-    private jugador apostador;
+    private Jugador apostador;
     private double monto;
 
-    public Apuesta(jugador apostador, double monto) {
+    public Apuesta(Jugador apostador, double monto) {
         this.apostador = apostador;
         this.monto = monto;
     }
 
-    public jugador getApostador() {
+    public Jugador getApostador() {
         return apostador;
     }
 
@@ -29,7 +29,7 @@ public class Apuesta {
         return monto;
     }
 
-    public void setApostador(jugador apostador) {
+    public void setApostador(Jugador apostador) {
         this.apostador = apostador;
     }
 

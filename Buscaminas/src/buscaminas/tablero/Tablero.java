@@ -33,7 +33,7 @@ public class Tablero {
             j = 1;
             i++;
         }
-        insertarMina(casillerosX, casillerosY);
+        insertarMina();
     }
 
     public boolean checkMedidasTablero(int casillerosX, int casillerosY) {
@@ -44,8 +44,8 @@ public class Tablero {
         }
     }
 
-    public void insertarMina(int casillerosX, int casillerosY) {
-        Mina nuevaMina = minaRandom(casillerosX, casillerosY);
+    public void insertarMina() {
+        Mina nuevaMina = minaRandom(this.casillerosX, this.casillerosY);
         boolean minaInsertada = false;
         do {
             for (Casillero k : casilleros) {

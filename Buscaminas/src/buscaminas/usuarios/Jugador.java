@@ -9,11 +9,11 @@ package buscaminas.usuarios;
  *
  * @author Federico
  */
-public class jugador extends usuario {
+public class Jugador extends Usuario {
 
     Double credito;
 
-    public jugador(String nombreUsuario, String clave, String nombreCompleto) {
+    public Jugador(String nombreUsuario, String clave, String nombreCompleto) {
         this.nombreUsuario = nombreUsuario;
         this.clave = clave;
         this.nombreCompleto = nombreCompleto;

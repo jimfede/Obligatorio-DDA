@@ -8,8 +8,8 @@ package buscaminas;
 import buscaminas.apuestas.Apuesta;
 import buscaminas.tablero.Tablero;
 import buscaminas.tablero.Casillero;
-import buscaminas.usuarios.administrador;
-import buscaminas.usuarios.jugador;
+import buscaminas.usuarios.Administrador;
+import buscaminas.usuarios.Jugador;
 
 /**
  *
@@ -25,13 +25,13 @@ public class Buscaminas {
         
         ControladoraSingleton.getInstance();
         
-        jugador j1 = new jugador("BB", "bb", "Babita Bernardotti");
-        jugador j2 = new jugador("CD", "cd", "Chrysa Darridon");
-        jugador j3 = new jugador("NR", "nr", "Nerty Raittie");
-        jugador j4 = new jugador("KP", "kp", "Katerine Pigeram");
-        jugador j5 = new jugador("LB", "lb", "Lindy Belamy");
-        jugador j6 = new jugador("CC", "cc", "Carr Cordelet");
-        administrador adm1 = new administrador("admin", "admin", "Stanton Tregunnah");
+        Jugador j1 = new Jugador("BB", "bb", "Babita Bernardotti");
+        Jugador j2 = new Jugador("CD", "cd", "Chrysa Darridon");
+        Jugador j3 = new Jugador("NR", "nr", "Nerty Raittie");
+        Jugador j4 = new Jugador("KP", "kp", "Katerine Pigeram");
+        Jugador j5 = new Jugador("LB", "lb", "Lindy Belamy");
+        Jugador j6 = new Jugador("CC", "cc", "Carr Cordelet");
+        Administrador adm1 = new Administrador("admin", "admin", "Stanton Tregunnah");
 
         //PRUEBAS
         //para probar partida inicial
