@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buscaminas;
+package buscaminas.partidas;
 
 import buscaminas.apuestas.Apuesta;
 import buscaminas.apuestas.Pozo;
-import buscaminas.tablero.Casillero;
-import buscaminas.tablero.Tablero;
+import buscaminas.partidas.Casillero;
+import buscaminas.partidas.Tablero;
 import buscaminas.usuarios.Jugador;
 
 /**
@@ -57,6 +57,7 @@ public final class Partida {
         if (saldoSuficiente(apostador, monto) && this.turnoJugador == apostador) {
             this.pozo.recibirApuesta(new Apuesta(apostador, monto));
             actualizarSaldo(apostador, monto);
+
             return true;
         } else {
             return false;

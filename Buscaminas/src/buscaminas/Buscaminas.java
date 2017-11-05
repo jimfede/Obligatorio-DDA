@@ -5,9 +5,11 @@
  */
 package buscaminas;
 
+import buscaminas.partidas.Partida;
 import buscaminas.apuestas.Apuesta;
-import buscaminas.tablero.Tablero;
-import buscaminas.tablero.Casillero;
+import buscaminas.partidas.Tablero;
+import buscaminas.partidas.Casillero;
+import buscaminas.partidas.TimerApuesta;
 import buscaminas.usuarios.Administrador;
 import buscaminas.usuarios.Jugador;
 
@@ -22,9 +24,9 @@ public class Buscaminas {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+
         ControladoraSingleton.getInstance();
-        
+
         Jugador j1 = new Jugador("BB", "bb", "Babita Bernardotti");
         Jugador j2 = new Jugador("CD", "cd", "Chrysa Darridon");
         Jugador j3 = new Jugador("NR", "nr", "Nerty Raittie");
@@ -46,6 +48,10 @@ public class Buscaminas {
             }
             System.out.println(k);
         }
+
+        TimerApuesta tt = new TimerApuesta(5000);
+        
+        //tt.getTimer().cancel();
 
     }
 
