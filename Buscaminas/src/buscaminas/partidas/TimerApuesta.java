@@ -16,15 +16,19 @@ public class TimerApuesta {
 
     private Timer timer = new Timer("CuentaRegresivaApuesta");
 
+    public TimerApuesta(long miliSegundos) {
+        this.timer.schedule(tiempoCumplido, miliSegundos);
+    }
+
     private TimerTask tiempoCumplido = new TimerTask() {
         public void run() {
             System.out.println("Thread " + Thread.currentThread().getName());
             timer.cancel();
         }
     };
-
-    public TimerApuesta(long miliSegundos) {
-        this.timer.schedule(tiempoCumplido, miliSegundos);
+    
+    public void cancelarTimerApuesta(){
+        this.timer.cancel();
     }
 
     public Timer getTimer() {

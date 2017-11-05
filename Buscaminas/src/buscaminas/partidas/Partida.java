@@ -26,12 +26,14 @@ public final class Partida {
     private double saldoJ1;
     private double saldoJ2;
     private Jugador ganador;
+    private TimerApuesta timerApuesta;
 
     /**
      * Documen
+     *
      * @param jugador1
      * @param tablero
-     * @param apuestaInicial 
+     * @param apuestaInicial
      */
     public Partida(Jugador jugador1, Tablero tablero, Apuesta apuestaInicial) {
         this.jugador1 = jugador1;
@@ -57,11 +59,23 @@ public final class Partida {
         if (saldoSuficiente(apostador, monto) && this.turnoJugador == apostador) {
             this.pozo.recibirApuesta(new Apuesta(apostador, monto));
             actualizarSaldo(apostador, monto);
-
+            this.timerApuesta = new TimerApuesta(5000);
             return true;
         } else {
             return false;
         }
+    }
+
+    public boolean pagarApuesta(Jugador apostador, double monto) {
+        if (saldoSuficiente(apostador, monto) && this.turnoJugador == apostador) {
+            this.pozo.recibirApuesta(new Apuesta(apostador, monto));
+            actualizarSaldo(apostador, monto);
+            this.timerApuesta.cancelarTimerApuesta();
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     public boolean saldoSuficiente(Jugador apostador, double monto) {
