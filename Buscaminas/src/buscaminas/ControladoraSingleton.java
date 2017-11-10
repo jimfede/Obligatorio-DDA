@@ -21,11 +21,20 @@ public class ControladoraSingleton {
     private static ArrayList<Sesion> sesiones;
     private static ControladoraSingleton instance = null;
 
+    /**
+     * (Singleton) Constructor de ControladoraSingleton
+     */
     protected ControladoraSingleton() {
         this.usuarios = new ArrayList<>();
         this.sesiones = new ArrayList<>();
     }
 
+    /**
+     * Devuelve la actual instancia Singleton, o crea una nueva, de
+     * ControladoraSingleton
+     *
+     * @return Instancia de ControladoraSingleton
+     */
     public static ControladoraSingleton getInstance() {
         if (instance == null) {
             instance = new ControladoraSingleton();
@@ -33,6 +42,13 @@ public class ControladoraSingleton {
         return instance;
     }
 
+    /**
+     * Inicia la sesion de un usuario, para un Nombre de Usuario y una Clave
+     * dada siempre que exista en el sistema o este no esté ya logeado
+     *
+     * @param nombreUsuario Nombre del usuario a logear
+     * @param clave Clave del usuario a logear
+     */
     public static void iniciarSesion(String nombreUsuario, String clave) {
         if (!sesionIniciada(nombreUsuario)) {
             for (Usuario u : usuarios) {
@@ -44,6 +60,12 @@ public class ControladoraSingleton {
         }
     }
 
+    /**
+     * Verifica que el usuario (nombreUsuario) no esté ya logeado en el sistema
+     *
+     * @param nombreUsuario Nombre del usuario a verificar
+     * @return True si el usuario ya está logeado | False sinó
+     */
     public static boolean sesionIniciada(String nombreUsuario) {
         for (Sesion s : sesiones) {
             if (s.getSesionUsuario().getNombreUsuario() == nombreUsuario && !s.getSesionUsuario().isSesioniniciada()) {
