@@ -11,6 +11,12 @@ package buscaminas.usuarios;
  */
 public class Administrador extends Usuario{
 
+    /**
+     * Constructor de Administrador
+     * @param nombreUsuario Nombre de usuario
+     * @param clave Clave del usuario
+     * @param nombreCompleto Nombre completo del usuario
+     */
     public Administrador(String nombreUsuario, String clave, String nombreCompleto) {
         this.nombreUsuario = nombreUsuario;
         this.clave = clave;
