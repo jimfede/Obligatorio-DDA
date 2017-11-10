@@ -44,7 +44,7 @@ public class Tablero {
     }
 
     /**
-     * Valida si el area del tablero es >= 9 O <= 100 como area maxima de
+     * Valida si el area del tablero es mayor o igual a 9 O menor o igual a 100 como area maxima de
      * casilleros en el tablero @param casillerosX Cantidad de Casilleros en X
      *
      * @
