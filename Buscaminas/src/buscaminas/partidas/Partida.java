@@ -56,6 +56,8 @@ public final class Partida {
     }
 
     public boolean nuevaApuesta(Jugador apostador, double monto) {
+        if (this.turnoJugador == jugador1) {
+        }
         if (saldoSuficiente(apostador, monto) && this.turnoJugador == apostador) {
             this.pozo.recibirApuesta(new Apuesta(apostador, monto));
             actualizarSaldo(apostador, monto);

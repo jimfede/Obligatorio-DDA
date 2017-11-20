@@ -5,6 +5,8 @@
  */
 package buscaminas.partidas;
 
+import buscaminas.usuarios.Jugador;
+
 /**
  *
  * @author Federico
@@ -14,6 +16,7 @@ public class Casillero {
     private int coordenadaX;
     private int coordenadaY;
     private boolean descubierto;
+    private Jugador descubiertoPor;
     private Mina mina;
 
     public Casillero(int coordenadaX, int coordenadaY) {
@@ -57,6 +60,14 @@ public class Casillero {
 
     public void setDescubierto(boolean descubierto) {
         this.descubierto = descubierto;
+    }
+
+    public Jugador getDescubiertoPor() {
+        return descubiertoPor;
+    }
+
+    public void setDescubiertoPor(Jugador descubiertoPor) {
+        this.descubiertoPor = descubiertoPor;
     }
 
 }
