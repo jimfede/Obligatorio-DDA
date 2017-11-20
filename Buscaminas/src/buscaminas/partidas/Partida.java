@@ -29,7 +29,8 @@ public final class Partida {
     private TimerApuesta timerApuesta;
 
     /**
-     * Documen
+     * Constructor de Partida. Instancia una nueva partida para un jugador, y se
+     * debita el saldo inicial apostado por el mismo
      *
      * @param jugador1
      * @param tablero
@@ -46,6 +47,13 @@ public final class Partida {
         actualizarSaldo(jugador1, apuestaInicial.getMonto());
     }
 
+    /**
+     * Se debita de la cuenta del jugador invitado, el saldo que apostó otro
+     * jugador
+     *
+     * @param jugadorInvitado Jugador Invitado a la partida
+     * @return True si se ejecuto correctamente | False sinó
+     */
     public boolean pagarApuestaInicial(Jugador jugadorInvitado) {
         if (saldoSuficiente(jugadorInvitado, this.pozo.totalPozo())) {
             actualizarSaldo(jugadorInvitado, this.pozo.totalPozo());
@@ -55,6 +63,23 @@ public final class Partida {
         }
     }
 
+    /**
+     * Genera una nueva apuesta, con tiempo de caducidad para responder a la
+     * oferta, y se valida que:<br>
+     * <b>
+     * <p>
+     * 1. El jugador apostante posea en su cuenta la cantidad de saldo
+     * suficiente para apostar.
+     * </p>
+     * <p>
+     * 2. El jugador apostante posea el turno de jugar
+     * </p>
+     * </b>
+     *
+     * @param apostador Jugador apostador
+     * @param monto Monto de Credito a apostar
+     * @return
+     */
     public boolean nuevaApuesta(Jugador apostador, double monto) {
         if (this.turnoJugador == jugador1) {
         }
@@ -80,10 +105,29 @@ public final class Partida {
 
     }
 
+    /**
+     * Verifica que el jugador pasado como Apostador, posea la cantidad
+     * suficiente de saldo en su cuenta, pasada como monto
+     * <p>
+     * <i>
+     * <b>Podria ser implementado como una funcion del Jugador, ya que solo este
+     * posee un atributo credito</b>
+     * </i</p>
+     *
+     * @param apostador Jugador apostante
+     * @param monto Monto del credito del jugador a validar
+     * @return True si tiene suficiente | False sinó
+     */
     public boolean saldoSuficiente(Jugador apostador, double monto) {
         return monto <= apostador.getCredito();
     }
 
+    /**
+     * Actualiza el saldo del jugador apostador
+     *
+     * @param apostador Jugador apostador
+     * @param monto Monto de credito del jugador apostador a actualizar
+     */
     public void actualizarSaldo(Jugador apostador, double monto) {
         apostador.setCredito(apostador.getCredito() - monto);
     }
@@ -93,6 +137,13 @@ public final class Partida {
         this.saldoJ2 = this.jugador2.getCredito();
     }
 
+    /**
+     * Realiza una jugada para un Jugador dado, sobre un casillero especifico.
+     *
+     * @param jugador Jugador actual
+     * @param casillero Casillero a jugar
+     * @return True si la jugada fue satisfactoria | False si hubo un problema
+     */
     public boolean jugarTurno(Jugador jugador, Casillero casillero) {
         if (this.turnoJugador == jugador) {
             if (casillero.isDescubierto() == false) {
@@ -115,6 +166,12 @@ public final class Partida {
         }
     }
 
+    /**
+     * Intercala el turno actual en funcion del jugador que haya realizado una
+     * jugada con anterioridad
+     *
+     * @param jugador Jugador Actual
+     */
     public void turnoJugadoPor(Jugador jugador) {
         if (jugador == jugador1) {
             this.turnoJugador = this.jugador2;

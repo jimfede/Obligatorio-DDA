@@ -19,6 +19,13 @@ public class Tablero {
     private String color2;
     private ArrayList<Casillero> casilleros = new ArrayList<>();
 
+    /**
+     * Constructor de Tablero. Crea una nueva instancia de Tablero, con X & Y
+     * casilleros, y coloca la primera mina en el tablero.
+     *
+     * @param casillerosX Cantidad de Casilleros en X
+     * @param casillerosY Cantidad de Casilleros en Y
+     */
     public Tablero(int casillerosX, int casillerosY) {
         this.casillerosX = casillerosX;
         this.casillerosY = casillerosY;
@@ -36,6 +43,14 @@ public class Tablero {
         insertarMina();
     }
 
+    /**
+     * Valida si el area del tablero es mayor o igual a 9 O menor o igual a 100 como area maxima de
+     * casilleros en el tablero @param casillerosX Cantidad de Casilleros en X
+     *
+     * @
+     * param casillerosY Cantidad de Casilleros en Y
+     * @return True si esta dentro de las medidas | False sinó
+     */
     public boolean checkMedidasTablero(int casillerosX, int casillerosY) {
         if (casillerosX * casillerosY >= 9 || casillerosX * casillerosY <= 100) {
             return true;
@@ -44,6 +59,10 @@ public class Tablero {
         }
     }
 
+    /**
+     * Inserta una mina de manera aleatoria donde no hayan otras minas o la
+     * casilla esté descubierta en el tablero actual.
+     */
     public void insertarMina() {
         Mina nuevaMina = minaRandom(this.casillerosX, this.casillerosY);
         boolean minaInsertada = false;
@@ -59,6 +78,14 @@ public class Tablero {
         } while (minaInsertada == false);
     }
 
+    /**
+     * Calcula de manera aleatoria, donde colocar la proxima mina, dentro de un
+     * rango maximo de X e Y
+     *
+     * @param casillerosX Cantidad de Casilleros en X
+     * @param casillerosY Cantidad de Casilleros en Y
+     * @return Nuevo Objeto mina a colocar.
+     */
     public Mina minaRandom(int casillerosX, int casillerosY) {
         Mina nuevaMina = new Mina((int) (Math.random() * casillerosX) + 1, (int) (Math.random() * casillerosY) + 1);
         return nuevaMina;

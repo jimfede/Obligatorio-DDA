@@ -13,10 +13,15 @@ public class Sesion {
 
     private Usuario sesionUsuario;
 
+    /**
+     * Constructor de Sesion
+     * @param usuarioConSesion 
+     */
     public Sesion(Usuario usuarioConSesion) {
         this.sesionUsuario = usuarioConSesion;
     }
 
+    
     public Usuario getSesionUsuario() {
         return sesionUsuario;
     }

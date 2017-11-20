@@ -13,6 +13,13 @@ public class Jugador extends Usuario {
 
     Double credito;
 
+    /**
+     * Constructor de Jugador
+     *
+     * @param nombreUsuario Nombre de Usuario a jugar
+     * @param clave Clave del usuario a jugar
+     * @param nombreCompleto Nombre completo del usuario a jugar
+     */
     public Jugador(String nombreUsuario, String clave, String nombreCompleto) {
         this.nombreUsuario = nombreUsuario;
         this.clave = clave;
@@ -21,8 +28,6 @@ public class Jugador extends Usuario {
         this.sesioniniciada = false;
         this.credito = 0.0;
     }
-    
-    
 
     public Double getCredito() {
         return credito;
@@ -71,7 +76,5 @@ public class Jugador extends Usuario {
     public void setSesioniniciada(boolean sesioniniciada) {
         this.sesioniniciada = sesioniniciada;
     }
-
-  
 
 }
