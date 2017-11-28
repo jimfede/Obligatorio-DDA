@@ -19,7 +19,7 @@ import javax.swing.Timer;
  */
 public final class Partida {
 
-    private int numeroPartida;
+    private int idPartida;
     private Jugador jugador1;
     private Jugador jugador2;
     private int turnosJugados;
@@ -271,11 +271,11 @@ public final class Partida {
     }
 
     public int getNumeroPartida() {
-        return numeroPartida;
+        return idPartida;
     }
 
     public void setNumeroPartida(int numeroPartida) {
-        this.numeroPartida = numeroPartida;
+        this.idPartida = numeroPartida;
     }
 
 }

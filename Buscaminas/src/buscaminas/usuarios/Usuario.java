@@ -11,6 +11,7 @@ package buscaminas.usuarios;
  */
 public class Usuario {
 
+    Integer idUsuario;
     String nombreUsuario;
     String clave;
     String nombreCompleto;
