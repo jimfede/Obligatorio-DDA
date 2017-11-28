@@ -31,7 +31,9 @@ public class TimerApuesta {
      * Tarea a ser ejecutada cuando se termina el tiempo (Timer)
      */
     private TimerTask tiempoCumplido = new TimerTask() {
+        @Override
         public void run() {
+            //se supone que aca tengo que llamar al metodo de terminar partida, aun no se como.
             System.out.println("Thread " + Thread.currentThread().getName());
             timer.cancel();
         }
@@ -46,6 +48,7 @@ public class TimerApuesta {
 
     /**
      * Devuelve el Timer actual
+     *
      * @return Timer
      */
     public Timer getTimer() {
@@ -54,6 +57,7 @@ public class TimerApuesta {
 
     /**
      * Devuelve la tarea a realizar
+     *
      * @return TimerTask
      */
     public TimerTask getTiempoCumplido() {

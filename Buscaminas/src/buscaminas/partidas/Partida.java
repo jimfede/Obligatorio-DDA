@@ -10,6 +10,8 @@ import buscaminas.apuestas.Pozo;
 import buscaminas.partidas.Casillero;
 import buscaminas.partidas.Tablero;
 import buscaminas.usuarios.Jugador;
+import java.util.TimerTask;
+import javax.swing.Timer;
 
 /**
  *
@@ -17,6 +19,7 @@ import buscaminas.usuarios.Jugador;
  */
 public final class Partida {
 
+    private int numeroPartida;
     private Jugador jugador1;
     private Jugador jugador2;
     private int turnosJugados;
@@ -156,6 +159,7 @@ public final class Partida {
                     }
                     return true;
                 } else {
+                    finalizarPartida();
                     return false;
                 }
             } else {
@@ -164,6 +168,10 @@ public final class Partida {
         } else {
             return false;
         }
+    }
+
+    public void finalizarPartida() {
+
     }
 
     /**
@@ -179,7 +187,8 @@ public final class Partida {
         if (jugador == jugador2) {
             this.turnoJugador = this.jugador1;
         }
-    }
+    }  
+    
 
     public Jugador getJugador1() {
         return jugador1;
@@ -251,6 +260,22 @@ public final class Partida {
 
     public void setGanador(Jugador ganador) {
         this.ganador = ganador;
+    }
+
+    public TimerApuesta getTimerApuesta() {
+        return timerApuesta;
+    }
+
+    public void setTimerApuesta(TimerApuesta timerApuesta) {
+        this.timerApuesta = timerApuesta;
+    }
+
+    public int getNumeroPartida() {
+        return numeroPartida;
+    }
+
+    public void setNumeroPartida(int numeroPartida) {
+        this.numeroPartida = numeroPartida;
     }
 
 }

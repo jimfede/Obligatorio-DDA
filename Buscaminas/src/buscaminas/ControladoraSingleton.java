@@ -5,11 +5,11 @@
  */
 package buscaminas;
 
+import buscaminas.partidas.Partida;
 import buscaminas.usuarios.Jugador;
 import buscaminas.usuarios.Sesion;
 import buscaminas.usuarios.Usuario;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  *
@@ -19,6 +19,7 @@ public class ControladoraSingleton {
 
     private static ArrayList<Usuario> usuarios;
     private static ArrayList<Sesion> sesiones;
+    private static ArrayList<Partida> partidas;
     private static ControladoraSingleton instance = null;
 
     /**
@@ -76,18 +77,42 @@ public class ControladoraSingleton {
         }
         return true;
     }
+
+    public boolean cargarSaldo(Jugador Jugador, double monto) {
+        Usuario usuarioJugador = (Usuario) Jugador;
+        for (Usuario k : this.usuarios) {
+            if (k.equals(usuarioJugador)) {
+                Jugador.setCredito(Jugador.getCredito() + monto);
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public static ArrayList<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public static ArrayList<Sesion> getSesiones() {
+        return sesiones;
+    }
+
+    public static ArrayList<Partida> getPartidas() {
+        return partidas;
+    }
+
+    public static void setUsuarios(ArrayList<Usuario> usuarios) {
+        ControladoraSingleton.usuarios = usuarios;
+    }
+
+    public static void setSesiones(ArrayList<Sesion> sesiones) {
+        ControladoraSingleton.sesiones = sesiones;
+    }
+
+    public static void setPartidas(ArrayList<Partida> partidas) {
+        ControladoraSingleton.partidas = partidas;
+    }
+
 }
-
-//    public boolean cargarSaldo(Jugador Jugador, double monto) {
-//        Usuario usuarioJugador = (Usuario) Jugador;
-//        for (Usuario k : this.usuarios) {
-//            if (k.equals(usuarioJugador)) {
-//                Jugador.setCredito(Jugador.getCredito() + monto);
-//                return true;
-//            } else {
-//                return false;
-//            }
-//        }
-//        return false;
-//    }
-
