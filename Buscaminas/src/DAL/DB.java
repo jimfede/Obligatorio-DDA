@@ -47,9 +47,9 @@ public class DB {
 
         try {
 
-            this.url = "jdbc:mysql://" + ipDB + ":" + portDB + "/" + serviceDB + "";
+            this.url = "jdbc:mysql://" + this.ipDB + ":" + this.portDB + "/" + this.serviceDB + "";
             connection = DriverManager
-                    .getConnection(url, userDB, passDB);
+                    .getConnection(this.url, this.userDB, this.passDB);
 
         } catch (SQLException e) {
             System.out.println("Conexión Fallida! Chequeá la consola");
