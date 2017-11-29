@@ -7,8 +7,7 @@ package Controller;
 
 import Model.partidas.Partida;
 import View.ITableroView;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,19 +15,19 @@ import java.util.Observer;
  *
  * @author Federico
  */
-public class PartidaController implements ActionListener, Observer{
-    
+public class PartidaController extends MouseAdapter implements Observer {
+
     private ITableroView tablero;
     private Partida partida;
-    
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    public PartidaController(ITableroView tableroView, Partida partida) {
+        this.tablero = tableroView;
+        this.partida = partida;
     }
 
     @Override
     public void update(Observable o, Object o1) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

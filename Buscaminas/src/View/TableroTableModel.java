@@ -6,6 +6,7 @@
 package View;
 
 import Model.partidas.Partida;
+import Model.partidas.Tablero;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -14,29 +15,25 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TableroTableModel extends AbstractTableModel {
 
-    private Partida partida;
+    private Tablero tablero;
+
+    public TableroTableModel(Partida partida) {
+        this.tablero = partida.getTablero();
+    }
 
     @Override
     public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.tablero.getCasillerosX();
     }
 
     @Override
     public int getColumnCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.tablero.getCasillerosY();
     }
 
     @Override
-    public Object getValueAt(int i, int i1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Partida getPartida() {
-        return partida;
-    }
-
-    public void setPartida(Partida partida) {
-        this.partida = partida;
+    public Object getValueAt(int x, int y) {
+        return tablero.obtenerCasillero(x, y);
     }
 
 }

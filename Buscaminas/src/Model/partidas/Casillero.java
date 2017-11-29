@@ -29,7 +29,7 @@ public class Casillero {
     public String toString() {
         return String.valueOf(this.coordenadaX + " " + this.coordenadaY);
     }
-
+    
     public int getCoordenadaX() {
         return coordenadaX;
     }

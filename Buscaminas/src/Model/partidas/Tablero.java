@@ -44,8 +44,9 @@ public class Tablero {
     }
 
     /**
-     * Valida si el area del tablero es mayor o igual a 9 O menor o igual a 100 como area maxima de
-     * casilleros en el tablero @param casillerosX Cantidad de Casilleros en X
+     * Valida si el area del tablero es mayor o igual a 9 O menor o igual a 100
+     * como area maxima de casilleros en el tablero @param casillerosX Cantidad
+     * de Casilleros en X
      *
      * @
      * param casillerosY Cantidad de Casilleros en Y
@@ -57,6 +58,15 @@ public class Tablero {
         } else {
             return false;
         }
+    }
+
+    public Object obtenerCasillero(int x, int y) {
+        for (Casillero i : casilleros) {
+            if (i.getCoordenadaX() == x && i.getCoordenadaY() == y) {
+                return i;
+            }
+        }
+        return null;
     }
 
     /**
