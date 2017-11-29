@@ -3,21 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buscaminas.partidas;
+package Model.partidas;
 
-import buscaminas.apuestas.Apuesta;
-import buscaminas.apuestas.Pozo;
-import buscaminas.partidas.Casillero;
-import buscaminas.partidas.Tablero;
-import buscaminas.usuarios.Jugador;
-import java.util.TimerTask;
-import javax.swing.Timer;
+import Model.apuestas.Apuesta;
+import Model.apuestas.Pozo;
+import Model.usuarios.Jugador;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author Federico
  */
-public final class Partida {
+public final class Partida extends Observable {
 
     private int idPartida;
     private Jugador jugador1;
@@ -30,6 +29,7 @@ public final class Partida {
     private double saldoJ2;
     private Jugador ganador;
     private TimerApuesta timerApuesta;
+    private ArrayList<Observer> observadores = new ArrayList<>();
 
     /**
      * Constructor de Partida. Instancia una nueva partida para un jugador, y se
@@ -187,8 +187,7 @@ public final class Partida {
         if (jugador == jugador2) {
             this.turnoJugador = this.jugador1;
         }
-    }  
-    
+    }
 
     public Jugador getJugador1() {
         return jugador1;

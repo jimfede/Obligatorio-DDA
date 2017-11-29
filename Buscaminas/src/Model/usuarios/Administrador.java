@@ -3,22 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buscaminas.usuarios;
+package Model.usuarios;
 
 /**
  *
  * @author Federico
  */
-public class Usuario {
+public class Administrador extends Usuario{
 
-    Integer idUsuario;
-    String nombreUsuario;
-    String clave;
-    String nombreCompleto;
-    rol rolUsuario;
-    boolean sesioniniciada;
-    enum rol {
-        administrador, jugador
+    /**
+     * Constructor de Administrador
+     * @param nombreUsuario Nombre de usuario
+     * @param clave Clave del usuario
+     * @param nombreCompleto Nombre completo del usuario
+     */
+    public Administrador(String nombreUsuario, String clave, String nombreCompleto) {
+        this.nombreUsuario = nombreUsuario;
+        this.clave = clave;
+        this.nombreCompleto = nombreCompleto;
+        this.rolUsuario = rol.administrador;
+        this.sesioniniciada = false;
     }
 
     public String getNombreUsuario() {
@@ -33,14 +37,6 @@ public class Usuario {
         return nombreCompleto;
     }
 
-    public rol getRolUsuario() {
-        return rolUsuario;
-    }
-
-    public boolean isSesioniniciada() {
-        return sesioniniciada;
-    }
-
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
     }
@@ -53,6 +49,14 @@ public class Usuario {
         this.nombreCompleto = nombreCompleto;
     }
 
+    public rol getRolUsuario() {
+        return rolUsuario;
+    }
+
+    public boolean isSesioniniciada() {
+        return sesioniniciada;
+    }
+
     public void setRolUsuario(rol rolUsuario) {
         this.rolUsuario = rolUsuario;
     }
@@ -60,7 +64,5 @@ public class Usuario {
     public void setSesioniniciada(boolean sesioniniciada) {
         this.sesioniniciada = sesioniniciada;
     }
-    
-    
-
+   
 }

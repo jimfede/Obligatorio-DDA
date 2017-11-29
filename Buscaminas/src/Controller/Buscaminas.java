@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buscaminas;
+package Controller;
 
-import buscaminas.partidas.Partida;
-import buscaminas.apuestas.Apuesta;
-import buscaminas.partidas.Tablero;
-import buscaminas.partidas.Casillero;
-import buscaminas.partidas.TimerApuesta;
-import buscaminas.usuarios.Administrador;
-import buscaminas.usuarios.Jugador;
+import Model.ControladoraSingleton;
+import Model.partidas.Partida;
+import Model.apuestas.Apuesta;
+import Model.partidas.Tablero;
+import Model.partidas.Casillero;
+import Model.partidas.TimerApuesta;
+import Model.usuarios.Administrador;
+import Model.usuarios.Jugador;
 
 /**
  *

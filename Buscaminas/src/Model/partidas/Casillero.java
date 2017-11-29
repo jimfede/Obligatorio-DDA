@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buscaminas.partidas;
+package Model.partidas;
 
-import buscaminas.usuarios.Jugador;
+import Model.usuarios.Jugador;
 
 /**
  *

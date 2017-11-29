@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buscaminas;
+package Model;
 
-import buscaminas.partidas.Partida;
-import buscaminas.usuarios.Jugador;
-import buscaminas.usuarios.Sesion;
-import buscaminas.usuarios.Usuario;
+import Model.partidas.Partida;
+import Model.usuarios.Jugador;
+import Model.usuarios.Sesion;
+import Model.usuarios.Usuario;
 import java.util.ArrayList;
 
 /**
