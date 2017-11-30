@@ -33,21 +33,56 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButton3.setText("Inicar Sesion");
+
+        jButton4.setText("Nueva Partida");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4)
+                    .addComponent(jButton3))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jButton3)
+                .addGap(88, 88, 88)
+                .addComponent(jButton4)
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // un jugador de prueba que debería estar en la base
+        Jugador jugador1 = new Jugador("a", "a", "a");
+
+        Tablero tablero1 = new Tablero(10, 10);
+        Apuesta apuesta1 = new Apuesta(jugador1, 100);
+        Partida partida = new Partida(jugador1, tablero1, apuesta1);
+        TableroView tableroView = new TableroView(partida);
+        PartidaController partidaController = new PartidaController(tableroView, partida);
+        tableroView.setControlador(partidaController);
+        new TableroView(partida).setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -85,19 +120,12 @@ public class Principal extends javax.swing.JFrame {
             public void run() {
                 new Principal().setVisible(true);
 
-                Jugador jugador1 = new Jugador("a", "a", "a");
-                Tablero tablero1 = new Tablero(10, 10);
-                Apuesta apuesta1 = new Apuesta(jugador1, 100);
-                Partida partida = new Partida(jugador1, tablero1, apuesta1);
-                TableroView tableroView = new TableroView(partida);
-                PartidaController partidaController = new PartidaController(tableroView, partida);
-                tableroView.setControlador(partidaController);
-                tableroView.setVisible(true);
-
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     // End of variables declaration//GEN-END:variables
 }

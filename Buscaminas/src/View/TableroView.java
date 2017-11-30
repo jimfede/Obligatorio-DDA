@@ -93,6 +93,6 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
 
     @Override
     public void setControlador(PartidaController partidaController) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jTableTablero.addMouseListener(partidaController);
     }
 }
