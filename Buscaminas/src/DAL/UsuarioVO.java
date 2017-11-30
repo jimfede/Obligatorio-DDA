@@ -27,6 +27,9 @@ public class UsuarioVO {
         this.usuarioId = usuarioId;
     }
 
+    public UsuarioVO() {
+    }
+
     public String getNombreUsuario() {
         return nombreUsuario;
     }

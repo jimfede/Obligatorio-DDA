@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -18,6 +17,10 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class UsuarioDAO {
 
     private DB db;
+
+    public UsuarioDAO(DB db) {
+        this.db = db;
+    }
 
     public boolean crearUsuario(UsuarioVO user) {
         Connection myConn = db.getConnection();
@@ -31,7 +34,7 @@ public class UsuarioDAO {
             statement.setString(2, user.getClave());
             statement.setString(3, user.getNombreCompleto());
             statement.setString(4, user.getRol());
-            statement.setFloat(4, user.getCredito());
+            statement.setFloat(5, user.getCredito());
 
             int filasAfectadas = statement.executeUpdate();
             return filasAfectadas > 0;
@@ -63,15 +66,15 @@ public class UsuarioDAO {
     public UsuarioVO leerUsuario(String nombreUsuario) {
         Connection myConn = db.getConnection();
         UsuarioVO myUser = null;
-        String sql = "SELECT * Usuarios WHERE nombreUsuario = ? ";
+        String sql = "SELECT * FROM Usuarios WHERE nombreUsuario = ?";
 
         try {
 
             PreparedStatement statement = myConn.prepareStatement(sql);
             statement.setString(1, nombreUsuario);
 
-            ResultSet result = statement.executeQuery(sql);
-
+            ResultSet result = statement.executeQuery();
+            
             if (result.next()) {
                 myUser = SerializarUsuario(result);
             }
@@ -130,7 +133,7 @@ public class UsuarioDAO {
 
             PreparedStatement statement = myConn.prepareStatement(sql);
             statement.setInt(1, ID);
-            
+
             int filasAfectadas = statement.executeUpdate();
             return filasAfectadas > 0;
 
@@ -157,7 +160,6 @@ public class UsuarioDAO {
             PreparedStatement statement = myConn.prepareStatement(sql);
             statement.setFloat(1, monto);
             statement.setInt(2, ID);
-
 
             int filasAfectadas = statement.executeUpdate();
 
