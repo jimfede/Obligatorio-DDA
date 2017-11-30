@@ -29,15 +29,15 @@ public class Tablero {
     public Tablero(int casillerosX, int casillerosY) {
         this.casillerosX = casillerosX;
         this.casillerosY = casillerosY;
-        int i = 1;
-        int j = 1;
+        int i = 0;
+        int j = 0;
         while (i <= casillerosX) {
             while (j <= casillerosY) {
                 Casillero casillero = new Casillero(i, j);
                 this.casilleros.add(casillero);
                 j++;
             }
-            j = 1;
+            j = 0;
             i++;
         }
         insertarMina();

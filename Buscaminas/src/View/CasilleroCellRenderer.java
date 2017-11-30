@@ -8,7 +8,6 @@ package View;
 import Model.partidas.Casillero;
 import java.awt.Color;
 import java.awt.Component;
-import static javax.management.Query.value;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;

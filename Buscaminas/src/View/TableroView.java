@@ -29,7 +29,7 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
         initComponents();
         this.jTableTableModel = new TableroTableModel(partida);
         jTableTablero.setModel(this.jTableTableModel);
-        //jTableTablero.setDefaultRenderer(Object.class, new CasilleroCellRenderer());
+        jTableTablero.setDefaultRenderer(Object.class, new CasilleroCellRenderer());
         jTableTablero.setRowHeight(50);
     }
 

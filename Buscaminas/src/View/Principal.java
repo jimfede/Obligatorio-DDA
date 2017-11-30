@@ -75,7 +75,7 @@ public class Principal extends javax.swing.JFrame {
         // un jugador de prueba que debería estar en la base
         Jugador jugador1 = new Jugador("a", "a", "a");
 
-        Tablero tablero1 = new Tablero(10, 10);
+        Tablero tablero1 = new Tablero(5, 5);
         Apuesta apuesta1 = new Apuesta(jugador1, 100);
         Partida partida = new Partida(jugador1, tablero1, apuesta1);
         TableroView tableroView = new TableroView(partida);
