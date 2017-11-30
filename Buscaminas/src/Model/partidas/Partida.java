@@ -5,6 +5,8 @@
  */
 package Model.partidas;
 
+import Model.Evento;
+import Model.Mensaje;
 import Model.apuestas.Apuesta;
 import Model.apuestas.Pozo;
 import Model.usuarios.Jugador;
@@ -186,6 +188,21 @@ public final class Partida extends Observable {
         }
         if (jugador == jugador2) {
             this.turnoJugador = this.jugador1;
+        }
+    }
+
+    public void procesarMensajePartida(Mensaje mensaje) {
+        if (mensaje.getEvento() == Evento.CASILLERO_SELECCIONADO) {
+            int[] coord = (int[]) mensaje.getAux();
+            Casillero casilleroSeleccionado = (Casillero) this.tablero.obtenerCasillero(coord[0], coord[1]);
+            if (casilleroSeleccionado.isDescubierto()) {
+                setChanged();
+                notifyObservers(new Mensaje(Evento.JUGADA_NO_PERMITIDA, "Jugada No permitida"));
+            } else {
+                casilleroSeleccionado.setDescubierto(true);
+                setChanged();
+                notifyObservers(new Mensaje(Evento.JUGADA_REALIZADA, null));
+            }
         }
     }
 

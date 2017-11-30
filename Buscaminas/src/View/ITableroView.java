@@ -7,6 +7,7 @@ package View;
 
 import Controller.PartidaController;
 import Model.Mensaje;
+import Model.partidas.Casillero;
 
 /**
  *
@@ -16,7 +17,7 @@ public interface ITableroView {
 
     int[] obtenerCeldaSeleccionada();
 
-    void procesar(Mensaje mensaje);
+    void procesarMensajeTablero(Mensaje mensaje);
 
     void setControlador(PartidaController partidaController);
 
