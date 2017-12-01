@@ -36,6 +36,7 @@ public class PartidaController extends MouseAdapter implements Observer {
 
     @Override
     public void mouseClicked(MouseEvent click) {
-        partida.procesarMensajePartida(new Mensaje(Evento.CASILLERO_SELECCIONADO, this.tablero.obtenerCeldaSeleccionada()));
+        this.partida.procesarMensajePartida(new Mensaje(Evento.CASILLERO_SELECCIONADO, this.tablero.obtenerCeldaSeleccionada()));
     }
+
 }

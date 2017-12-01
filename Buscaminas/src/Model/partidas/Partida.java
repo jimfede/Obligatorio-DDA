@@ -38,14 +38,15 @@ public final class Partida extends Observable {
      * debita el saldo inicial apostado por el mismo
      *
      * @param jugador1
-     * @param tablero
+     * @param x
+     * @param y
      * @param apuestaInicial
      */
-    public Partida(Jugador jugador1, Tablero tablero, Apuesta apuestaInicial) {
+    public Partida(Jugador jugador1, int x, int y, Apuesta apuestaInicial) {
         this.jugador1 = jugador1;
         this.jugador2 = null;
         this.turnoJugador = jugador2;
-        this.tablero = tablero;
+        this.tablero = new Tablero(x, y);
         this.turnosJugados = 0;
         this.pozo = new Pozo();
         this.pozo.recibirApuesta(apuestaInicial);
@@ -173,7 +174,15 @@ public final class Partida extends Observable {
     }
 
     public void finalizarPartida() {
+// tres condiciones
+//1 - por descrubrir mina
+//2 - por tiempo cumplido de jugada
+//3 - por tiempo cuplido de aceptar apuesta
+//4 - no pagar apuesta
 
+// cambiar estado a finalizada
+// pasar bolsa de apuesta a ganador
+// notificar a jugadores con cartelito
     }
 
     /**

@@ -8,9 +8,10 @@ package View;
 import Controller.PartidaController;
 import Model.Evento;
 import Model.Mensaje;
-import Model.partidas.Casillero;
+//import Model.partidas.Casillero;
 import Model.partidas.Partida;
 import javax.swing.JOptionPane;
+//import javax.swing.JTable;
 
 /**
  *
@@ -30,7 +31,7 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
         this.jTableTableModel = new TableroTableModel(partida);
         jTableTablero.setModel(this.jTableTableModel);
         jTableTablero.setDefaultRenderer(Object.class, new CasilleroCellRenderer());
-        jTableTablero.setRowHeight(50);
+        jTableTablero.setRowHeight(70);
     }
 
     /**
@@ -48,7 +49,8 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setSize(new java.awt.Dimension(0, 0));
 
         jTableTablero.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,6 +63,10 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableTablero.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTableTablero.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        jTableTablero.setRowSelectionAllowed(false);
+        jTableTablero.setTableHeader(null);
         jScrollPane1.setViewportView(jTableTablero);
 
         jButton1.setText("Nueva Apuesta");
@@ -74,30 +80,30 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(177, 177, 177)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
+                        .addGap(42, 42, 42)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(201, 201, 201)
-                        .addComponent(jLabel1)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -133,7 +139,8 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
     }
 
     @Override
-    public void setControlador(PartidaController partidaController) {
-        jTableTablero.addMouseListener(partidaController);
+    public void agregarMouseListener(PartidaController partidaController) {
+        this.jTableTablero.addMouseListener(partidaController);
     }
+    
 }

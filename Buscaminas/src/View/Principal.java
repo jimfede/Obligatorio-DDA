@@ -34,55 +34,92 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbtnNuevaPartida = new javax.swing.JButton();
+        txtY = new javax.swing.JTextField();
+        txtX = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton3.setText("Inicar Sesion");
 
-        jButton4.setText("Nueva Partida");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jbtnNuevaPartida.setText("Nueva Partida");
+        jbtnNuevaPartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jbtnNuevaPartidaActionPerformed(evt);
             }
         });
+
+        txtY.setNextFocusableComponent(jbtnNuevaPartida);
+
+        txtX.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtX.setNextFocusableComponent(txtY);
+
+        jLabel1.setText("X");
+
+        jLabel2.setText("Y");
+
+        jLabel3.setText("Tamaño");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(145, 145, 145)
+                .addContainerGap(93, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtY)
+                    .addComponent(txtX)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3))
-                .addContainerGap(154, Short.MAX_VALUE))
+                    .addComponent(jButton3)
+                    .addComponent(jbtnNuevaPartida))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(jButton3)
-                .addGap(88, 88, 88)
-                .addComponent(jButton4)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jButton3)
+                        .addGap(60, 60, 60)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addComponent(jbtnNuevaPartida)))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jbtnNuevaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNuevaPartidaActionPerformed
         // un jugador de prueba que debería estar en la base
         Jugador jugador1 = new Jugador("a", "a", "a");
 
-        Tablero tablero1 = new Tablero(5, 5);
         Apuesta apuesta1 = new Apuesta(jugador1, 100);
-        Partida partida = new Partida(jugador1, tablero1, apuesta1);
+        Partida partida = new Partida(jugador1, Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText()), apuesta1);
         TableroView tableroView = new TableroView(partida);
         PartidaController partidaController = new PartidaController(tableroView, partida);
-        tableroView.setControlador(partidaController);
-        new TableroView(partida).setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+        tableroView.agregarMouseListener(partidaController);
+        tableroView.setVisible(true);
+    }//GEN-LAST:event_jbtnNuevaPartidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,6 +163,11 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jbtnNuevaPartida;
+    private javax.swing.JTextField txtX;
+    private javax.swing.JTextField txtY;
     // End of variables declaration//GEN-END:variables
 }

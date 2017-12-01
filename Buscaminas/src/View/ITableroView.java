@@ -19,6 +19,6 @@ public interface ITableroView {
 
     void procesarMensajeTablero(Mensaje mensaje);
 
-    void setControlador(PartidaController partidaController);
+    void agregarMouseListener(PartidaController partidaController);
 
 }
