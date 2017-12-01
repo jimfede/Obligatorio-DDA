@@ -9,18 +9,16 @@ import Model.mensajes.Evento;
 import Model.mensajes.Mensaje;
 import Model.apuestas.Apuesta;
 import Model.apuestas.Pozo;
-import Model.partidas.Interfaces.IObservadorRemoto;
-import Model.partidas.Interfaces.IPartidaRemota;
 import Model.usuarios.Jugador;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author Federico
  */
-public final class Partida extends Observable implements IPartidaRemota{
+public final class Partida extends Observable {
 
     private int idPartida;
     private Jugador jugador1;
@@ -33,7 +31,7 @@ public final class Partida extends Observable implements IPartidaRemota{
     private double saldoJ2;
     private Jugador ganador;
     private TimerApuesta timerApuesta;
-    private ArrayList<IObservadorRemoto> observadores = new ArrayList<>();
+    private ArrayList<Observer> observadores = new ArrayList<>();
 
     /**
      * Constructor de Partida. Instancia una nueva partida para un jugador, y se
@@ -55,16 +53,6 @@ public final class Partida extends Observable implements IPartidaRemota{
         actualizarSaldo(jugador1, apuestaInicial.getMonto());
     }
 
-    /**
-     * <b>(RMI)</b> Metodo de interfaz IPartidaRemota que permite añadir Observadores de manera remota.
-     * @param observer
-     * @throws RemoteException 
-     */
-    @Override
-    public void agregarObservador(IObservadorRemoto observer) throws RemoteException {
-        this.observadores.add(observer);
-    }
-    
     /**
      * Se debita de la cuenta del jugador invitado, el saldo que apostó otro
      * jugador
@@ -212,7 +200,6 @@ public final class Partida extends Observable implements IPartidaRemota{
         }
     }
 
-    @Override
     public void procesarMensajePartida(Mensaje mensaje) {
         if (mensaje.getEvento() == Evento.CASILLERO_SELECCIONADO) {
             int[] coord = (int[]) mensaje.getAux();

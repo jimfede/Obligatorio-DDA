@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Model.partidas.Interfaces;
+
+import java.rmi.RemoteException;
 
 /**
  *
  * @author Federico
  */
-public enum Evento {
-    CASILLERO_SELECCIONADO,
-    JUGADA_REALIZADA,
-    JUGADA_NO_PERMITIDA
+public interface IObservadorRemoto {
+
+    public void update(IPartidaRemota fachada, Object aux) throws RemoteException;
+
 }

@@ -3,34 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package buscaminascliente.Controller;
 
 import Model.mensajes.Evento;
 import Model.mensajes.Mensaje;
+import Model.partidas.Interfaces.IPartidaRemota;
 import Model.partidas.Partida;
 import View.ITableroView;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Federico
  */
-public class PartidaController extends MouseAdapter implements Observer {
+public class PartidaController extends MouseAdapter {
 
     private ITableroView tablero;
-    private Partida partida;
+    private IPartidaRemota partida;
 
     public PartidaController(ITableroView tableroView, Partida partida) {
         this.tablero = tableroView;
         this.partida = partida;
-        this.partida.addObserver(this);
+        try {
+            new AdaptadorPartidaController(this);
+        } catch (RemoteException ex) {
+            Logger.getLogger(PartidaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
+    public void procesarMensajeTablero(Object arg) {
         this.tablero.procesarMensajeTablero((Mensaje) arg);
     }
 
