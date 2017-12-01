@@ -9,18 +9,28 @@ package Model.usuarios;
  *
  * @author Federico
  */
-public class Usuario {
+public class Jugador extends Usuario {
 
-    Integer idUsuario;
-    String nombreUsuario;
-    String clave;
-    String nombreCompleto;
-    double credito;
-    rol rolUsuario;
-    boolean sesioniniciada;
+    Double credito;
 
-    enum rol {
-        administrador, jugador
+    /**
+     * Constructor de Jugador
+     *
+     * @param nombreUsuario Nombre de Usuario a jugar
+     * @param clave Clave del usuario a jugar
+     * @param nombreCompleto Nombre completo del usuario a jugar
+     */
+    public Jugador(String nombreUsuario, String clave, String nombreCompleto) {
+        this.nombreUsuario = nombreUsuario;
+        this.clave = clave;
+        this.nombreCompleto = nombreCompleto;
+        this.rolUsuario = rol.jugador;
+        this.sesioniniciada = false;
+        this.credito = 0.0;
+    }
+
+    public Double getCredito() {
+        return credito;
     }
 
     public String getNombreUsuario() {
@@ -35,12 +45,8 @@ public class Usuario {
         return nombreCompleto;
     }
 
-    public rol getRolUsuario() {
-        return rolUsuario;
-    }
-
-    public boolean isSesioniniciada() {
-        return sesioniniciada;
+    public void setCredito(Double credito) {
+        this.credito = credito;
     }
 
     public void setNombreUsuario(String nombreUsuario) {
@@ -53,6 +59,14 @@ public class Usuario {
 
     public void setNombreCompleto(String nombreCompleto) {
         this.nombreCompleto = nombreCompleto;
+    }
+
+    public rol getRolUsuario() {
+        return rolUsuario;
+    }
+
+    public boolean isSesioniniciada() {
+        return sesioniniciada;
     }
 
     public void setRolUsuario(rol rolUsuario) {

@@ -15,32 +15,15 @@ import java.util.ArrayList;
  *
  * @author Federico
  */
-public class ControladoraSingleton {
+public class GestoraBuscaminas {
 
-    private static ArrayList<Usuario> usuarios;
-    private static ArrayList<Sesion> sesiones;
-    private static ArrayList<Partida> partidas;
-    private static ControladoraSingleton instance = null;
+    private ArrayList<Usuario> usuarios;
+    private ArrayList<Sesion> sesiones;
+    private ArrayList<Partida> partidas;
 
-    /**
-     * (Singleton) Constructor de ControladoraSingleton
-     */
-    protected ControladoraSingleton() {
+    public GestoraBuscaminas() {
         this.usuarios = new ArrayList<>();
         this.sesiones = new ArrayList<>();
-    }
-
-    /**
-     * Devuelve la actual instancia Singleton, o crea una nueva, de
-     * ControladoraSingleton
-     *
-     * @return Instancia de ControladoraSingleton
-     */
-    public static ControladoraSingleton getInstance() {
-        if (instance == null) {
-            instance = new ControladoraSingleton();
-        }
-        return instance;
     }
 
     /**
@@ -50,7 +33,7 @@ public class ControladoraSingleton {
      * @param nombreUsuario Nombre del usuario a logear
      * @param clave Clave del usuario a logear
      */
-    public static void iniciarSesion(String nombreUsuario, String clave) {
+    public void iniciarSesion(String nombreUsuario, String clave) {
         if (!sesionIniciada(nombreUsuario)) {
             for (Usuario u : usuarios) {
                 if (u.getNombreUsuario() == nombreUsuario && u.getClave() == clave) {
@@ -67,7 +50,7 @@ public class ControladoraSingleton {
      * @param nombreUsuario Nombre del usuario a verificar
      * @return True si el usuario ya está logeado | False sinó
      */
-    public static boolean sesionIniciada(String nombreUsuario) {
+    public boolean sesionIniciada(String nombreUsuario) {
         for (Sesion s : sesiones) {
             if (s.getSesionUsuario().getNombreUsuario() == nombreUsuario && !s.getSesionUsuario().isSesioniniciada()) {
                 return true;
@@ -91,28 +74,28 @@ public class ControladoraSingleton {
         return false;
     }
 
-    public static ArrayList<Usuario> getUsuarios() {
+    public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
 
-    public static ArrayList<Sesion> getSesiones() {
+    public ArrayList<Sesion> getSesiones() {
         return sesiones;
     }
 
-    public static ArrayList<Partida> getPartidas() {
+    public ArrayList<Partida> getPartidas() {
         return partidas;
     }
 
-    public static void setUsuarios(ArrayList<Usuario> usuarios) {
-        ControladoraSingleton.usuarios = usuarios;
+    public void setUsuarios(ArrayList<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
-    public static void setSesiones(ArrayList<Sesion> sesiones) {
-        ControladoraSingleton.sesiones = sesiones;
+    public void setSesiones(ArrayList<Sesion> sesiones) {
+        this.sesiones = sesiones;
     }
 
-    public static void setPartidas(ArrayList<Partida> partidas) {
-        ControladoraSingleton.partidas = partidas;
+    public void setPartidas(ArrayList<Partida> partidas) {
+        this.partidas = partidas;
     }
 
 }
