@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buscaminascliente.Controller;
+package Controller;
 
+import Interfaces.IPartidaRemota;
 import Model.mensajes.Evento;
 import Model.mensajes.Mensaje;
-import Model.partidas.Interfaces.IPartidaRemota;
 import Model.partidas.Partida;
 import View.ITableroView;
 import java.awt.event.MouseAdapter;
@@ -27,11 +27,11 @@ public class PartidaController extends MouseAdapter {
     private ITableroView tablero;
     private IPartidaRemota partida;
 
-    public PartidaController(ITableroView tableroView, Partida partida) {
+    public PartidaController(ITableroView tableroView, IPartidaRemota partida) {
         this.tablero = tableroView;
         this.partida = partida;
         try {
-            new AdaptadorPartidaController(this);
+            partida.agregarObservador(new AdaptadorPartidaController(this));
         } catch (RemoteException ex) {
             Logger.getLogger(PartidaController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -43,7 +43,11 @@ public class PartidaController extends MouseAdapter {
 
     @Override
     public void mouseClicked(MouseEvent click) {
-        this.partida.procesarMensajePartida(new Mensaje(Evento.CASILLERO_SELECCIONADO, this.tablero.obtenerCeldaSeleccionada()));
+        try {
+            this.partida.procesarMensajePartida(new Mensaje(Evento.CASILLERO_SELECCIONADO, this.tablero.obtenerCeldaSeleccionada()));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

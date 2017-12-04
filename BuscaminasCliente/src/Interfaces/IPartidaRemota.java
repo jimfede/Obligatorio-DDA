@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buscaminascliente.Interfaces;
+package Interfaces;
 
 import Model.mensajes.Mensaje;
 import java.rmi.Remote;
@@ -18,4 +18,6 @@ public interface IPartidaRemota extends Remote {
     public void agregarObservador(IObservadorRemoto observer) throws RemoteException;
 
     public void procesarMensajePartida(Mensaje mensaje) throws RemoteException;
+
+    public Object getTableroRemote() throws RemoteException;
 }

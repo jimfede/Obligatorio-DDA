@@ -8,8 +8,8 @@ package View;
 import Controller.PartidaController;
 import Model.mensajes.Evento;
 import Model.mensajes.Mensaje;
-//import Model.partidas.Casillero;
 import Model.partidas.Partida;
+import Model.partidas.Tablero;
 import javax.swing.JOptionPane;
 //import javax.swing.JTable;
 
@@ -26,9 +26,9 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
      *
      * @param partida
      */
-    public TableroView(Partida partida) {
+    public TableroView(Tablero xTablero) {
         initComponents();
-        this.jTableTableModel = new TableroTableModel(partida);
+        this.jTableTableModel = new TableroTableModel(xTablero);
         jTableTablero.setModel(this.jTableTableModel);
         jTableTablero.setDefaultRenderer(Object.class, new CasilleroCellRenderer());
         jTableTablero.setRowHeight(70);

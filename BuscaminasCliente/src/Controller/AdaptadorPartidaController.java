@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buscaminascliente.Controller;
+package Controller;
 
 import Model.mensajes.Mensaje;
-import buscaminascliente.Interfaces.IObservadorRemoto;
-import buscaminascliente.Interfaces.IPartidaRemota;
+import Interfaces.IObservadorRemoto;
+import Interfaces.IPartidaRemota;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -17,18 +17,15 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class AdaptadorPartidaController extends UnicastRemoteObject implements IObservadorRemoto{
 
-    private PartidaController pcontroller;
-    private IPartidaRemota partida;
-
+    private PartidaController partidaControler;
     
     public AdaptadorPartidaController(PartidaController pc) throws RemoteException{
-        this.pcontroller = pc;
-        this.partida.agregarObservador(this);
+        this.partidaControler = pc;
     }
     
     @Override
     public void update(IPartidaRemota fachada, Object aux) throws RemoteException {
-        pcontroller.procesarMensajeTablero(aux);
+        partidaControler.procesarMensajeTablero(aux);
     }
 
     

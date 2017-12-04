@@ -111,14 +111,14 @@ public class Principal extends javax.swing.JFrame {
 
     private void jbtnNuevaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNuevaPartidaActionPerformed
         // un jugador de prueba que debería estar en la base
-        Jugador jugador1 = new Jugador("a", "a", "a");
-
-        Apuesta apuesta1 = new Apuesta(jugador1, 100);
-        Partida partida = new Partida(jugador1, Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText()), apuesta1);
-        TableroView tableroView = new TableroView(partida);
-        PartidaController partidaController = new PartidaController(tableroView, partida);
-        tableroView.agregarMouseListener(partidaController);
-        tableroView.setVisible(true);
+//        Jugador jugador1 = new Jugador("a", "a", "a");
+//
+//        Apuesta apuesta1 = new Apuesta(jugador1, 100);
+//        Partida partida = new Partida(jugador1, Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText()), apuesta1);
+//        TableroView tableroView = new TableroView(partida);
+//        PartidaController partidaController = new PartidaController(tableroView, partida);
+//        tableroView.agregarMouseListener(partidaController);
+//        tableroView.setVisible(true);
     }//GEN-LAST:event_jbtnNuevaPartidaActionPerformed
 
     /**

@@ -17,8 +17,8 @@ public class TableroTableModel extends AbstractTableModel {
 
     private Tablero tablero;
 
-    public TableroTableModel(Partida partida) {
-        this.tablero = partida.getTablero();
+    public TableroTableModel(Tablero xTablero) {
+        this.tablero = xTablero;
     }
 
     @Override
