@@ -26,7 +26,7 @@ public class PartidaController extends MouseAdapter implements Observer {
     public PartidaController(ITableroView tableroView, Partida partida) {
         this.tablero = tableroView;
         this.partida = partida;
-        this.partida.addObserver(this);
+//        this.partida.addObserver(this);
     }
 
     @Override

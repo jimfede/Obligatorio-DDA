@@ -15,12 +15,13 @@ import Model.usuarios.Jugador;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author Federico
  */
-public final class Partida extends Observable implements IPartidaRemota{
+public final class Partida implements IPartidaRemota {
 
     private int idPartida;
     private Jugador jugador1;
@@ -55,16 +56,29 @@ public final class Partida extends Observable implements IPartidaRemota{
         actualizarSaldo(jugador1, apuestaInicial.getMonto());
     }
 
+    @Override
+    public Object getTableroRemote() throws RemoteException {
+        return getTablero();
+    }
+    
+    public void notificarObservadores(Object arg) throws RemoteException {
+        for (int i = observadores.size() - 1; i >= 0; i--) {
+            observadores.get(i).update(this, arg);
+        }
+    }
+
     /**
-     * <b>(RMI)</b> Metodo de interfaz IPartidaRemota que permite añadir Observadores de manera remota.
+     * <b>(RMI)</b> Metodo de interfaz IPartidaRemota que permite añadir
+     * Observadores de manera remota.
+     *
      * @param observer
-     * @throws RemoteException 
+     * @throws RemoteException
      */
     @Override
     public void agregarObservador(IObservadorRemoto observer) throws RemoteException {
         this.observadores.add(observer);
     }
-    
+
     /**
      * Se debita de la cuenta del jugador invitado, el saldo que apostó otro
      * jugador
@@ -217,13 +231,17 @@ public final class Partida extends Observable implements IPartidaRemota{
         if (mensaje.getEvento() == Evento.CASILLERO_SELECCIONADO) {
             int[] coord = (int[]) mensaje.getAux();
             Casillero casilleroSeleccionado = (Casillero) this.tablero.obtenerCasillero(coord[0], coord[1]);
-            if (casilleroSeleccionado.isDescubierto()) {
-                setChanged();
-                notifyObservers(new Mensaje(Evento.JUGADA_NO_PERMITIDA, "Jugada No permitida"));
-            } else {
-                casilleroSeleccionado.setDescubierto(true);
-                setChanged();
-                notifyObservers(new Mensaje(Evento.JUGADA_REALIZADA, null));
+            try {
+                if (casilleroSeleccionado.isDescubierto()) {
+//                setChanged();
+                    notificarObservadores(new Mensaje(Evento.JUGADA_NO_PERMITIDA, "Jugada No permitida"));
+                } else {
+                    casilleroSeleccionado.setDescubierto(true);
+//                setChanged();
+                    notificarObservadores(new Mensaje(Evento.JUGADA_REALIZADA, null));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

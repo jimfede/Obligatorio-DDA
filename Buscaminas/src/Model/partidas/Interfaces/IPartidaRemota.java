@@ -18,4 +18,7 @@ public interface IPartidaRemota extends Remote {
     public void agregarObservador(IObservadorRemoto observer) throws RemoteException;
 
     public void procesarMensajePartida(Mensaje mensaje) throws RemoteException;
+
+    public Object getTableroRemote() throws RemoteException;
+
 }
