@@ -8,13 +8,10 @@ package Controller;
 import Interfaces.IPartidaRemota;
 import Model.mensajes.Evento;
 import Model.mensajes.Mensaje;
-import Model.partidas.Partida;
 import View.ITableroView;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

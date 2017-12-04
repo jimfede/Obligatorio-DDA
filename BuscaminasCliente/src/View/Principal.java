@@ -40,6 +40,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        lblApuesta = new javax.swing.JLabel();
+        txtApuesta = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +65,8 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel3.setText("Tamaño");
 
+        lblApuesta.setText("Apuesta");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,14 +77,19 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtY)
-                    .addComponent(txtX)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
-                    .addComponent(jbtnNuevaPartida))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtY)
+                            .addComponent(txtX)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3)
+                            .addComponent(jbtnNuevaPartida)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtApuesta, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblApuesta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(146, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,7 +112,11 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(182, 182, 182)
                         .addComponent(jbtnNuevaPartida)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblApuesta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtApuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,14 +124,14 @@ public class Principal extends javax.swing.JFrame {
 
     private void jbtnNuevaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNuevaPartidaActionPerformed
         // un jugador de prueba que debería estar en la base
-//        Jugador jugador1 = new Jugador("a", "a", "a");
-//
-//        Apuesta apuesta1 = new Apuesta(jugador1, 100);
-//        Partida partida = new Partida(jugador1, Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText()), apuesta1);
-//        TableroView tableroView = new TableroView(partida);
-//        PartidaController partidaController = new PartidaController(tableroView, partida);
-//        tableroView.agregarMouseListener(partidaController);
-//        tableroView.setVisible(true);
+        Jugador jugador1 = new Jugador("a", "a", "a");
+
+        double apuesta1 = Integer.parseInt(txtApuesta.getText());
+        Partida partida = new Partida(jugador1, Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText()), apuesta1);
+        TableroView tableroView = new TableroView(/*TableroDeUnaPartida*/);
+        PartidaController partidaController = new PartidaController(tableroView, partida);
+        tableroView.agregarMouseListener(partidaController);
+        tableroView.setVisible(true);
     }//GEN-LAST:event_jbtnNuevaPartidaActionPerformed
 
     /**
@@ -167,6 +180,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton jbtnNuevaPartida;
+    private javax.swing.JLabel lblApuesta;
+    private javax.swing.JTextField txtApuesta;
     private javax.swing.JTextField txtX;
     private javax.swing.JTextField txtY;
     // End of variables declaration//GEN-END:variables
