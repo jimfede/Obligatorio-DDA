@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.partidas.Interfaces;
+package Interfaces;
 
 import java.rmi.RemoteException;
 
@@ -13,6 +13,11 @@ import java.rmi.RemoteException;
  */
 public interface IObservadorRemoto {
 
-    public void update(IPartidaRemota fachada, Object aux) throws RemoteException;
+    /**
+     * Actualiza el estado de un observador, pasandole como argumento un objeto.
+     * @param aux
+     * @throws RemoteException 
+     */
+    public void update(Object aux) throws RemoteException;
 
 }

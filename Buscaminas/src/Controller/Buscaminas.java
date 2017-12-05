@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Model.GestoraBuscaminas;
+import Model.GestoraSingleton;
 import Model.partidas.Partida;
 import Model.apuestas.Apuesta;
 import Model.partidas.Tablero;
@@ -26,7 +26,7 @@ public class Buscaminas {
     public static void main(String[] args) {
         // TODO code application logic here
 
-        GestoraBuscaminas.getInstance();
+        GestoraSingleton.getInstance();
 
 //        Jugador j1 = new Jugador("BB", "bb", "Babita Bernardotti");
 //        Jugador j2 = new Jugador("CD", "cd", "Chrysa Darridon");

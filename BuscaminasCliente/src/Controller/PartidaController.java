@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Interfaces.IPartidaRemota;
+import Interfaces.IFacadeRemota;
 import Model.mensajes.Evento;
 import Model.mensajes.Mensaje;
 import View.ITableroView;
@@ -22,13 +22,13 @@ import java.util.logging.Logger;
 public class PartidaController extends MouseAdapter {
 
     private ITableroView tablero;
-    private IPartidaRemota partida;
+    private String idPartida;
 
-    public PartidaController(ITableroView tableroView, IPartidaRemota partida) {
+    public PartidaController(ITableroView tableroView, String xidPartida) {
         this.tablero = tableroView;
-        this.partida = partida;
+        this.idPartida = xidPartida;
         try {
-            partida.agregarObservador(new AdaptadorPartidaController(this));
+            ControladoraCliente.getInstance().agregarObservador(new AdaptadorPartidaController(this));
         } catch (RemoteException ex) {
             Logger.getLogger(PartidaController.class.getName()).log(Level.SEVERE, null, ex);
         }

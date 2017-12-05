@@ -5,6 +5,8 @@
  */
 
 
+import Interfaces.IFacadeRemota;
+import RMI.ClienteRMI;
 import View.Principal;
 
 /**
@@ -18,6 +20,13 @@ public class MainCliente {
      */
     public static void main(String[] args) {
         new Principal().setVisible(true);
+        IFacadeRemota fachada = (IFacadeRemota) ClienteRMI.obtenerConexionRMI("localhost", "1099", "Fachada");
+        if (fachada != null) {
+            System.out.println("Conexión satisfactoria");
+            ControladoraCliente.getInstance().setFacade(fachada);
+        } else {
+            System.err.println("No se pudo realizar la conexión con el Servidor de RMI");
+        }
     }
     
 }

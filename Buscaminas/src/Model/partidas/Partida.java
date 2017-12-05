@@ -9,21 +9,20 @@ import Model.mensajes.Evento;
 import Model.mensajes.Mensaje;
 import Model.apuestas.Apuesta;
 import Model.apuestas.Pozo;
-import Model.partidas.Interfaces.IObservadorRemoto;
-import Model.partidas.Interfaces.IPartidaRemota;
+import Interfaces.IObservadorRemoto;
 import Model.usuarios.Jugador;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.UUID;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
  * @author Federico
  */
-public final class Partida implements IPartidaRemota {
+public final class Partida {
 
-    private int idPartida;
+    private final String idPartida;
     private Jugador jugador1;
     private Jugador jugador2;
     private int turnosJugados;
@@ -54,16 +53,12 @@ public final class Partida implements IPartidaRemota {
         this.pozo = new Pozo();
         this.pozo.recibirApuesta(apuestaInicial);
         actualizarSaldo(jugador1, apuestaInicial.getMonto());
+        this.idPartida = UUID.randomUUID().toString();
     }
 
-    @Override
-    public Object getTableroRemote() throws RemoteException {
-        return getTablero();
-    }
-    
     public void notificarObservadores(Object arg) throws RemoteException {
         for (int i = observadores.size() - 1; i >= 0; i--) {
-            observadores.get(i).update(this, arg);
+            observadores.get(i).update(arg);
         }
     }
 
@@ -74,8 +69,7 @@ public final class Partida implements IPartidaRemota {
      * @param observer
      * @throws RemoteException
      */
-    @Override
-    public void agregarObservador(IObservadorRemoto observer) throws RemoteException {
+    public void agregarObservador(IObservadorRemoto observer) {
         this.observadores.add(observer);
     }
 
@@ -200,15 +194,17 @@ public final class Partida implements IPartidaRemota {
     }
 
     public void finalizarPartida() {
-// tres condiciones
-//1 - por descrubrir mina
-//2 - por tiempo cumplido de jugada
-//3 - por tiempo cuplido de aceptar apuesta
-//4 - no pagar apuesta
+        //TODO: Metodo finalizar partida sin terminar
+        // tres condiciones
+        //1 - por descrubrir mina
+        //2 - por tiempo cumplido de jugada
+        //3 - por tiempo cuplido de aceptar apuesta
+        //4 - no pagar apuesta
 
-// cambiar estado a finalizada
-// pasar bolsa de apuesta a ganador
-// notificar a jugadores con cartelito
+        // cambiar estado a finalizada
+        // pasar bolsa de apuesta a ganador
+        // notificar a jugadores con cartelito
+        throw new NotImplementedException();
     }
 
     /**
@@ -226,18 +222,15 @@ public final class Partida implements IPartidaRemota {
         }
     }
 
-    @Override
     public void procesarMensajePartida(Mensaje mensaje) {
         if (mensaje.getEvento() == Evento.CASILLERO_SELECCIONADO) {
             int[] coord = (int[]) mensaje.getAux();
             Casillero casilleroSeleccionado = (Casillero) this.tablero.obtenerCasillero(coord[0], coord[1]);
             try {
                 if (casilleroSeleccionado.isDescubierto()) {
-//                setChanged();
                     notificarObservadores(new Mensaje(Evento.JUGADA_NO_PERMITIDA, "Jugada No permitida"));
                 } else {
                     casilleroSeleccionado.setDescubierto(true);
-//                setChanged();
                     notificarObservadores(new Mensaje(Evento.JUGADA_REALIZADA, null));
                 }
             } catch (Exception e) {
@@ -326,12 +319,7 @@ public final class Partida implements IPartidaRemota {
         this.timerApuesta = timerApuesta;
     }
 
-    public int getNumeroPartida() {
+    public String getIdPartida() {
         return idPartida;
     }
-
-    public void setNumeroPartida(int numeroPartida) {
-        this.idPartida = numeroPartida;
-    }
-
 }

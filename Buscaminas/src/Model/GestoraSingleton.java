@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Model.apuestas.Apuesta;
 import Model.partidas.Partida;
 import Model.usuarios.Jugador;
 import Model.usuarios.Sesion;
@@ -15,17 +16,17 @@ import java.util.ArrayList;
  *
  * @author Federico
  */
-public class GestoraBuscaminas {
+public class GestoraSingleton {
 
     private static ArrayList<Usuario> usuarios;
     private static ArrayList<Sesion> sesiones;
     private static ArrayList<Partida> partidas;
-    private static GestoraBuscaminas instance = null;
+    private static GestoraSingleton instance = null;
 
     /**
      * (Singleton) Constructor de ControladoraSingleton
      */
-    protected GestoraBuscaminas() {
+    protected GestoraSingleton() {
         this.usuarios = new ArrayList<>();
         this.sesiones = new ArrayList<>();
     }
@@ -36,13 +37,22 @@ public class GestoraBuscaminas {
      *
      * @return Instancia de GestoraBuscaminas
      */
-    public static GestoraBuscaminas getInstance() {
+    public static GestoraSingleton getInstance() {
         if (instance == null) {
-            instance = new GestoraBuscaminas();
+            instance = new GestoraSingleton();
         }
         return instance;
     }
 
+    public Partida obtenerPartida(String id){
+        for (Partida par : partidas) {
+            if (par.getIdPartida().equals(id)) {
+                return par;
+            }
+        }
+        return null;
+    }
+    
     /**
      * Inicia la sesion de un usuario, para un Nombre de Usuario y una Clave
      * dada siempre que exista en el sistema o este no esté ya logeado
@@ -50,7 +60,7 @@ public class GestoraBuscaminas {
      * @param nombreUsuario Nombre del usuario a logear
      * @param clave Clave del usuario a logear
      */
-    public static void iniciarSesion(String nombreUsuario, String clave) {
+    public void iniciarSesion(String nombreUsuario, String clave) {
         if (!sesionIniciada(nombreUsuario)) {
             for (Usuario u : usuarios) {
                 if (u.getNombreUsuario() == nombreUsuario && u.getClave() == clave) {
@@ -67,7 +77,7 @@ public class GestoraBuscaminas {
      * @param nombreUsuario Nombre del usuario a verificar
      * @return True si el usuario ya está logeado | False sinó
      */
-    public static boolean sesionIniciada(String nombreUsuario) {
+    public boolean sesionIniciada(String nombreUsuario) {
         for (Sesion s : sesiones) {
             if (s.getSesionUsuario().getNombreUsuario() == nombreUsuario && !s.getSesionUsuario().isSesioniniciada()) {
                 return true;
@@ -76,6 +86,17 @@ public class GestoraBuscaminas {
             }
         }
         return true;
+    }
+    
+    public void cerrarSesion(String nombreUsuario){
+        if (sesionIniciada(nombreUsuario)) {
+            for (Sesion s : sesiones) {
+                if (s.getSesionUsuario().getNombreUsuario().equals(nombreUsuario)) {
+                    sesiones.remove(s);
+                    return;
+                }
+            }
+        }
     }
 
     public boolean cargarSaldo(Jugador Jugador, double monto) {
@@ -89,6 +110,12 @@ public class GestoraBuscaminas {
             }
         }
         return false;
+    }
+    
+    public Partida nuevaPartida(Jugador player, int x, int y, Apuesta aInicial){
+        Partida nuevaPartida = new Partida(player, x, y, aInicial);
+        partidas.add(nuevaPartida);
+        return nuevaPartida;
     }
 
     public static ArrayList<Usuario> getUsuarios() {
@@ -104,15 +131,15 @@ public class GestoraBuscaminas {
     }
 
     public static void setUsuarios(ArrayList<Usuario> usuarios) {
-        GestoraBuscaminas.usuarios = usuarios;
+        GestoraSingleton.usuarios = usuarios;
     }
 
     public static void setSesiones(ArrayList<Sesion> sesiones) {
-        GestoraBuscaminas.sesiones = sesiones;
+        GestoraSingleton.sesiones = sesiones;
     }
 
     public static void setPartidas(ArrayList<Partida> partidas) {
-        GestoraBuscaminas.partidas = partidas;
+        GestoraSingleton.partidas = partidas;
     }
 
 }
