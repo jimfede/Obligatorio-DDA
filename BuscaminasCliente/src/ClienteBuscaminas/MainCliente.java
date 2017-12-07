@@ -10,6 +10,7 @@ package ClienteBuscaminas;
 import ClienteBuscaminas.Interfaces.IFacadeRemota;
 import ClienteBuscaminas.RMI.ClienteRMI;
 import ClienteBuscaminas.View.Principal;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,14 +22,16 @@ public class MainCliente {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Principal().setVisible(true);
         IFacadeRemota fachada = (IFacadeRemota) ClienteRMI.obtenerConexionRMI("localhost", "1099", "Fachada");
         if (fachada != null) {
             System.out.println("Conexión satisfactoria");
             ControladoraCliente.getInstance().setFacade(fachada);
         } else {
             System.err.println("No se pudo realizar la conexión con el Servidor de RMI");
+            JOptionPane.showMessageDialog(null, "No se pudo establecer comunicacion con el servidor remoto");
+            System.exit(0);
         }
+        new Principal().setVisible(true);
     }
     
 }
