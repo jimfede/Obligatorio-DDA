@@ -9,11 +9,8 @@ import ClienteBuscaminas.ControladoraCliente;
 import ClienteBuscaminas.Controller.PartidaController;
 import ClienteBuscaminas.Model.apuestas.Apuesta;
 import ClienteBuscaminas.Model.partidas.Partida;
-import ClienteBuscaminas.Model.partidas.Tablero;
 import ClienteBuscaminas.Model.usuarios.Jugador;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -125,6 +122,7 @@ public class Principal extends javax.swing.JFrame {
         Object nuevoUsuario = ControladoraCliente.getInstance().getMyUsuario();
         Jugador miJugador = null;
 
+        //Verificacion de usuario Administrador
         if (nuevoUsuario instanceof Jugador) {
             miJugador = (Jugador) nuevoUsuario;
         } else {
@@ -132,8 +130,9 @@ public class Principal extends javax.swing.JFrame {
             return;
         }
 
+        //FIN Verificacion de usuario Administrador
         Apuesta apuesta1 = new Apuesta(miJugador, Integer.parseInt(txtApuesta.getText()));
-        
+
         Partida partida;
         try {
             partida = ControladoraCliente.getInstance().getFacade().nuevaPartida(miJugador, Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText()), apuesta1);
@@ -142,7 +141,7 @@ public class Principal extends javax.swing.JFrame {
             e.printStackTrace();
             return;
         }
-        
+
         TableroView tableroView = new TableroView(partida.getTablero());
         PartidaController partidaController = new PartidaController(tableroView, partida.getIdPartida());
         tableroView.agregarMouseListener(partidaController);

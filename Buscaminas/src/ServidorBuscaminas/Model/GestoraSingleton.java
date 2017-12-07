@@ -10,6 +10,7 @@ import ServidorBuscaminas.Model.partidas.Partida;
 import ServidorBuscaminas.Model.usuarios.Jugador;
 import ServidorBuscaminas.Model.usuarios.Sesion;
 import ServidorBuscaminas.Model.usuarios.Usuario;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
@@ -117,7 +118,13 @@ public class GestoraSingleton {
     }
     
     public Partida nuevaPartida(Jugador player, int x, int y, Apuesta aInicial){
-        Partida nuevaPartida = new Partida(player, x, y, aInicial);
+        Partida nuevaPartida;
+        try{
+        nuevaPartida = new Partida(player, x, y, aInicial);
+        }catch(RemoteException e){
+            e.printStackTrace();
+            return null;
+        }
         partidas.add(nuevaPartida);
         return nuevaPartida;
     }

@@ -17,14 +17,12 @@ public class AdaptadorPartidaController extends UnicastRemoteObject implements I
 
     private final PartidaController partidaControler;
     
-    public AdaptadorPartidaController(PartidaController pc) throws RemoteException{
-        this.partidaControler = pc;
+    public AdaptadorPartidaController(PartidaController partidaCon) throws RemoteException{
+        this.partidaControler = partidaCon;
     }
     
     @Override
     public void update(Object aux) throws RemoteException {
         partidaControler.procesarMensajeTablero(aux);
-    }
-
-    
+    }    
 }

@@ -1,6 +1,7 @@
 package ServidorBuscaminas;
 
 
+import ServidorBuscaminas.RMIServidor.RmiServer;
 import java.util.Scanner;
 
 /*
@@ -16,7 +17,10 @@ import java.util.Scanner;
 public class MainServidor {
 
     public static void main(String[] args) {
-        System.out.println("Servidor Iniciado, presiona una tecla para Terminar");
+        
+        RmiServer.RMIinit(1099);
+        
+        System.out.println("Servidor Iniciado! presiona una tecla para Terminar");
         String salida;
         Scanner scanInput = new Scanner(System.in);
         salida = scanInput.nextLine();
