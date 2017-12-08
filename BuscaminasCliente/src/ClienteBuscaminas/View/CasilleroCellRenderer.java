@@ -5,7 +5,7 @@
  */
 package ClienteBuscaminas.View;
 
-import ClienteBuscaminas.Model.partidas.Casillero;
+import ServidorBuscaminas.Model.partidas.Casillero;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JButton;

@@ -7,7 +7,7 @@ package ClienteBuscaminas.View;
 
 import ClienteBuscaminas.ControladoraCliente;
 import ClienteBuscaminas.Controller.LoginController;
-import ClienteBuscaminas.Model.usuarios.Usuario;
+import ServidorBuscaminas.Model.usuarios.Usuario;
 import java.rmi.RemoteException;
 import javax.swing.JOptionPane;
 
@@ -106,7 +106,7 @@ public class LoginPanel extends javax.swing.JFrame {
         String Pass = txtPassword.getText();
         Usuario miuser = null;
         try {
-            miuser = LoginController.iniciarSesionUsuario(nombreUsuario, Pass);
+            LoginController.iniciarSesionUsuario(nombreUsuario, Pass);
         } catch (RemoteException e) {
             System.out.println("Error en Comunicacion RMI en: ");
             e.printStackTrace();

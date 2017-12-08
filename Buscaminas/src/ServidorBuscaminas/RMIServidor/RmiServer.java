@@ -6,9 +6,7 @@
 package ServidorBuscaminas.RMIServidor;
 
 import ServidorBuscaminas.Fachada.FacadeRemota;
-import java.rmi.Naming;
-import java.rmi.NoSuchObjectException;
-import java.rmi.RMISecurityManager;
+import ServidorBuscaminas.Interfaces.IFacadeRemota;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -20,24 +18,28 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class RmiServer {
 
-    public static void RMIinit(int puerto) {
+    public static FacadeRemota RMIinit() {
+        
 //        if (System.getSecurityManager() == null) {
-//            System.setSecurityManager(new RMISecurityManager());
+//            System.setSecurityManager(new SecurityManager());
 //        }
-
+        
+        Util.setCodebase(IFacadeRemota.class);
         Registry registroRMI = null;
+        FacadeRemota miFachada = new FacadeRemota();
 
         try {
-            registroRMI = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
-            FacadeRemota facade = new FacadeRemota();
-            Naming.rebind("rmi://localhost:" + puerto + "/Fachada", facade);
+            IFacadeRemota ifacade = (IFacadeRemota) UnicastRemoteObject.exportObject(miFachada, 1099);
+            registroRMI = LocateRegistry.createRegistry(1099);
+            registroRMI.rebind("Fachada", ifacade);
+            return miFachada;
         } catch (RemoteException e) {
             System.err.println("Error de comunicacion: " + e.toString());
             try {
                 UnicastRemoteObject.unexportObject(registroRMI, true);
             } catch (Exception e2) {
             }
-            System.exit(1);
+            System.exit(0);
         } catch (Exception e) {
             System.err.println("Excepcion en RMIServer:");
             e.printStackTrace();
@@ -45,8 +47,9 @@ public class RmiServer {
                 UnicastRemoteObject.unexportObject(registroRMI, true);
             } catch (Exception e2) {
             }
-            System.exit(1);
+            System.exit(0);
         }
+        return miFachada;
     }
 
 }

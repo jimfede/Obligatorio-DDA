@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ClienteBuscaminas.Model.partidas;
+package ServidorBuscaminas.Model.partidas;
 
-import ClienteBuscaminas.Model.usuarios.Jugador;
+import ServidorBuscaminas.Model.usuarios.Jugador;
 
 /**
  *

@@ -7,9 +7,9 @@ package ClienteBuscaminas.View;
 
 import ClienteBuscaminas.ControladoraCliente;
 import ClienteBuscaminas.Controller.PartidaController;
-import ClienteBuscaminas.Model.apuestas.Apuesta;
-import ClienteBuscaminas.Model.partidas.Partida;
-import ClienteBuscaminas.Model.usuarios.Jugador;
+import ServidorBuscaminas.Model.apuestas.Apuesta;
+import ServidorBuscaminas.Model.partidas.Partida;
+import ServidorBuscaminas.Model.usuarios.Jugador;
 import java.rmi.RemoteException;
 import javax.swing.JOptionPane;
 

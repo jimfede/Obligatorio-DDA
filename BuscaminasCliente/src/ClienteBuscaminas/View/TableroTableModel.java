@@ -5,8 +5,8 @@
  */
 package ClienteBuscaminas.View;
 
-import ClienteBuscaminas.Model.partidas.Partida;
-import ClienteBuscaminas.Model.partidas.Tablero;
+import ServidorBuscaminas.Model.partidas.Partida;
+import ServidorBuscaminas.Model.partidas.Tablero;
 import javax.swing.table.AbstractTableModel;
 
 /**

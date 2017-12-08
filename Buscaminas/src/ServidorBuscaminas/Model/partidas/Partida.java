@@ -11,8 +11,8 @@ import ServidorBuscaminas.Model.apuestas.Apuesta;
 import ServidorBuscaminas.Model.apuestas.Pozo;
 import ServidorBuscaminas.Interfaces.IObservadorRemoto;
 import ServidorBuscaminas.Model.usuarios.Jugador;
+import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.UUID;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -21,7 +21,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  *
  * @author Federico
  */
-public final class Partida extends UnicastRemoteObject {
+public final class Partida implements Serializable {
 
     private final String idPartida;
     private Jugador jugador1;

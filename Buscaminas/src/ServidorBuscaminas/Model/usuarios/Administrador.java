@@ -5,11 +5,13 @@
  */
 package ServidorBuscaminas.Model.usuarios;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Federico
  */
-public class Administrador extends Usuario{
+public class Administrador extends Usuario implements Serializable{
 
     /**
      * Constructor de Administrador

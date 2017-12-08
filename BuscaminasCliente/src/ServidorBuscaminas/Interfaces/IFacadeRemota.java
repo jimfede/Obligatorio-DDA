@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ClienteBuscaminas.Interfaces;
+package ServidorBuscaminas.Interfaces;
 
-import ClienteBuscaminas.Model.apuestas.Apuesta;
-import ClienteBuscaminas.Model.mensajes.Mensaje;
-import ClienteBuscaminas.Model.partidas.Casillero;
-import ClienteBuscaminas.Model.partidas.Partida;
-import ClienteBuscaminas.Model.usuarios.Jugador;
-import ClienteBuscaminas.Model.usuarios.Usuario;
+import ServidorBuscaminas.Model.apuestas.Apuesta;
+import ServidorBuscaminas.Model.mensajes.Mensaje;
+import ServidorBuscaminas.Model.partidas.Casillero;
+import ServidorBuscaminas.Model.partidas.Partida;
+import ServidorBuscaminas.Model.usuarios.Jugador;
+import ServidorBuscaminas.Model.usuarios.Usuario;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

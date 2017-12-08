@@ -6,9 +6,9 @@
 package ClienteBuscaminas.Controller;
 
 import ClienteBuscaminas.ControladoraCliente;
-import ClienteBuscaminas.Model.mensajes.Evento;
+import ServidorBuscaminas.Model.mensajes.Evento;
 import ClienteBuscaminas.View.ITableroView;
-import ClienteBuscaminas.Model.mensajes.Mensaje;
+import ServidorBuscaminas.Model.mensajes.Mensaje;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;

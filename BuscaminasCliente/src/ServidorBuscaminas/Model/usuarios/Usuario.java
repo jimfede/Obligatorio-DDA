@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ClienteBuscaminas.Model.usuarios;
+package ServidorBuscaminas.Model.usuarios;
+
+import java.io.Serializable;
 
 /**
  *
  * @author Federico
  */
-public class Usuario {
+public class Usuario implements Serializable{
 
     Integer idUsuario;
     String nombreUsuario;

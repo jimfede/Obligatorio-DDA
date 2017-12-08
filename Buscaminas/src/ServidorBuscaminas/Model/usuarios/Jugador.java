@@ -5,11 +5,13 @@
  */
 package ServidorBuscaminas.Model.usuarios;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Federico
  */
-public class Jugador extends Usuario {
+public class Jugador extends Usuario implements Serializable{
 
     Double credito;
 

@@ -1,7 +1,19 @@
 package ServidorBuscaminas;
 
+import ServidorBuscaminas.Fachada.FacadeRemota;
+import ServidorBuscaminas.Interfaces.IFacadeRemota;
 import ServidorBuscaminas.RMIServidor.RmiServer;
+import ServidorBuscaminas.RMIServidor.Util;
+import java.io.IOException;
+import java.rmi.Naming;
+import java.rmi.NoSuchObjectException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,18 +26,16 @@ import java.util.Scanner;
  */
 public class MainServidor {
 
-    public static void main(String[] args) {
-
-        RmiServer.RMIinit(1099);
+    public static void main(String[] args) throws NoSuchObjectException {
+        FacadeRemota mifacade = RmiServer.RMIinit();
 
         System.out.println("Servidor Iniciado! presiona una tecla para Terminar");
-        String salida;
-        Scanner scanInput = new Scanner(System.in);
-        salida = scanInput.nextLine();
-        if (salida == "") {
-            System.exit(0);
-        } else {
-            System.exit(0);
+        
+        try {
+            System.in.read();
+        } catch (IOException ex) {
         }
+        
+        UnicastRemoteObject.unexportObject(mifacade, true);
     }
 }

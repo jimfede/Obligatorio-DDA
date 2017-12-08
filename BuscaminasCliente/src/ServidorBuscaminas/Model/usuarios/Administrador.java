@@ -3,34 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ClienteBuscaminas.Model.usuarios;
+package ServidorBuscaminas.Model.usuarios;
+
+import java.io.Serializable;
 
 /**
  *
  * @author Federico
  */
-public class Jugador extends Usuario {
-
-    Double credito;
+public class Administrador extends Usuario implements Serializable{
 
     /**
-     * Constructor de Jugador
-     *
-     * @param nombreUsuario Nombre de Usuario a jugar
-     * @param clave Clave del usuario a jugar
-     * @param nombreCompleto Nombre completo del usuario a jugar
+     * Constructor de Administrador
+     * @param nombreUsuario Nombre de usuario
+     * @param clave Clave del usuario
+     * @param nombreCompleto Nombre completo del usuario
      */
-    public Jugador(String nombreUsuario, String clave, String nombreCompleto) {
+    public Administrador(String nombreUsuario, String clave, String nombreCompleto) {
         this.nombreUsuario = nombreUsuario;
         this.clave = clave;
         this.nombreCompleto = nombreCompleto;
-        this.rolUsuario = rol.jugador;
+        this.rolUsuario = rol.administrador;
         this.sesioniniciada = false;
-        this.credito = 0.0;
-    }
-
-    public Double getCredito() {
-        return credito;
     }
 
     public String getNombreUsuario() {
@@ -43,10 +37,6 @@ public class Jugador extends Usuario {
 
     public String getNombreCompleto() {
         return nombreCompleto;
-    }
-
-    public void setCredito(Double credito) {
-        this.credito = credito;
     }
 
     public void setNombreUsuario(String nombreUsuario) {
@@ -76,5 +66,5 @@ public class Jugador extends Usuario {
     public void setSesioniniciada(boolean sesioniniciada) {
         this.sesioniniciada = sesioniniciada;
     }
-
+   
 }

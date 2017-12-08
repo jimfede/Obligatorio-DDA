@@ -5,7 +5,8 @@
  */
 package ClienteBuscaminas.Controller;
 
-import ClienteBuscaminas.Interfaces.IObservadorRemoto;
+
+import ServidorBuscaminas.Interfaces.IObservadorRemoto;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 

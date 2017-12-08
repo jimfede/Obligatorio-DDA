@@ -5,11 +5,13 @@
  */
 package ServidorBuscaminas.Model.usuarios;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Federico
  */
-public class Usuario {
+public class Usuario implements Serializable{
 
     Integer idUsuario;
     String nombreUsuario;

@@ -5,8 +5,13 @@
  */
 package ClienteBuscaminas.RMI;
 
+
+import ServidorBuscaminas.Interfaces.IFacadeRemota;
 import java.rmi.Naming;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 /**
  *
@@ -14,9 +19,12 @@ import java.rmi.RemoteException;
  */
 public class ClienteRMI {
 
-    public static Object obtenerConexionRMI(String Host, String puerto, String Objeto) {
+    public static Remote obtenerConexionRMI(String Host, String puerto, String Objeto) {
+        Util.setCodebase(IFacadeRemota.class);
         try {
-            return (Object) Naming.lookup("//" + Host + ":" + puerto + "/" + Objeto);
+            //Registry miRegistro = LocateRegistry.getRegistry();
+           return Naming.lookup("//" + Host + ":" + puerto + "/" + Objeto);
+           // return Naming.lookup(Objeto);
         } catch (RemoteException e) {
             System.err.println("Error de comunicacion: " + e.toString());
             return null;

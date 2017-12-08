@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ClienteBuscaminas.Model.partidas;
+package ServidorBuscaminas.Model.partidas;
 
-import ClienteBuscaminas.Model.mensajes.Evento;
-import ClienteBuscaminas.Model.mensajes.Mensaje;
-import ClienteBuscaminas.Model.apuestas.Apuesta;
-import ClienteBuscaminas.Model.apuestas.Pozo;
-import ClienteBuscaminas.Interfaces.IObservadorRemoto;
-import ClienteBuscaminas.Model.usuarios.Jugador;
+import ServidorBuscaminas.Model.mensajes.Evento;
+import ServidorBuscaminas.Model.mensajes.Mensaje;
+import ServidorBuscaminas.Model.apuestas.Apuesta;
+import ServidorBuscaminas.Model.apuestas.Pozo;
+import ServidorBuscaminas.Interfaces.IObservadorRemoto;
+import ServidorBuscaminas.Model.usuarios.Jugador;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -20,7 +21,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  *
  * @author Federico
  */
-public final class Partida {
+public final class Partida implements Serializable {
 
     private final String idPartida;
     private Jugador jugador1;
@@ -44,7 +45,8 @@ public final class Partida {
      * @param y
      * @param apuestaInicial
      */
-    public Partida(Jugador jugador1, int x, int y, Apuesta apuestaInicial) {
+    public Partida(Jugador jugador1, int x, int y, Apuesta apuestaInicial) throws RemoteException{
+        super();
         this.jugador1 = jugador1;
         this.jugador2 = null;
         this.turnoJugador = jugador2;
@@ -55,6 +57,8 @@ public final class Partida {
         actualizarSaldo(jugador1, apuestaInicial.getMonto());
         this.idPartida = UUID.randomUUID().toString();
     }
+    
+    
 
     public void notificarObservadores(Object arg) throws RemoteException {
         for (int i = observadores.size() - 1; i >= 0; i--) {

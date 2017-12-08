@@ -7,9 +7,13 @@ package ClienteBuscaminas;
  */
 
 
-import ClienteBuscaminas.Interfaces.IFacadeRemota;
+
 import ClienteBuscaminas.RMI.ClienteRMI;
 import ClienteBuscaminas.View.Principal;
+import ServidorBuscaminas.Interfaces.IFacadeRemota;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,8 +25,10 @@ public class MainCliente {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RemoteException {
+              
         IFacadeRemota fachada = (IFacadeRemota) ClienteRMI.obtenerConexionRMI("localhost", "1099", "Fachada");
+        
         if (fachada != null) {
             System.out.println("Conexión satisfactoria");
             ControladoraCliente.getInstance().setFacade(fachada);

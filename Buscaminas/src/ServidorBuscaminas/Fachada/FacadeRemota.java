@@ -15,17 +15,16 @@ import ServidorBuscaminas.Model.partidas.Partida;
 import ServidorBuscaminas.Model.usuarios.Jugador;
 import ServidorBuscaminas.Model.usuarios.Usuario;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
  * @author Daniel
  */
-public class FacadeRemota extends UnicastRemoteObject implements IFacadeRemota {
-    
-    public FacadeRemota() throws RemoteException{
-        super();
-    }
+public class FacadeRemota implements IFacadeRemota {
+//    
+//    public FacadeRemota() throws RemoteException{
+//        super();
+//    }
     
     @Override
     public Usuario iniciarSesion(String nombreUsuario, String clave) throws RemoteException {
