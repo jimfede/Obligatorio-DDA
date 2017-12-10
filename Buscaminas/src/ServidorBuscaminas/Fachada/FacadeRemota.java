@@ -5,15 +5,15 @@
  */
 package ServidorBuscaminas.Fachada;
 
-import ServidorBuscaminas.Interfaces.IFacadeRemota;
-import ServidorBuscaminas.Interfaces.IObservadorRemoto;
-import ServidorBuscaminas.Model.GestoraSingleton;
-import ServidorBuscaminas.Model.apuestas.Apuesta;
-import ServidorBuscaminas.Model.mensajes.Mensaje;
-import ServidorBuscaminas.Model.partidas.Casillero;
-import ServidorBuscaminas.Model.partidas.Partida;
-import ServidorBuscaminas.Model.usuarios.Jugador;
-import ServidorBuscaminas.Model.usuarios.Usuario;
+import CommonBuscaminas.Interfaces.IFacadeRemota;
+import CommonBuscaminas.Interfaces.IObservadorRemoto;
+import CommonBuscaminas.Model.GestoraSingleton;
+import CommonBuscaminas.Model.apuestas.Apuesta;
+import CommonBuscaminas.Model.mensajes.Mensaje;
+import CommonBuscaminas.Model.partidas.Casillero;
+import CommonBuscaminas.Model.partidas.Partida;
+import CommonBuscaminas.Model.usuarios.Jugador;
+import CommonBuscaminas.Model.usuarios.Usuario;
 import java.rmi.RemoteException;
 
 /**

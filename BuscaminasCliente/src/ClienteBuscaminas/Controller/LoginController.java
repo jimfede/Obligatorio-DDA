@@ -6,7 +6,7 @@
 package ClienteBuscaminas.Controller;
 
 import ClienteBuscaminas.ControladoraCliente;
-import ServidorBuscaminas.Model.usuarios.Usuario;
+import CommonBuscaminas.Model.usuarios.Usuario;
 import java.rmi.RemoteException;
 
 /**

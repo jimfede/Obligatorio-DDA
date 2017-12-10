@@ -2,8 +2,8 @@ package ClienteBuscaminas;
 
 
 
-import ServidorBuscaminas.Model.usuarios.Usuario;
-import ServidorBuscaminas.Interfaces.IFacadeRemota;
+import CommonBuscaminas.Model.usuarios.Usuario;
+import CommonBuscaminas.Interfaces.IFacadeRemota;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

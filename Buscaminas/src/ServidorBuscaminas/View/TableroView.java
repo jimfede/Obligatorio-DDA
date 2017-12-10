@@ -6,9 +6,9 @@
 package ServidorBuscaminas.View;
 
 import ServidorBuscaminas.Controller.PartidaController;
-import ServidorBuscaminas.Model.mensajes.Evento;
-import ServidorBuscaminas.Model.mensajes.Mensaje;
-import ServidorBuscaminas.Model.partidas.Partida;
+import CommonBuscaminas.Model.mensajes.Evento;
+import CommonBuscaminas.Model.mensajes.Mensaje;
+import CommonBuscaminas.Model.partidas.Partida;
 import javax.swing.JOptionPane;
 //import javax.swing.JTable;
 

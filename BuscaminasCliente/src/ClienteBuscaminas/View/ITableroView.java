@@ -6,8 +6,8 @@
 package ClienteBuscaminas.View;
 
 import ClienteBuscaminas.Controller.PartidaController;
-import ServidorBuscaminas.Model.mensajes.Mensaje;
-import ServidorBuscaminas.Model.partidas.Casillero;
+import CommonBuscaminas.Model.mensajes.Mensaje;
+import CommonBuscaminas.Model.partidas.Casillero;
 
 /**
  *

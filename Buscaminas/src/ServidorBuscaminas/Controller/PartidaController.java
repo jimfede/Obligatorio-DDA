@@ -5,9 +5,9 @@
  */
 package ServidorBuscaminas.Controller;
 
-import ServidorBuscaminas.Model.mensajes.Evento;
-import ServidorBuscaminas.Model.mensajes.Mensaje;
-import ServidorBuscaminas.Model.partidas.Partida;
+import CommonBuscaminas.Model.mensajes.Evento;
+import CommonBuscaminas.Model.mensajes.Mensaje;
+import CommonBuscaminas.Model.partidas.Partida;
 import ServidorBuscaminas.View.ITableroView;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

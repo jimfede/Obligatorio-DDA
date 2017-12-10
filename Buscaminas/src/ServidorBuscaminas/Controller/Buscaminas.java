@@ -5,14 +5,14 @@
  */
 package ServidorBuscaminas.Controller;
 
-import ServidorBuscaminas.Model.GestoraSingleton;
-import ServidorBuscaminas.Model.partidas.Partida;
-import ServidorBuscaminas.Model.apuestas.Apuesta;
-import ServidorBuscaminas.Model.partidas.Tablero;
-import ServidorBuscaminas.Model.partidas.Casillero;
-import ServidorBuscaminas.Model.partidas.TimerApuesta;
-import ServidorBuscaminas.Model.usuarios.Administrador;
-import ServidorBuscaminas.Model.usuarios.Jugador;
+import CommonBuscaminas.Model.GestoraSingleton;
+import CommonBuscaminas.Model.partidas.Partida;
+import CommonBuscaminas.Model.apuestas.Apuesta;
+import CommonBuscaminas.Model.partidas.Tablero;
+import CommonBuscaminas.Model.partidas.Casillero;
+import CommonBuscaminas.Model.partidas.TimerApuesta;
+import CommonBuscaminas.Model.usuarios.Administrador;
+import CommonBuscaminas.Model.usuarios.Jugador;
 
 /**
  *

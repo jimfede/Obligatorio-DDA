@@ -6,7 +6,7 @@
 package ServidorBuscaminas.RMIServidor;
 
 import ServidorBuscaminas.Fachada.FacadeRemota;
-import ServidorBuscaminas.Interfaces.IFacadeRemota;
+import CommonBuscaminas.Interfaces.IFacadeRemota;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;

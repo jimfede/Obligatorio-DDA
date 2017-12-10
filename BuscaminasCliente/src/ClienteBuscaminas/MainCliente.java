@@ -10,7 +10,7 @@ package ClienteBuscaminas;
 
 import ClienteBuscaminas.RMI.ClienteRMI;
 import ClienteBuscaminas.View.LoginPanel;
-import ServidorBuscaminas.Interfaces.IFacadeRemota;
+import CommonBuscaminas.Interfaces.IFacadeRemota;
 import java.rmi.RemoteException;
 import javax.swing.JOptionPane;
 

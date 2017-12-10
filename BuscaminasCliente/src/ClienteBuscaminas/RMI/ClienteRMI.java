@@ -6,7 +6,7 @@
 package ClienteBuscaminas.RMI;
 
 
-import ServidorBuscaminas.Interfaces.IFacadeRemota;
+import CommonBuscaminas.Interfaces.IFacadeRemota;
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;

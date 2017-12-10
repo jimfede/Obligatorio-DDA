@@ -1,9 +1,9 @@
 package ServidorBuscaminas;
 
 import ServidorBuscaminas.Fachada.FacadeRemota;
-import ServidorBuscaminas.Model.GestoraSingleton;
-import ServidorBuscaminas.Model.usuarios.Jugador;
-import ServidorBuscaminas.Model.usuarios.Usuario;
+import CommonBuscaminas.Model.GestoraSingleton;
+import CommonBuscaminas.Model.usuarios.Jugador;
+import CommonBuscaminas.Model.usuarios.Usuario;
 import ServidorBuscaminas.RMIServidor.RmiServer;
 import java.io.IOException;
 import java.rmi.NoSuchObjectException;

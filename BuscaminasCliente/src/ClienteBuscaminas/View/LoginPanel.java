@@ -7,7 +7,7 @@ package ClienteBuscaminas.View;
 
 import ClienteBuscaminas.ControladoraCliente;
 import ClienteBuscaminas.Controller.LoginController;
-import ServidorBuscaminas.Model.usuarios.Usuario;
+import CommonBuscaminas.Model.usuarios.Usuario;
 import java.rmi.RemoteException;
 import javax.swing.JOptionPane;
 

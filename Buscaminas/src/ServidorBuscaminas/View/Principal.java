@@ -6,10 +6,10 @@
 package ServidorBuscaminas.View;
 
 import ServidorBuscaminas.Controller.PartidaController;
-import ServidorBuscaminas.Model.apuestas.Apuesta;
-import ServidorBuscaminas.Model.partidas.Partida;
-import ServidorBuscaminas.Model.partidas.Tablero;
-import ServidorBuscaminas.Model.usuarios.Jugador;
+import CommonBuscaminas.Model.apuestas.Apuesta;
+import CommonBuscaminas.Model.partidas.Partida;
+import CommonBuscaminas.Model.partidas.Tablero;
+import CommonBuscaminas.Model.usuarios.Jugador;
 
 /**
  *

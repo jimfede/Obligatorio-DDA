@@ -6,7 +6,7 @@
 package ClienteBuscaminas.Controller;
 
 
-import ServidorBuscaminas.Interfaces.IObservadorRemoto;
+import CommonBuscaminas.Interfaces.IObservadorRemoto;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 
