@@ -24,6 +24,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        lblNombreUsu.setText(ControladoraCliente.getInstance().getMyUsuario().getNombreCompleto());
     }
 
     /**
@@ -43,6 +44,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lblApuesta = new javax.swing.JLabel();
         txtApuesta = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        lblNombreUsu = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,7 +58,7 @@ public class Principal extends javax.swing.JFrame {
 
         txtY.setNextFocusableComponent(jbtnNuevaPartida);
 
-        txtX.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtX.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtX.setNextFocusableComponent(txtY);
 
         jLabel1.setText("X");
@@ -65,6 +68,10 @@ public class Principal extends javax.swing.JFrame {
         jLabel3.setText("Tamaño");
 
         lblApuesta.setText("Apuesta");
+
+        jLabel4.setText("Bienvenido: ");
+
+        lblNombreUsu.setText("jLabel5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,13 +95,23 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(txtApuesta, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblApuesta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(146, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNombreUsu)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(lblNombreUsu))
+                        .addGap(127, 127, 127)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -192,8 +209,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JButton jbtnNuevaPartida;
     private javax.swing.JLabel lblApuesta;
+    private javax.swing.JLabel lblNombreUsu;
     private javax.swing.JTextField txtApuesta;
     private javax.swing.JTextField txtX;
     private javax.swing.JTextField txtY;

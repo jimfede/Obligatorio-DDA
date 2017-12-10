@@ -45,7 +45,7 @@ public class GestoraSingleton {
         return instance;
     }
 
-    public Partida obtenerPartida(String id){
+    public static Partida obtenerPartida(String id){
         for (Partida par : partidas) {
             if (par.getIdPartida().equals(id)) {
                 return par;
@@ -66,7 +66,7 @@ public class GestoraSingleton {
         Usuario miUser = null;
         if (!sesionIniciada(nombreUsuario)) {
             for (Usuario u : usuarios) {
-                if (u.getNombreUsuario() == nombreUsuario && u.getClave() == clave) {
+                if (u.getNombreUsuario().equals(nombreUsuario) && u.getClave().equals(clave)) {
                     miUser = u;
                     sesiones.add(new Sesion(u));
                     u.setSesioniniciada(true);
@@ -84,13 +84,11 @@ public class GestoraSingleton {
      */
     public boolean sesionIniciada(String nombreUsuario) {
         for (Sesion s : sesiones) {
-            if (s.getSesionUsuario().getNombreUsuario() == nombreUsuario && !s.getSesionUsuario().isSesioniniciada()) {
+            if (s.getSesionUsuario().getNombreUsuario().equals(nombreUsuario) && !s.getSesionUsuario().isSesioniniciada()) {
                 return true;
-            } else {
-                return false;
             }
         }
-        return true;
+        return false;
     }
     
     public void cerrarSesion(String nombreUsuario){
@@ -106,7 +104,7 @@ public class GestoraSingleton {
 
     public boolean cargarSaldo(Jugador Jugador, double monto) {
         Usuario usuarioJugador = (Usuario) Jugador;
-        for (Usuario k : this.usuarios) {
+        for (Usuario k : usuarios) {
             if (k.equals(usuarioJugador)) {
                 Jugador.setCredito(Jugador.getCredito() + monto);
                 return true;
@@ -129,27 +127,27 @@ public class GestoraSingleton {
         return nuevaPartida;
     }
 
-    public static ArrayList<Usuario> getUsuarios() {
+    public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
 
-    public static ArrayList<Sesion> getSesiones() {
+    public ArrayList<Sesion> getSesiones() {
         return sesiones;
     }
 
-    public static ArrayList<Partida> getPartidas() {
+    public ArrayList<Partida> getPartidas() {
         return partidas;
     }
 
-    public static void setUsuarios(ArrayList<Usuario> usuarios) {
+    public void setUsuarios(ArrayList<Usuario> usuarios) {
         GestoraSingleton.usuarios = usuarios;
     }
 
-    public static void setSesiones(ArrayList<Sesion> sesiones) {
+    public void setSesiones(ArrayList<Sesion> sesiones) {
         GestoraSingleton.sesiones = sesiones;
     }
 
-    public static void setPartidas(ArrayList<Partida> partidas) {
+    public void setPartidas(ArrayList<Partida> partidas) {
         GestoraSingleton.partidas = partidas;
     }
 

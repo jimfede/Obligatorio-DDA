@@ -9,11 +9,9 @@ package ClienteBuscaminas;
 
 
 import ClienteBuscaminas.RMI.ClienteRMI;
-import ClienteBuscaminas.View.Principal;
+import ClienteBuscaminas.View.LoginPanel;
 import ServidorBuscaminas.Interfaces.IFacadeRemota;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,7 +35,7 @@ public class MainCliente {
             JOptionPane.showMessageDialog(null, "No se pudo establecer comunicacion con el servidor remoto");
             System.exit(0);
         }
-        new Principal().setVisible(true);
+        new LoginPanel().setVisible(true);
     }
     
 }

@@ -53,11 +53,7 @@ public class LoginPanel extends javax.swing.JFrame {
             }
         });
 
-        txtUsuario.setText("Usuario");
-
         lblNombreUsuario.setText("Nombre de Usuario");
-
-        txtPassword.setText("Contraseña");
 
         lblPassword.setText("Contraseña");
 
@@ -106,7 +102,7 @@ public class LoginPanel extends javax.swing.JFrame {
         String Pass = txtPassword.getText();
         Usuario miuser = null;
         try {
-            LoginController.iniciarSesionUsuario(nombreUsuario, Pass);
+            miuser = LoginController.iniciarSesionUsuario(nombreUsuario, Pass);
         } catch (RemoteException e) {
             System.out.println("Error en Comunicacion RMI en: ");
             e.printStackTrace();

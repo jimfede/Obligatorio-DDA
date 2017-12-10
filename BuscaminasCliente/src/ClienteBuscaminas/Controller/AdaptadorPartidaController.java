@@ -7,14 +7,14 @@ package ClienteBuscaminas.Controller;
 
 
 import ServidorBuscaminas.Interfaces.IObservadorRemoto;
+import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
  * @author Federico
  */
-public class AdaptadorPartidaController extends UnicastRemoteObject implements IObservadorRemoto{
+public class AdaptadorPartidaController implements IObservadorRemoto, Serializable{
 
     private final PartidaController partidaControler;
     

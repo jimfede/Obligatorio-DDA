@@ -6,12 +6,13 @@
 package ServidorBuscaminas.Model.apuestas;
 
 import ServidorBuscaminas.Model.usuarios.Jugador;
+import java.io.Serializable;
 
 /**
  *
  * @author Federico
  */
-public class Apuesta {
+public class Apuesta implements Serializable{
 
     private Jugador apostador;
     private double monto;
