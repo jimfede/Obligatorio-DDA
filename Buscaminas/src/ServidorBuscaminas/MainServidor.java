@@ -27,8 +27,6 @@ public class MainServidor {
 
 //Zona de pruebas
 
-GestoraSingleton.getInstance().nuevoAdministrador("Jorge", "321", "Jorgito el1");
-
 //FIN zona de pruebas
         try {
             System.in.read();

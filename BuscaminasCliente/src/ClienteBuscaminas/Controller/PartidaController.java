@@ -20,7 +20,7 @@ import java.rmi.RemoteException;
  *
  * @author Federico
  */
-public class PartidaController extends MouseAdapter implements IObservadorRemoto, Remote {
+public class PartidaController extends MouseAdapter implements IObservadorRemoto, Remote, Serializable {
 
     private ITableroView tablero;
     private String idPartida;
