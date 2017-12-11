@@ -15,16 +15,24 @@ public class UsuarioVO {
     private String clave;
     private String nombreCompleto;
     private String rol;
-    private float credito;
+    private double credito;
     private int usuarioId;
 
-    public UsuarioVO(String nombreUsuario, String clave, String nombreCompleto, String rol, float credito, int usuarioId) {
+    public UsuarioVO(String nombreUsuario, String clave, String nombreCompleto, String rol, double credito, int usuarioId) {
         this.nombreUsuario = nombreUsuario;
         this.clave = clave;
         this.nombreCompleto = nombreCompleto;
         this.rol = rol;
         this.credito = credito;
         this.usuarioId = usuarioId;
+    }
+
+    public UsuarioVO(String nombreUsuario, String clave, String nombreCompleto, String rol, double credito) {
+        this.nombreUsuario = nombreUsuario;
+        this.clave = clave;
+        this.nombreCompleto = nombreCompleto;
+        this.rol = rol;
+        this.credito = credito;
     }
 
     public UsuarioVO() {
@@ -62,11 +70,11 @@ public class UsuarioVO {
         this.rol = rol;
     }
 
-    public float getCredito() {
+    public double getCredito() {
         return credito;
     }
 
-    public void setCredito(float credito) {
+    public void setCredito(double credito) {
         this.credito = credito;
     }
 

@@ -3,14 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CommonBuscaminas.Model;
+package ServidorBuscaminas;
 
 import CommonBuscaminas.Model.apuestas.Apuesta;
 import CommonBuscaminas.Model.partidas.Partida;
+import CommonBuscaminas.Model.usuarios.Administrador;
 import CommonBuscaminas.Model.usuarios.Jugador;
 import CommonBuscaminas.Model.usuarios.Sesion;
 import CommonBuscaminas.Model.usuarios.Usuario;
-import java.rmi.RemoteException;
+import CommonBuscaminas.Model.usuarios.Usuario.rol;
+import ServidorBuscaminas.DAL.DB;
+import ServidorBuscaminas.DAL.UsuarioDAO;
+import ServidorBuscaminas.DAL.UsuarioVO;
 import java.util.ArrayList;
 
 /**
@@ -23,6 +27,7 @@ public class GestoraSingleton {
     private static ArrayList<Sesion> sesiones;
     private static ArrayList<Partida> partidas;
     private static GestoraSingleton instance = null;
+    protected final DB myDb = new DB("localhost", "3306", "buscaminas", "root", "");
 
     /**
      * (Singleton) Constructor de ControladoraSingleton
@@ -65,16 +70,37 @@ public class GestoraSingleton {
      */
     public Usuario iniciarSesion(String nombreUsuario, String clave) {
         Usuario miUser = null;
+        UsuarioDAO usrDao = new UsuarioDAO(myDb);
+
         if (!sesionIniciada(nombreUsuario)) {
-            for (Usuario u : usuarios) {
-                if (u.getNombreUsuario().equals(nombreUsuario) && u.getClave().equals(clave)) {
-                    miUser = u;
-                    sesiones.add(new Sesion(u));
-                    u.setSesioniniciada(true);
-                }
+            UsuarioVO vo = usrDao.leerUsuario(nombreUsuario);
+
+            if (vo.getRol().equals(Usuario.rol.jugador.toString())) {
+                Jugador miJ = new Jugador(vo.getNombreUsuario(), vo.getClave(), vo.getNombreCompleto());
+                miJ.setCredito(vo.getCredito());
+                miJ.setRolUsuario(rol.jugador);
+                miUser = (Usuario) miJ;
+            } else {
+                Administrador miA = new Administrador(vo.getNombreUsuario(), vo.getClave(), vo.getNombreCompleto());
+                miA.setRolUsuario(rol.administrador);
+                miUser = (Usuario) miA;
             }
+
         }
+
+        if (miUser != null) {
+            sesiones.add(new Sesion(miUser));
+        }
+
         return miUser;
+    }
+
+    public boolean nuevoJugador(String nombreUsuario, String clave, String nombreCompleto) {
+        return new UsuarioDAO(myDb).crearUsuario(new UsuarioVO(nombreUsuario, clave, nombreCompleto, rol.jugador.toString(), 0));
+    }
+
+    public boolean nuevoAdministrador(String nombreUsuario, String clave, String nombreCompleto) {
+        return new UsuarioDAO(myDb).crearUsuario(new UsuarioVO(nombreUsuario, clave, nombreCompleto, rol.administrador.toString(), 0));
     }
 
     /**
@@ -104,16 +130,7 @@ public class GestoraSingleton {
     }
 
     public boolean cargarSaldo(Jugador Jugador, double monto) {
-        Usuario usuarioJugador = (Usuario) Jugador;
-        for (Usuario k : usuarios) {
-            if (k.equals(usuarioJugador)) {
-                Jugador.setCredito(Jugador.getCredito() + monto);
-                return true;
-            } else {
-                return false;
-            }
-        }
-        return false;
+        return new UsuarioDAO(myDb).cargarSaldo(Jugador.getIdUsuario(), monto);
     }
 
     public Partida nuevaPartida(Jugador player, int x, int y, Apuesta aInicial) {

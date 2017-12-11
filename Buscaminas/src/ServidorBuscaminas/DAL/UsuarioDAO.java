@@ -34,7 +34,7 @@ public class UsuarioDAO {
             statement.setString(2, user.getClave());
             statement.setString(3, user.getNombreCompleto());
             statement.setString(4, user.getRol());
-            statement.setFloat(5, user.getCredito());
+            statement.setDouble(5, user.getCredito());
 
             int filasAfectadas = statement.executeUpdate();
             return filasAfectadas > 0;
@@ -58,7 +58,7 @@ public class UsuarioDAO {
         UsuarioVO myUser = null;
 
         myUser = new UsuarioVO(result.getString("nombreUsuario"), result.getString("clave"),
-                result.getString("nombreCompleto"), result.getString("rol"), result.getFloat("credito"),
+                result.getString("nombreCompleto"), result.getString("rol"), result.getDouble("credito"),
                 result.getInt("usuarioId"));
         return myUser;
     }
@@ -104,7 +104,7 @@ public class UsuarioDAO {
             statement.setString(2, user.getClave());
             statement.setString(3, user.getNombreCompleto());
             statement.setString(4, user.getRol());
-            statement.setFloat(5, user.getCredito());
+            statement.setDouble(5, user.getCredito());
             statement.setInt(6, user.getUsuarioId());
 
             int filasAfectadas = statement.executeUpdate();
@@ -152,13 +152,13 @@ public class UsuarioDAO {
         return false;
     }
 
-    public boolean cargarSaldo(int ID, float monto) {
+    public boolean cargarSaldo(int ID, double monto) {
         Connection myConn = db.getConnection();
 
         String sql = "UPDATE Usuarios SET credito = credito + ? WHERE usuarioId = ?";
         try {
             PreparedStatement statement = myConn.prepareStatement(sql);
-            statement.setFloat(1, monto);
+            statement.setDouble(1, monto);
             statement.setInt(2, ID);
 
             int filasAfectadas = statement.executeUpdate();

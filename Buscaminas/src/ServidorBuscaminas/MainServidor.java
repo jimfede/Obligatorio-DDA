@@ -1,7 +1,6 @@
 package ServidorBuscaminas;
 
 import ServidorBuscaminas.Fachada.FacadeRemota;
-import CommonBuscaminas.Model.GestoraSingleton;
 import CommonBuscaminas.Model.usuarios.Jugador;
 import CommonBuscaminas.Model.usuarios.Usuario;
 import ServidorBuscaminas.RMIServidor.RmiServer;
@@ -27,9 +26,8 @@ public class MainServidor {
         System.out.println("Servidor Iniciado! presiona una tecla para Terminar");
 
 //Zona de pruebas
-        ArrayList<Usuario> milist = new ArrayList<Usuario>();
-        milist.add(new Jugador("Daniel", "123", "Daniel Cisa"));
-        GestoraSingleton.getInstance().setUsuarios(milist);
+
+GestoraSingleton.getInstance().nuevoAdministrador("Jorge", "321", "Jorgito el1");
 
 //FIN zona de pruebas
         try {

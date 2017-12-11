@@ -19,8 +19,10 @@ public class Usuario implements Serializable{
     String nombreCompleto;
     rol rolUsuario;
     boolean sesioniniciada;
-    enum rol {
-        administrador, jugador
+    
+    public enum rol {
+        administrador, 
+        jugador
     }
 
     public String getNombreUsuario() {
@@ -63,6 +65,8 @@ public class Usuario implements Serializable{
         this.sesioniniciada = sesioniniciada;
     }
     
-    
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
 
 }

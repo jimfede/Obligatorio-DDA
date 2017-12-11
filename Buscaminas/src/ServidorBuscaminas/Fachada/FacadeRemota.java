@@ -7,7 +7,7 @@ package ServidorBuscaminas.Fachada;
 
 import CommonBuscaminas.Interfaces.IFacadeRemota;
 import CommonBuscaminas.Interfaces.IObservadorRemoto;
-import CommonBuscaminas.Model.GestoraSingleton;
+import ServidorBuscaminas.GestoraSingleton;
 import CommonBuscaminas.Model.apuestas.Apuesta;
 import CommonBuscaminas.Model.mensajes.Mensaje;
 import CommonBuscaminas.Model.partidas.Casillero;
