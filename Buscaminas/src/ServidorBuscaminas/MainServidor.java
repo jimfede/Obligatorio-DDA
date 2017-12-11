@@ -27,6 +27,10 @@ public class MainServidor {
 
 //Zona de pruebas
 
+GestoraSingleton.getInstance().nuevoJugador("Daniel", "123", "Daniel Cisa");
+GestoraSingleton.getInstance().nuevoJugador("Federico", "321", "Federico Castrillon");
+GestoraSingleton.getInstance().nuevoAdministrador("Jorge", "123", "Jorgito");
+
 //FIN zona de pruebas
         try {
             System.in.read();
