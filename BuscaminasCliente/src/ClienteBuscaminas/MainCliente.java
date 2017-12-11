@@ -19,7 +19,6 @@ import javax.swing.JOptionPane;
  * @author Federico
  */
 public class MainCliente {
-
     /**
      * @param args the command line arguments
      */
