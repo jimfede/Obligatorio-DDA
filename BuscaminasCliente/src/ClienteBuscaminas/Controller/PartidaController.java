@@ -8,17 +8,18 @@ package ClienteBuscaminas.Controller;
 import ClienteBuscaminas.ControladoraCliente;
 import CommonBuscaminas.Model.mensajes.Evento;
 import ClienteBuscaminas.View.ITableroView;
+import CommonBuscaminas.Interfaces.IObservadorRemoto;
 import CommonBuscaminas.Model.mensajes.Mensaje;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
-
 
 /**
  *
  * @author Federico
  */
-public class PartidaController extends MouseAdapter {
+public class PartidaController extends MouseAdapter implements IObservadorRemoto, Remote {
 
     private ITableroView tablero;
     private String idPartida;
@@ -28,14 +29,14 @@ public class PartidaController extends MouseAdapter {
         this.idPartida = xidPartida;
         agregarObservadores(xidPartida);
     }
-    
-    private void agregarObservadores(String idPartida){
+
+    private void agregarObservadores(String idPartida) {
         try {
-            ControladoraCliente.getInstance().getFacade().agregarObservadores(idPartida, new AdaptadorPartidaController(this));
+            ControladoraCliente.getInstance().getFacade().agregarObservadores(idPartida, this);
         } catch (RemoteException e) {
             System.out.println("Error de conmunicación RMI en: ");
             e.printStackTrace();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error en: ");
             e.printStackTrace();
         }
@@ -45,7 +46,6 @@ public class PartidaController extends MouseAdapter {
         this.tablero.procesarMensajeTablero((Mensaje) arg);
     }
 
-    
     @Override
     public void mouseClicked(MouseEvent click) {
         try {
@@ -54,9 +54,14 @@ public class PartidaController extends MouseAdapter {
             //Obtengo la Fachada, a traves de la gestora cliente, 
             //y ejecuto el metodo remoto de Partida procesarMensajePartida
             ControladoraCliente.getInstance().getFacade().procesarMensajePartida(idPartida, myMensaje);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void update(Object aux) throws RemoteException {
+        procesarMensajeTablero(aux);
     }
 
 }

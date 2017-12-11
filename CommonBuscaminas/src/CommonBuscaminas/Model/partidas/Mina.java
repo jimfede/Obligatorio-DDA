@@ -5,11 +5,13 @@
  */
 package CommonBuscaminas.Model.partidas;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Federico
  */
-public class Mina {
+public class Mina implements Serializable {
 
     private int coordenadaX;
     private int coordenadaY;

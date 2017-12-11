@@ -8,7 +8,7 @@ package CommonBuscaminas.Interfaces;
 import CommonBuscaminas.Model.apuestas.Apuesta;
 import CommonBuscaminas.Model.mensajes.Mensaje;
 import CommonBuscaminas.Model.partidas.Casillero;
-import CommonBuscaminas.Model.partidas.Partida;
+import CommonBuscaminas.Model.partidas.Tablero;
 import CommonBuscaminas.Model.usuarios.Jugador;
 import CommonBuscaminas.Model.usuarios.Usuario;
 import java.rmi.Remote;
@@ -24,7 +24,18 @@ public interface IFacadeRemota extends Remote {
 
     public void cerrarSesion(String nombreUsuario) throws RemoteException;
 
-    public Partida nuevaPartida(Jugador player, int x, int y, Apuesta aInicial) throws RemoteException;
+    /**
+     * Crea una nueva partida en el sistema remoto
+     * @param player
+     * @param x
+     * @param y
+     * @param aInicial
+     * @return Devuelve un Object[] con 2 objetos maximo (1 = PartidaId, 2 = Tablero de la partida)
+     * @throws RemoteException 
+     */
+    public String nuevaPartida(Jugador player, int x, int y, Apuesta aInicial) throws RemoteException;
+    
+    public Tablero obtenerTablero(String partidaId) throws RemoteException;
 
     public void nuevaApuesta(String idPartida, Jugador apostador, double Monto) throws RemoteException;
 

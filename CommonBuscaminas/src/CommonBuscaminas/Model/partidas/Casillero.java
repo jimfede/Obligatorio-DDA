@@ -6,12 +6,13 @@
 package CommonBuscaminas.Model.partidas;
 
 import CommonBuscaminas.Model.usuarios.Jugador;
+import java.io.Serializable;
 
 /**
  *
  * @author Federico
  */
-public class Casillero {
+public class Casillero implements Serializable {
 
     private int coordenadaX;
     private int coordenadaY;

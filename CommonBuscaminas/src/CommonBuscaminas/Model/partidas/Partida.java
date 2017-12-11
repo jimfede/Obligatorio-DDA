@@ -11,7 +11,6 @@ import CommonBuscaminas.Model.apuestas.Apuesta;
 import CommonBuscaminas.Model.apuestas.Pozo;
 import CommonBuscaminas.Interfaces.IObservadorRemoto;
 import CommonBuscaminas.Model.usuarios.Jugador;
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -21,7 +20,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  *
  * @author Federico
  */
-public final class Partida implements Serializable {
+public final class Partida {
 
     private final String idPartida;
     private Jugador jugador1;

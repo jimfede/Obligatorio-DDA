@@ -12,7 +12,7 @@ import java.io.Serializable;
  *
  * @author Federico
  */
-public class Apuesta implements Serializable{
+public class Apuesta implements Serializable {
 
     private Jugador apostador;
     private double monto;

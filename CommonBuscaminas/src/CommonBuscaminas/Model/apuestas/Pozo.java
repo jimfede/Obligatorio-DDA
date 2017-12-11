@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Federico
  */
-public class Pozo implements Serializable{
+public class Pozo {
 
     private ArrayList<Apuesta> Apuestas;
 

@@ -7,8 +7,9 @@ package ClienteBuscaminas.View;
 
 import ClienteBuscaminas.ControladoraCliente;
 import ClienteBuscaminas.Controller.PartidaController;
+import CommonBuscaminas.Interfaces.IFacadeRemota;
 import CommonBuscaminas.Model.apuestas.Apuesta;
-import CommonBuscaminas.Model.partidas.Partida;
+import CommonBuscaminas.Model.partidas.Tablero;
 import CommonBuscaminas.Model.usuarios.Jugador;
 import java.rmi.RemoteException;
 import javax.swing.JOptionPane;
@@ -135,7 +136,9 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnNuevaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNuevaPartidaActionPerformed
-        // un jugador de prueba que debería estar en la base
+        IFacadeRemota facadeRemota = ControladoraCliente.getInstance().getFacade();
+
+// un jugador de prueba que debería estar en la base
         Object nuevoUsuario = ControladoraCliente.getInstance().getMyUsuario();
         Jugador miJugador = null;
 
@@ -150,17 +153,19 @@ public class Principal extends javax.swing.JFrame {
         //FIN Verificacion de usuario Administrador
         Apuesta apuesta1 = new Apuesta(miJugador, Integer.parseInt(txtApuesta.getText()));
 
-        Partida partida;
+        String partidaId;
+        Tablero miTablero;
         try {
-            partida = ControladoraCliente.getInstance().getFacade().nuevaPartida(miJugador, Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText()), apuesta1);
+            partidaId = facadeRemota.nuevaPartida(miJugador, Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText()), apuesta1);
+            miTablero = facadeRemota.obtenerTablero(partidaId);
         } catch (RemoteException e) {
             System.out.println("Ha ocurrido un error en: ");
             e.printStackTrace();
             return;
         }
-
-        TableroView tableroView = new TableroView(partida.getTablero());
-        PartidaController partidaController = new PartidaController(tableroView, partida.getIdPartida());
+        
+        TableroView tableroView = new TableroView(miTablero);
+        PartidaController partidaController = new PartidaController(tableroView, partidaId);
         tableroView.agregarMouseListener(partidaController);
         tableroView.setVisible(true);
     }//GEN-LAST:event_jbtnNuevaPartidaActionPerformed

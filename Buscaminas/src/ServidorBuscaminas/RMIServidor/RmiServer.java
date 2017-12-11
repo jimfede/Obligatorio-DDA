@@ -26,7 +26,7 @@ public class RmiServer {
         
         Util.setCodebase(IFacadeRemota.class);
         Registry registroRMI = null;
-        FacadeRemota miFachada = new FacadeRemota();
+        FacadeRemota miFachada = FacadeRemota.getInstance();
 
         try {
             IFacadeRemota ifacade = (IFacadeRemota) UnicastRemoteObject.exportObject(miFachada, 1099);
