@@ -15,17 +15,18 @@ import java.awt.event.MouseEvent;
 import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
  * @author Federico
  */
-public class PartidaController extends MouseAdapter implements IObservadorRemoto, Remote, Serializable {
+public class PartidaController extends MouseAdapter implements IObservadorRemoto {
 
     private ITableroView tablero;
     private String idPartida;
 
-    public PartidaController(ITableroView tableroView, String xidPartida) {
+    public PartidaController(ITableroView tableroView, String xidPartida) throws RemoteException{
         this.tablero = tableroView;
         this.idPartida = xidPartida;
         agregarObservadores(xidPartida);
@@ -33,7 +34,7 @@ public class PartidaController extends MouseAdapter implements IObservadorRemoto
 
     private void agregarObservadores(String idPartida) {
         try {
-            ControladoraCliente.getInstance().getFacade().agregarObservadores(idPartida, this);
+            ControladoraCliente.getInstance().getFacade().agregarObservadores(idPartida, (IObservadorRemoto) UnicastRemoteObject.exportObject(this, 0));
         } catch (RemoteException e) {
             System.out.println("Error de conmunicación RMI en: ");
             e.printStackTrace();

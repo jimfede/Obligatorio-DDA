@@ -5,13 +5,14 @@
  */
 package CommonBuscaminas.Interfaces;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
  *
  * @author Federico
  */
-public interface IObservadorRemoto {
+public interface IObservadorRemoto extends Remote {
 
     /**
      * Actualiza el estado de un observador, pasandole como argumento un objeto.

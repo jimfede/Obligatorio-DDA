@@ -5,11 +5,13 @@
  */
 package CommonBuscaminas.Model.mensajes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Federico
  */
-public class Mensaje {
+public class Mensaje implements Serializable{
 
     private Evento evento;
     private Object aux;

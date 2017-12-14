@@ -163,10 +163,15 @@ public class Principal extends javax.swing.JFrame {
             e.printStackTrace();
             return;
         }
-        
+
         TableroView tableroView = new TableroView(miTablero);
-        PartidaController partidaController = new PartidaController(tableroView, partidaId);
-        tableroView.agregarMouseListener(partidaController);
+        try {
+            PartidaController partidaController = new PartidaController(tableroView, partidaId);
+            tableroView.agregarMouseListener(partidaController);
+        } catch (RemoteException r) {
+            r.printStackTrace();
+        }
+
         tableroView.setVisible(true);
     }//GEN-LAST:event_jbtnNuevaPartidaActionPerformed
 
