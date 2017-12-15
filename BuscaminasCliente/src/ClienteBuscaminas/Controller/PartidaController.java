@@ -5,15 +5,13 @@
  */
 package ClienteBuscaminas.Controller;
 
-import ClienteBuscaminas.ControladoraCliente;
+import ClienteBuscaminas.GestoraCliente;
 import CommonBuscaminas.Model.mensajes.Evento;
 import ClienteBuscaminas.View.ITableroView;
 import CommonBuscaminas.Interfaces.IObservadorRemoto;
 import CommonBuscaminas.Model.mensajes.Mensaje;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.Serializable;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -34,7 +32,7 @@ public class PartidaController extends MouseAdapter implements IObservadorRemoto
 
     private void agregarObservadores(String idPartida) {
         try {
-            ControladoraCliente.getInstance().getFacade().agregarObservadores(idPartida, (IObservadorRemoto) UnicastRemoteObject.exportObject(this, 0));
+            GestoraCliente.getInstance().getFacade().agregarObservadores(idPartida, (IObservadorRemoto) UnicastRemoteObject.exportObject(this, 0));
         } catch (RemoteException e) {
             System.out.println("Error de conmunicación RMI en: ");
             e.printStackTrace();
@@ -55,7 +53,7 @@ public class PartidaController extends MouseAdapter implements IObservadorRemoto
             Mensaje myMensaje = new Mensaje(Evento.CASILLERO_SELECCIONADO, this.tablero.obtenerCeldaSeleccionada());
             //Obtengo la Fachada, a traves de la gestora cliente, 
             //y ejecuto el metodo remoto de Partida procesarMensajePartida
-            ControladoraCliente.getInstance().getFacade().procesarMensajePartida(idPartida, myMensaje);
+            GestoraCliente.getInstance().getFacade().procesarMensajePartida(idPartida, myMensaje);
         } catch (Exception e) {
             e.printStackTrace();
         }

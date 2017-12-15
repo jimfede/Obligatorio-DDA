@@ -5,7 +5,7 @@
  */
 package ClienteBuscaminas.View;
 
-import ClienteBuscaminas.ControladoraCliente;
+import ClienteBuscaminas.GestoraCliente;
 import ClienteBuscaminas.Controller.PartidaController;
 import CommonBuscaminas.Interfaces.IFacadeRemota;
 import CommonBuscaminas.Model.apuestas.Apuesta;
@@ -25,7 +25,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        lblNombreUsu.setText(ControladoraCliente.getInstance().getMyUsuario().getNombreCompleto());
+        lblNombreUsu.setText(GestoraCliente.getInstance().getMyUsuario().getNombreCompleto());
     }
 
     /**
@@ -136,43 +136,14 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnNuevaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNuevaPartidaActionPerformed
-        IFacadeRemota facadeRemota = ControladoraCliente.getInstance().getFacade();
-
-// un jugador de prueba que debería estar en la base
-        Object nuevoUsuario = ControladoraCliente.getInstance().getMyUsuario();
-        Jugador miJugador = null;
-
-        //Verificacion de usuario Administrador
-        if (nuevoUsuario instanceof Jugador) {
-            miJugador = (Jugador) nuevoUsuario;
-        } else {
-            JOptionPane.showMessageDialog(null, "Sos un admin, no podés jugar");
-            return;
-        }
-
-        //FIN Verificacion de usuario Administrador
-        Apuesta apuesta1 = new Apuesta(miJugador, Integer.parseInt(txtApuesta.getText()));
-
-        String partidaId;
-        Tablero miTablero;
+        int x = Integer.parseInt(txtX.getText());
+        int y = Integer.parseInt(txtY.getText());
+        double apuesta = Double.parseDouble(txtApuesta.getText());
         try {
-            partidaId = facadeRemota.nuevaPartida(miJugador, Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText()), apuesta1);
-            miTablero = facadeRemota.obtenerTablero(partidaId);
-        } catch (RemoteException e) {
-            System.out.println("Ha ocurrido un error en: ");
+            GestoraCliente.getInstance().nuevaPartida((Jugador) GestoraCliente.getInstance().getMyUsuario(), x, y, apuesta);
+        } catch (Exception e) {
             e.printStackTrace();
-            return;
         }
-
-        TableroView tableroView = new TableroView(miTablero);
-        try {
-            PartidaController partidaController = new PartidaController(tableroView, partidaId);
-            tableroView.agregarMouseListener(partidaController);
-        } catch (RemoteException r) {
-            r.printStackTrace();
-        }
-
-        tableroView.setVisible(true);
     }//GEN-LAST:event_jbtnNuevaPartidaActionPerformed
 
     /**

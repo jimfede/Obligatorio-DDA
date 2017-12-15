@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * @author Federico
  */
 public class GestoraSingleton {
-
+    
     private static ArrayList<Usuario> usuarios;
     private static ArrayList<Sesion> sesiones;
     private static ArrayList<Partida> partidas;
@@ -50,7 +50,7 @@ public class GestoraSingleton {
         }
         return instance;
     }
-
+    
     public Partida obtenerPartida(String id) {
         for (Partida par : partidas) {
             if (par.getIdPartida().equals(id)) {
@@ -71,10 +71,10 @@ public class GestoraSingleton {
     public Usuario iniciarSesion(String nombreUsuario, String clave) {
         Usuario miUser = null;
         UsuarioDAO usrDao = new UsuarioDAO(myDb);
-
+        
         if (!sesionIniciada(nombreUsuario)) {
             UsuarioVO vo = usrDao.leerUsuario(nombreUsuario);
-
+            
             if (vo.getRol().equals(Usuario.rol.jugador.toString())) {
                 Jugador miJ = new Jugador(vo.getNombreUsuario(), vo.getClave(), vo.getNombreCompleto());
                 miJ.setCredito(vo.getCredito());
@@ -85,20 +85,20 @@ public class GestoraSingleton {
                 miA.setRolUsuario(rol.administrador);
                 miUser = (Usuario) miA;
             }
-
+            
         }
-
+        
         if (miUser != null) {
             sesiones.add(new Sesion(miUser));
         }
-
+        
         return miUser;
     }
-
+    
     public boolean nuevoJugador(String nombreUsuario, String clave, String nombreCompleto) {
         return new UsuarioDAO(myDb).crearUsuario(new UsuarioVO(nombreUsuario, clave, nombreCompleto, rol.jugador.toString(), 0));
     }
-
+    
     public boolean nuevoAdministrador(String nombreUsuario, String clave, String nombreCompleto) {
         return new UsuarioDAO(myDb).crearUsuario(new UsuarioVO(nombreUsuario, clave, nombreCompleto, rol.administrador.toString(), 0));
     }
@@ -117,7 +117,7 @@ public class GestoraSingleton {
         }
         return false;
     }
-
+    
     public void cerrarSesion(String nombreUsuario) {
         if (sesionIniciada(nombreUsuario)) {
             for (Sesion s : sesiones) {
@@ -128,39 +128,58 @@ public class GestoraSingleton {
             }
         }
     }
-
+    
     public boolean cargarSaldo(Jugador Jugador, double monto) {
         return new UsuarioDAO(myDb).cargarSaldo(Jugador.getIdUsuario(), monto);
     }
-
-    public Partida nuevaPartida(Jugador player, int x, int y, Apuesta aInicial) {
+    
+    public Partida nuevaPartida(Jugador player, int x, int y, double aInicial) {
         Partida nuevaPartida = new Partida(player, x, y, aInicial);
         this.partidas.add(nuevaPartida);
         return nuevaPartida;
     }
-
+    
+    public String buscarPartidaNoIniciada(Jugador jugador) {
+        for (Partida partida : partidas) {
+            if (!partida.isPartidaIniciada() && partida.saldoSuficiente(jugador)) {
+                return partida.getIdPartida();
+            }
+        }
+        return null;
+    }
+    
+    public boolean unirseAPartida(String idPartida, Jugador jugador){
+        Partida miPartida = obtenerPartida(idPartida);
+        if (miPartida != null) {
+            miPartida.setJugador2(jugador);
+            miPartida.comenzarPartida();
+            return true;
+        }
+        return false;
+    }
+    
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
-
+    
     public ArrayList<Sesion> getSesiones() {
         return sesiones;
     }
-
+    
     public ArrayList<Partida> getPartidas() {
         return partidas;
     }
-
+    
     public void setUsuarios(ArrayList<Usuario> usuarios) {
         GestoraSingleton.usuarios = usuarios;
     }
-
+    
     public void setSesiones(ArrayList<Sesion> sesiones) {
         GestoraSingleton.sesiones = sesiones;
     }
-
+    
     public void setPartidas(ArrayList<Partida> partidas) {
         GestoraSingleton.partidas = partidas;
     }
-
+    
 }

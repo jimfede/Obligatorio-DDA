@@ -28,7 +28,7 @@ public class MainCliente {
         
         if (fachada != null) {
             System.out.println("Conexión satisfactoria");
-            ControladoraCliente.getInstance().setFacade(fachada);
+            GestoraCliente.getInstance().setFacade(fachada);
         } else {
             System.err.println("No se pudo realizar la conexión con el Servidor de RMI");
             JOptionPane.showMessageDialog(null, "No se pudo establecer comunicacion con el servidor remoto");

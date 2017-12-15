@@ -33,7 +33,7 @@ public interface IFacadeRemota extends Remote {
      * @return Devuelve un Object[] con 2 objetos maximo (1 = PartidaId, 2 = Tablero de la partida)
      * @throws RemoteException 
      */
-    public String nuevaPartida(Jugador player, int x, int y, Apuesta aInicial) throws RemoteException;
+    public String nuevaPartida(Jugador player, int x, int y, double aInicial) throws RemoteException;
     
     public Tablero obtenerTablero(String partidaId) throws RemoteException;
 
@@ -41,12 +41,14 @@ public interface IFacadeRemota extends Remote {
 
     public void pagarApuesta(String idPartida, Jugador apostador, double Monto) throws RemoteException;
 
-    public void apuestaInicial(String idPartida, Jugador apostador) throws RemoteException;
-
     public void jugarTurno(String idPartida, Jugador player, Casillero casillero) throws RemoteException;
 
     public void agregarObservadores(String idPartida, IObservadorRemoto obs) throws RemoteException;
 
     public void procesarMensajePartida(String idPartida, Mensaje mensaje) throws RemoteException;
+    
+    public String buscarPartidaNoIniciada(Jugador jugador)throws RemoteException;
+    
+    public boolean unirseAPartida(String idPartida, Jugador jugador) throws RemoteException;
 
 }

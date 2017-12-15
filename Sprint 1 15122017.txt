@@ -1,0 +1,30 @@
+BACKLOG
+
+* agregar a partida variable de control si inicio o no
+* metodo buscar partida no inciada
+* Crear metodo comenzarPartida, si la partida cambia el estado a comenzada
+				actualizar saldos
+				cambiar estado
+* chequear si tiene saldo suficiente para nueva partida apuesta inicial
+
+* chequear si puede pagar apuesta de partida ya iniciada antes de unirse
+
+Chequear mensajeria (faltan mensajes)
+
+arreglar UI
+		label de mensage generico
+		etiquetas con nobre de jugadores
+		etiquetas con saldo de c/u
+		etiqueta con turno
+
+____________________________________
+
+OPCION A
+Chequear el update de la fachada para evitar que se notifiquen obervadores(PartidaController) que no corresponden
+mandando el id de partida en el mensaje.
+
+OPCION B
+Modificar agregarObservadores de fachada para que agregue los oberservadores (PartidaController) directamente a la partida que le corresponda.
+
+modificar saldo en la BD en metodo actualizar saldo
+		

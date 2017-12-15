@@ -48,7 +48,7 @@ public class FacadeRemota implements IFacadeRemota, IObservadorRemoto {
     }
 
     @Override
-    public String nuevaPartida(Jugador player, int x, int y, Apuesta aInicial) throws RemoteException {
+    public String nuevaPartida(Jugador player, int x, int y, double aInicial) throws RemoteException {
         return GestoraSingleton.getInstance().nuevaPartida(player, x, y, aInicial).getIdPartida();
     }
 
@@ -68,8 +68,8 @@ public class FacadeRemota implements IFacadeRemota, IObservadorRemoto {
     }
 
     @Override
-    public void apuestaInicial(String idPartida, Jugador jugador) throws RemoteException {
-        GestoraSingleton.getInstance().obtenerPartida(idPartida).pagarApuestaInicial(jugador);
+    public String buscarPartidaNoIniciada(Jugador jugador) throws RemoteException {
+        return GestoraSingleton.getInstance().buscarPartidaNoIniciada(jugador);
     }
 
     @Override
@@ -92,6 +92,11 @@ public class FacadeRemota implements IFacadeRemota, IObservadorRemoto {
     @Override
     public void procesarMensajePartida(String idPartida, Mensaje mensaje) throws RemoteException {
         GestoraSingleton.getInstance().obtenerPartida(idPartida).procesarMensajePartida(mensaje);
+    }
+
+    @Override
+    public boolean unirseAPartida(String idPartida, Jugador jugador) throws RemoteException {
+        return GestoraSingleton.getInstance().unirseAPartida(idPartida, jugador);
     }
 
     @Override

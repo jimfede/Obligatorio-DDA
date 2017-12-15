@@ -33,6 +33,8 @@ public final class Partida {
     private double saldoJ2;
     private Jugador ganador;
     private TimerApuesta timerApuesta;
+    private boolean partidaIniciada;
+    private double apuestaInicial;
     private ArrayList<IObservadorRemoto> observadores = new ArrayList<>();
 
     /**
@@ -44,19 +46,16 @@ public final class Partida {
      * @param y
      * @param apuestaInicial
      */
-    public Partida(Jugador jugador1, int x, int y, Apuesta apuestaInicial){
+    public Partida(Jugador jugador1, int x, int y, Double apuestaInicial) {
         this.jugador1 = jugador1;
         this.jugador2 = null;
         this.turnoJugador = jugador2;
         this.tablero = new Tablero(x, y);
         this.turnosJugados = 0;
         this.pozo = new Pozo();
-        this.pozo.recibirApuesta(apuestaInicial);
-        actualizarSaldo(jugador1, apuestaInicial.getMonto());
+        this.apuestaInicial = apuestaInicial;
         this.idPartida = UUID.randomUUID().toString();
     }
-    
-    
 
     public void notificarObservadores(Object arg) throws RemoteException {
         for (int i = observadores.size() - 1; i >= 0; i--) {
@@ -73,22 +72,6 @@ public final class Partida {
      */
     public void agregarObservador(IObservadorRemoto observer) {
         this.observadores.add(observer);
-    }
-
-    /**
-     * Se debita de la cuenta del jugador invitado, el saldo que apostó otro
-     * jugador
-     *
-     * @param jugadorInvitado Jugador Invitado a la partida
-     * @return True si se ejecuto correctamente | False sinó
-     */
-    public boolean pagarApuestaInicial(Jugador jugadorInvitado) {
-        if (saldoSuficiente(jugadorInvitado, this.pozo.totalPozo())) {
-            actualizarSaldo(jugadorInvitado, this.pozo.totalPozo());
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
@@ -111,10 +94,10 @@ public final class Partida {
     public boolean nuevaApuesta(Jugador apostador, double monto) {
         if (this.turnoJugador == jugador1) {
         }
-        if (saldoSuficiente(apostador, monto) && this.turnoJugador == apostador) {
+        if (saldoSuficiente(apostador) && this.turnoJugador == apostador) {
             this.pozo.recibirApuesta(new Apuesta(apostador, monto));
             actualizarSaldo(apostador, monto);
-            this.timerApuesta = new TimerApuesta(5000);
+            //this.timerApuesta = new TimerApuesta(5000);
             return true;
         } else {
             return false;
@@ -122,7 +105,7 @@ public final class Partida {
     }
 
     public boolean pagarApuesta(Jugador apostador, double monto) {
-        if (saldoSuficiente(apostador, monto) && this.turnoJugador == apostador) {
+        if (saldoSuficiente(apostador) && this.turnoJugador == apostador) {
             this.pozo.recibirApuesta(new Apuesta(apostador, monto));
             actualizarSaldo(apostador, monto);
             this.timerApuesta.cancelarTimerApuesta();
@@ -146,8 +129,8 @@ public final class Partida {
      * @param monto Monto del credito del jugador a validar
      * @return True si tiene suficiente | False sinó
      */
-    public boolean saldoSuficiente(Jugador apostador, double monto) {
-        return monto <= apostador.getCredito();
+    public boolean saldoSuficiente(Jugador apostador) {
+        return this.apuestaInicial <= apostador.getCredito();
     }
 
     /**
@@ -193,6 +176,13 @@ public final class Partida {
         } else {
             return false;
         }
+    }
+
+    public void comenzarPartida() {
+        this.setPartidaIniciada(true);
+        nuevaApuesta(this.jugador1, this.getApuestaInicial());
+        nuevaApuesta(this.jugador2, this.getApuestaInicial());
+//        notificarObservadores(new Mensaje(Evento.JUGADA_REALIZADA, "Comenzo partida"));
     }
 
     public void finalizarPartida() {
@@ -324,4 +314,23 @@ public final class Partida {
     public String getIdPartida() {
         return idPartida;
     }
+
+    public boolean isPartidaIniciada() {
+        return partidaIniciada;
+    }
+
+    public void setPartidaIniciada(boolean partidaIniciada) {
+        this.partidaIniciada = partidaIniciada;
+    }
+
+    public double getApuestaInicial() {
+        return apuestaInicial;
+    }
+
+    public void setApuestaInicial(double apuestaInicial) {
+        this.apuestaInicial = apuestaInicial;
+    }
+    
+    
+
 }

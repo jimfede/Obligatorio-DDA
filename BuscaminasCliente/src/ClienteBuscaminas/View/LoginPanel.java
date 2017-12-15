@@ -5,10 +5,12 @@
  */
 package ClienteBuscaminas.View;
 
-import ClienteBuscaminas.ControladoraCliente;
+import ClienteBuscaminas.GestoraCliente;
 import ClienteBuscaminas.Controller.LoginController;
 import CommonBuscaminas.Model.usuarios.Usuario;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -100,26 +102,11 @@ public class LoginPanel extends javax.swing.JFrame {
         //TODO
         String nombreUsuario = txtUsuario.getText();
         String Pass = txtPassword.getText();
-        Usuario miuser = null;
+        
         try {
-            miuser = LoginController.iniciarSesionUsuario(nombreUsuario, Pass);
-        } catch (RemoteException e) {
-            System.out.println("Error en Comunicacion RMI en: ");
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "No se ha podido establecer conexión con el servidor");
-            return;
-        }catch(Exception e){
-            System.out.println("Error en Comunicacion RMI en: ");
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error :( ");
-            return;
-        }
-
-        if (miuser != null) {
-            ControladoraCliente.getInstance().setMyUsuario(miuser);
-            new Principal().setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "No existe ese jugador en el sistema");
+            LoginController.iniciarSesionUsuario(nombreUsuario, Pass);
+        } catch (RemoteException ex) {
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_btnLogearseMouseClicked
 
