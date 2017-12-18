@@ -130,7 +130,7 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
     }
 
     @Override
-    public void procesarMensajeTablero(Mensaje mensaje) {
+    public void procesarMensajeTablero(Object arg, Mensaje mensaje) {
         if (mensaje.getEvento() == Evento.JUGADA_NO_PERMITIDA) {
             JOptionPane.showMessageDialog(null, mensaje.getAux().toString());
         } else if (mensaje.getEvento() == Evento.JUGADA_REALIZADA) {

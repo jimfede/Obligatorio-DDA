@@ -7,6 +7,7 @@ import CommonBuscaminas.Interfaces.IFacadeRemota;
 import CommonBuscaminas.Model.partidas.Tablero;
 import CommonBuscaminas.Model.usuarios.Jugador;
 import java.rmi.RemoteException;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -39,21 +40,37 @@ public class GestoraCliente {
         return facade;
     }
 
-    public void inicializarPartida(String idPartida) throws RemoteException{
+    // 2.1 - ANTECESOR, GestoraCliente.nuevaPartida
+    public void inicializarPartidaJugador(String idPartida) throws RemoteException {
         Tablero miTablero = GestoraCliente.getInstance().getFacade().obtenerTablero(idPartida);
         TableroView tableroView = new TableroView(miTablero);
         PartidaController partidaController = new PartidaController(tableroView, idPartida);
         tableroView.agregarMouseListener(partidaController);
         tableroView.setVisible(true);
 //        unirseAPartida devuelve un Boolean
-        GestoraCliente.getInstance().getFacade().unirseAPartida(idPartida, (Jugador) GestoraCliente.getInstance().getMyUsuario());
     }
-    
-    public void nuevaPartida(Jugador jugador, int x, int y, double apuesta) throws RemoteException{
-        String idPartida = GestoraCliente.getInstance().getFacade().nuevaPartida(jugador, x, y, apuesta);
-        if (idPartida != null) {
-            inicializarPartida(idPartida);
+
+    public void unirseAPartida(String idPartida, Jugador jugador) {
+        try{
+        inicializarPartidaJugador(idPartida);
+        GestoraCliente.getInstance().getFacade().unirseAPartida(idPartida, (Jugador) GestoraCliente.getInstance().getMyUsuario());
+        }catch(Exception e){
+            e.printStackTrace();
         }
+        
+    }
+
+    // 1 NUEVA PARTIDA
+    public void nuevaPartida(Jugador jugador, int x, int y, double apuesta) throws RemoteException {
+        if (facade.chequearSaldoInicio(apuesta, jugador)) {
+            String idPartida = GestoraCliente.getInstance().getFacade().nuevaPartida(jugador, x, y, apuesta);
+            if (idPartida != null) {
+                inicializarPartidaJugador(idPartida);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Saldo insuficiente");
+        }
+
     }
 
     public void setFacade(IFacadeRemota facade) {

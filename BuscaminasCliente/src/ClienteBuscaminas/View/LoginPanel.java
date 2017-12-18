@@ -104,6 +104,7 @@ public class LoginPanel extends javax.swing.JFrame {
         String Pass = txtPassword.getText();
         
         try {
+            
             LoginController.iniciarSesionUsuario(nombreUsuario, Pass);
         } catch (RemoteException ex) {
             ex.printStackTrace();

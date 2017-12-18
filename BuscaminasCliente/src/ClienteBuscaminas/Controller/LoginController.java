@@ -29,7 +29,7 @@ public class LoginController {
                 String idPartida = buscarPartidaNoIniciada(((Jugador) miUsuario));
                 
                 if (idPartida != null) {
-                    GestoraCliente.getInstance().inicializarPartida(idPartida);
+                    GestoraCliente.getInstance().unirseAPartida(idPartida, (Jugador) GestoraCliente.getInstance().getMyUsuario());
 
                 } else {
                     new Principal().setVisible(true);

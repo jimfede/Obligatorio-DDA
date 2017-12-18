@@ -17,7 +17,7 @@ public interface ITableroView {
 
     int[] obtenerCeldaSeleccionada();
 
-    void procesarMensajeTablero(Mensaje mensaje);
+    void procesarMensajeTablero(Object arg, Mensaje mensaje);
 
     void agregarMouseListener(PartidaController partidaController);
 

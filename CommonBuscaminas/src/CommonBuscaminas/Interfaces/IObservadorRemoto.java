@@ -19,6 +19,6 @@ public interface IObservadorRemoto extends Remote {
      * @param aux
      * @throws RemoteException 
      */
-    public void update(Object aux) throws RemoteException;
+    public void update(Object aux, Object msg) throws RemoteException;
 
 }

@@ -26,15 +26,17 @@ public interface IFacadeRemota extends Remote {
 
     /**
      * Crea una nueva partida en el sistema remoto
+     *
      * @param player
      * @param x
      * @param y
      * @param aInicial
-     * @return Devuelve un Object[] con 2 objetos maximo (1 = PartidaId, 2 = Tablero de la partida)
-     * @throws RemoteException 
+     * @return Devuelve un Object[] con 2 objetos maximo (1 = PartidaId, 2 =
+     * Tablero de la partida)
+     * @throws RemoteException
      */
     public String nuevaPartida(Jugador player, int x, int y, double aInicial) throws RemoteException;
-    
+
     public Tablero obtenerTablero(String partidaId) throws RemoteException;
 
     public void nuevaApuesta(String idPartida, Jugador apostador, double Monto) throws RemoteException;
@@ -46,9 +48,11 @@ public interface IFacadeRemota extends Remote {
     public void agregarObservadores(String idPartida, IObservadorRemoto obs) throws RemoteException;
 
     public void procesarMensajePartida(String idPartida, Mensaje mensaje) throws RemoteException;
-    
-    public String buscarPartidaNoIniciada(Jugador jugador)throws RemoteException;
-    
+
+    public String buscarPartidaNoIniciada(Jugador jugador) throws RemoteException;
+
     public boolean unirseAPartida(String idPartida, Jugador jugador) throws RemoteException;
+
+    public boolean chequearSaldoInicio(Double monto, Jugador jugador) throws RemoteException;
 
 }

@@ -22,7 +22,7 @@ import java.util.ArrayList;
  *
  * @author Daniel
  */
-public class FacadeRemota implements IFacadeRemota, IObservadorRemoto {
+public class FacadeRemota implements IFacadeRemota {
 
     private ArrayList<IObservadorRemoto> observadores = new ArrayList<>();
     private static FacadeRemota miFacade;
@@ -79,14 +79,15 @@ public class FacadeRemota implements IFacadeRemota, IObservadorRemoto {
 
     @Override
     public void agregarObservadores(String idPartida, IObservadorRemoto obs) throws RemoteException {
-        //Obtengo mi fachada remota
-        FacadeRemota miFacadeRemota = FacadeRemota.getInstance();
-        //Le agrego el IObservadorRemoto pasado como parametro
-        miFacadeRemota.observadores.add(obs);
-        //Obtengo la partida a la cual le voy a insertar la Fachada como Observador
+//        FacadeRemota miFacadeRemota = FacadeRemota.getInstance();
+//        miFacadeRemota.observadores.add(obs);
         Partida miPartida = GestoraSingleton.getInstance().obtenerPartida(idPartida);
-        //Agrego a mi partida la fachada como Observador
-        miPartida.agregarObservador(miFacadeRemota);
+        if (miPartida != null) {
+            miPartida.agregarObservador(obs);
+        }else{
+            System.err.println("No se encontró una partida con el id: " + idPartida);
+        }
+
     }
 
     @Override
@@ -100,13 +101,7 @@ public class FacadeRemota implements IFacadeRemota, IObservadorRemoto {
     }
 
     @Override
-    public void update(Object aux) throws RemoteException {
-        notificarObservadores(aux);
-    }
-
-    public void notificarObservadores(Object arg) throws RemoteException {
-        for (int i = observadores.size() - 1; i >= 0; i--) {
-            observadores.get(i).update(arg);
-        }
+    public boolean chequearSaldoInicio(Double monto, Jugador jugador) {
+        return GestoraSingleton.getInstance().chequearSaldoInicio(monto, jugador);
     }
 }

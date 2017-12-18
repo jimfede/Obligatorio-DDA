@@ -42,8 +42,8 @@ public class PartidaController extends MouseAdapter implements IObservadorRemoto
         }
     }
 
-    public void procesarMensajeTablero(Object arg) {
-        this.tablero.procesarMensajeTablero((Mensaje) arg);
+    public void procesarMensajeTablero(Object arg, Object msg) {
+        this.tablero.procesarMensajeTablero(arg, (Mensaje) msg);
     }
 
     @Override
@@ -60,8 +60,8 @@ public class PartidaController extends MouseAdapter implements IObservadorRemoto
     }
 
     @Override
-    public void update(Object aux) throws RemoteException {
-        procesarMensajeTablero(aux);
+    public void update(Object aux, Object msg) throws RemoteException {
+        procesarMensajeTablero(aux, msg);
     }
 
 }

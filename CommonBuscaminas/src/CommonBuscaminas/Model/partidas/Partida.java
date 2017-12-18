@@ -13,7 +13,9 @@ import CommonBuscaminas.Interfaces.IObservadorRemoto;
 import CommonBuscaminas.Model.usuarios.Jugador;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Observer;
 import java.util.UUID;
+import javafx.beans.Observable;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -57,9 +59,9 @@ public final class Partida {
         this.idPartida = UUID.randomUUID().toString();
     }
 
-    public void notificarObservadores(Object arg) throws RemoteException {
+    public void notificarObservadores(Object arg, Object msg) throws RemoteException {
         for (int i = observadores.size() - 1; i >= 0; i--) {
-            observadores.get(i).update(arg);
+            observadores.get(i).update(arg, msg);
         }
     }
 
@@ -92,9 +94,8 @@ public final class Partida {
      * @return
      */
     public boolean nuevaApuesta(Jugador apostador, double monto) {
-        if (this.turnoJugador == jugador1) {
-        }
-        if (saldoSuficiente(apostador) && this.turnoJugador == apostador) {
+
+        if (saldoSuficiente(apostador, monto) && this.turnoJugador == apostador) {
             this.pozo.recibirApuesta(new Apuesta(apostador, monto));
             actualizarSaldo(apostador, monto);
             //this.timerApuesta = new TimerApuesta(5000);
@@ -102,10 +103,11 @@ public final class Partida {
         } else {
             return false;
         }
+
     }
 
     public boolean pagarApuesta(Jugador apostador, double monto) {
-        if (saldoSuficiente(apostador) && this.turnoJugador == apostador) {
+        if (saldoSuficiente(apostador, monto) && this.turnoJugador == apostador) {
             this.pozo.recibirApuesta(new Apuesta(apostador, monto));
             actualizarSaldo(apostador, monto);
             this.timerApuesta.cancelarTimerApuesta();
@@ -129,8 +131,8 @@ public final class Partida {
      * @param monto Monto del credito del jugador a validar
      * @return True si tiene suficiente | False sinó
      */
-    public boolean saldoSuficiente(Jugador apostador) {
-        return this.apuestaInicial <= apostador.getCredito();
+    public boolean saldoSuficiente(Jugador apostador, double monto) {
+        return monto <= apostador.getCredito();
     }
 
     /**
@@ -178,6 +180,7 @@ public final class Partida {
         }
     }
 
+    // 4 ANTECESOR, GestoraSingleton.unirseAPartida
     public void comenzarPartida() {
         this.setPartidaIniciada(true);
         nuevaApuesta(this.jugador1, this.getApuestaInicial());
@@ -220,10 +223,10 @@ public final class Partida {
             Casillero casilleroSeleccionado = (Casillero) this.tablero.obtenerCasillero(coord[0], coord[1]);
             try {
                 if (casilleroSeleccionado.isDescubierto()) {
-                    notificarObservadores(new Mensaje(Evento.JUGADA_NO_PERMITIDA, "Jugada No permitida"));
+                    notificarObservadores(null, new Mensaje(Evento.JUGADA_NO_PERMITIDA, "Jugada No permitida"));
                 } else {
                     casilleroSeleccionado.setDescubierto(true);
-                    notificarObservadores(new Mensaje(Evento.JUGADA_REALIZADA, null));
+                    notificarObservadores(null, new Mensaje(Evento.JUGADA_REALIZADA, null));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -330,7 +333,5 @@ public final class Partida {
     public void setApuestaInicial(double apuestaInicial) {
         this.apuestaInicial = apuestaInicial;
     }
-    
-    
 
 }

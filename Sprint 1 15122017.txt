@@ -9,11 +9,13 @@ BACKLOG
 
 * chequear si puede pagar apuesta de partida ya iniciada antes de unirse
 
+arreglar inicializarPartida, hay que separar el unirseAPartida que se llama al final porque genera que el jugador1 se agregue tambien como 2 y ya comienza la partida.
+
 Chequear mensajeria (faltan mensajes)
 
 arreglar UI
 		label de mensage generico
-		etiquetas con nobre de jugadores
+		etiquetas con nombre de jugadores
 		etiquetas con saldo de c/u
 		etiqueta con turno
 
@@ -27,4 +29,11 @@ OPCION B
 Modificar agregarObservadores de fachada para que agregue los oberservadores (PartidaController) directamente a la partida que le corresponda.
 
 modificar saldo en la BD en metodo actualizar saldo
+
+____________________________________
+mensaje de falla de conexion, al iniciar sistema sin DB no muestra error
+
+Objetivo:
+focalizarse en hacer que las aplicaciones clientes inicien cargen el tablero y comience partida, jugadores puedan destapar casilleros y que cuando se encuentre una mina finalice el juego y muestre quien gano y perdió a cada aplicación cliente.
+
 		
