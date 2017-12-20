@@ -24,6 +24,15 @@ public class LoginPanel extends javax.swing.JFrame {
      */
     public LoginPanel() {
         initComponents();
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                try {
+                    GestoraCliente.getInstance().getFacade().cerrarSesion(GestoraCliente.getInstance().getMyUsuario().getNombreUsuario());
+                } catch (Exception e) {
+                    System.out.println("Error al deslogearse");
+                }
+            }
+        });
     }
 
     /**

@@ -5,7 +5,6 @@
  */
 package ServidorBuscaminas;
 
-import CommonBuscaminas.Model.apuestas.Apuesta;
 import CommonBuscaminas.Model.partidas.Partida;
 import CommonBuscaminas.Model.usuarios.Administrador;
 import CommonBuscaminas.Model.usuarios.Jugador;
@@ -123,8 +122,20 @@ public class GestoraSingleton {
             for (Sesion s : sesiones) {
                 if (s.getSesionUsuario().getNombreUsuario().equals(nombreUsuario)) {
                     sesiones.remove(s);
-                    return;
+                    //Busco una partida ya iniciada por el usuario. Si existe, 
+                    //elimina de la partida al jugador y la partida actualiza su estado, dejando ganar al otro jugador
+                    BuscarPartidaAbandonada(nombreUsuario);
+                    break;
                 }
+            }
+        }
+    }
+
+    public void BuscarPartidaAbandonada(String nombreUsuario) {
+        for (Partida partida : partidas) {
+            if (!partida.isPartidaIniciada() && partida.getJugador1().getNombreUsuario().equals(nombreUsuario)) {
+                partidas.remove(partida);
+                break;
             }
         }
     }

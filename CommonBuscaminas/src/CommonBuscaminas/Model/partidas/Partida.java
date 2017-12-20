@@ -165,7 +165,9 @@ public final class Partida {
                     turnoJugadoPor(jugador);
                     this.turnosJugados++;
                     if (this.turnosJugados % 2 == 0) {
-                        this.getTablero().insertarMina();
+//                        this.getTablero().insertarMina();
+//                      Se tiene que trasladar este metodo a traves de RMI para 
+//                          que los jugadores tengan nuevas minas
                     }
                     return true;
                 } else {
@@ -226,7 +228,7 @@ public final class Partida {
                     notificarObservadores(null, new Mensaje(Evento.JUGADA_NO_PERMITIDA, "Jugada No permitida"));
                 } else {
                     casilleroSeleccionado.setDescubierto(true);
-                    notificarObservadores(null, new Mensaje(Evento.JUGADA_REALIZADA, null));
+                    notificarObservadores(coord, new Mensaje(Evento.JUGADA_REALIZADA, null));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

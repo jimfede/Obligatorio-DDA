@@ -1,0 +1,6 @@
+Singleton
+Observer
+Proxy
+Strategy
+Fcade
+Template

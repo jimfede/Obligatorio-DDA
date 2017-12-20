@@ -24,7 +24,7 @@ public class CasilleroCellRenderer extends JButton implements TableCellRenderer 
 
     @Override
     public Component getTableCellRendererComponent(JTable jtable, Object value, boolean bln, boolean bln1, int i, int i1) {
-        Casillero casillero = (Casillero) value;
+         Casillero casillero = (Casillero) value;
         if (casillero.isDescubierto()) {
             this.setBackground(Color.red);
         } else {

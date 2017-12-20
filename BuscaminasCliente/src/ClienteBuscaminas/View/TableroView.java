@@ -8,6 +8,7 @@ package ClienteBuscaminas.View;
 import ClienteBuscaminas.Controller.PartidaController;
 import CommonBuscaminas.Model.mensajes.Evento;
 import CommonBuscaminas.Model.mensajes.Mensaje;
+import CommonBuscaminas.Model.partidas.Casillero;
 import CommonBuscaminas.Model.partidas.Partida;
 import CommonBuscaminas.Model.partidas.Tablero;
 import javax.swing.JOptionPane;
@@ -48,6 +49,7 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        lblNotificacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setSize(new java.awt.Dimension(0, 0));
@@ -64,7 +66,7 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
             }
         ));
         jTableTablero.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jTableTablero.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        jTableTablero.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTableTablero.setRowSelectionAllowed(false);
         jTableTablero.setTableHeader(null);
         jScrollPane1.setViewportView(jTableTablero);
@@ -89,7 +91,10 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblNotificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,7 +108,9 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblNotificacion, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -116,6 +123,7 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableTablero;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblNotificacion;
     // End of variables declaration//GEN-END:variables
 
     private void actualizarVista() {
@@ -132,8 +140,11 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
     @Override
     public void procesarMensajeTablero(Object arg, Mensaje mensaje) {
         if (mensaje.getEvento() == Evento.JUGADA_NO_PERMITIDA) {
-            JOptionPane.showMessageDialog(null, mensaje.getAux().toString());
+            lblNotificacion.setText(mensaje.getAux().toString());
         } else if (mensaje.getEvento() == Evento.JUGADA_REALIZADA) {
+            int[] coords = (int[]) arg;
+            Casillero miCasillero = (Casillero) jTableTableModel.getValueAt(coords[0], coords[1]);
+            miCasillero.setDescubierto(true);
             actualizarVista();
         }
     }
