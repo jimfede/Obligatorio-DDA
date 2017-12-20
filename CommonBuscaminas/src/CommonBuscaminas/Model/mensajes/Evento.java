@@ -5,12 +5,17 @@
  */
 package CommonBuscaminas.Model.mensajes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Federico
  */
-public enum Evento {
+public enum Evento implements Serializable {
     CASILLERO_SELECCIONADO,
     JUGADA_REALIZADA,
-    JUGADA_NO_PERMITIDA
+    JUGADA_NO_PERMITIDA,
+    TURNO_INCORRECTO,
+    NUEVA_MINA,
+    JUEGO_TERMINADO
 }

@@ -7,8 +7,8 @@ package ServidorBuscaminas.Fachada;
 
 import CommonBuscaminas.Interfaces.IFacadeRemota;
 import CommonBuscaminas.Interfaces.IObservadorRemoto;
+import CommonBuscaminas.Model.mensajes.Evento;
 import ServidorBuscaminas.GestoraSingleton;
-import CommonBuscaminas.Model.apuestas.Apuesta;
 import CommonBuscaminas.Model.mensajes.Mensaje;
 import CommonBuscaminas.Model.partidas.Casillero;
 import CommonBuscaminas.Model.partidas.Partida;
@@ -103,5 +103,10 @@ public class FacadeRemota implements IFacadeRemota {
     @Override
     public boolean chequearSaldoInicio(Double monto, Jugador jugador) {
         return GestoraSingleton.getInstance().chequearSaldoInicio(monto, jugador);
+    }
+
+    @Override
+    public Evento jugarTurno(String idPartida, Jugador jugador, int[] coordenadas) throws RemoteException {
+        return GestoraSingleton.getInstance().obtenerPartida(idPartida).jugarTurno(jugador, new Casillero(coordenadas[0], coordenadas[1]));
     }
 }

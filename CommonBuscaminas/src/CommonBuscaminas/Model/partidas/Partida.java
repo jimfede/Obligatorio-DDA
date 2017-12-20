@@ -157,28 +157,38 @@ public final class Partida {
      * @param casillero Casillero a jugar
      * @return True si la jugada fue satisfactoria | False si hubo un problema
      */
-    public boolean jugarTurno(Jugador jugador, Casillero casillero) {
+    public Mensaje jugarTurno(Jugador jugador, Casillero casillero) throws RemoteException {
         if (this.turnoJugador == jugador) {
             if (casillero.isDescubierto() == false) {
                 if (casillero.getMina() == null) {
+
                     casillero.setDescubierto(true);
                     turnoJugadoPor(jugador);
                     this.turnosJugados++;
+
                     if (this.turnosJugados % 2 == 0) {
-//                        this.getTablero().insertarMina();
-//                      Se tiene que trasladar este metodo a traves de RMI para 
-//                          que los jugadores tengan nuevas minas
+                        int[] coords = this.getTablero().insertarMina();
+                        return new Mensaje(Evento.NUEVA_MINA, coords);
                     }
-                    return true;
+
+                    return new Mensaje(Evento.JUGADA_REALIZADA, null);
                 } else {
                     finalizarPartida();
-                    return false;
+                    return new Mensaje(Evento.JUEGO_TERMINADO, null);
                 }
             } else {
-                return false;
+                return new Mensaje(Evento.JUGADA_NO_PERMITIDA, null);
             }
         } else {
-            return false;
+            return new Mensaje(Evento.TURNO_INCORRECTO, null);
+        }
+    }
+
+    public boolean jugarCasillero(Jugador jugador, int x, int y) throws RemoteException {
+        Casillero xCasillero = (Casillero) this.tablero.obtenerCasillero(x, y);
+        if (xCasillero != null) {
+            xCasillero.setDescubierto(true);
+            return true;
         }
     }
 

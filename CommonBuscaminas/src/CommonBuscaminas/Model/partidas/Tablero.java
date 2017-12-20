@@ -76,7 +76,7 @@ public class Tablero implements Serializable{
      * Inserta una mina de manera aleatoria donde no hayan otras minas o la
      * casilla esté descubierta en el tablero actual.
      */
-    public void insertarMina() {
+    public int[] insertarMina() {
         Mina nuevaMina = minaRandom(this.casillerosX, this.casillerosY);
         boolean minaInsertada = false;
         do {
@@ -85,10 +85,13 @@ public class Tablero implements Serializable{
                     if (k.getCoordenadaX() == nuevaMina.getCoordenadaX() && k.getCoordenadaY() == nuevaMina.getCoordenadaY()) {
                         k.setMina(nuevaMina);
                         minaInsertada = true;
+                        return new int[]{k.getCoordenadaX(), k.getCoordenadaY()};
                     }
                 }
             }
         } while (minaInsertada == false);
+        
+        return null;
     }
 
     /**
