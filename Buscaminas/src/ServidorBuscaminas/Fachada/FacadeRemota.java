@@ -84,7 +84,7 @@ public class FacadeRemota implements IFacadeRemota {
         Partida miPartida = GestoraSingleton.getInstance().obtenerPartida(idPartida);
         if (miPartida != null) {
             miPartida.agregarObservador(obs);
-        }else{
+        } else {
             System.err.println("No se encontró una partida con el id: " + idPartida);
         }
 
@@ -105,8 +105,4 @@ public class FacadeRemota implements IFacadeRemota {
         return GestoraSingleton.getInstance().chequearSaldoInicio(monto, jugador);
     }
 
-    @Override
-    public Evento jugarTurno(String idPartida, Jugador jugador, int[] coordenadas) throws RemoteException {
-        return GestoraSingleton.getInstance().obtenerPartida(idPartida).jugarTurno(jugador, new Casillero(coordenadas[0], coordenadas[1]));
-    }
 }

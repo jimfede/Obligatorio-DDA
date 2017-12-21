@@ -157,38 +157,33 @@ public final class Partida {
      * @param casillero Casillero a jugar
      * @return True si la jugada fue satisfactoria | False si hubo un problema
      */
-    public Mensaje jugarTurno(Jugador jugador, Casillero casillero) throws RemoteException {
-        if (this.turnoJugador == jugador) {
-            if (casillero.isDescubierto() == false) {
-                if (casillero.getMina() == null) {
+    public Mensaje jugarTurno(Jugador jugador, Casillero casillero) {
+        try {
+            if (this.turnoJugador.getNombreUsuario().equals(jugador.getNombreUsuario())) {
+                if (casillero.isDescubierto() == false) {
+                    if (casillero.getMina() == null) {
 
-                    casillero.setDescubierto(true);
-                    turnoJugadoPor(jugador);
-                    this.turnosJugados++;
+                        casillero.setDescubierto(true);
+                        turnoJugadoPor(jugador);
+                        this.turnosJugados++;
 
-                    if (this.turnosJugados % 2 == 0) {
-                        int[] coords = this.getTablero().insertarMina();
-                        return new Mensaje(Evento.NUEVA_MINA, coords);
+                        int[] coords = null;
+                        if (this.turnosJugados % 2 == 0) {
+                            coords = this.getTablero().insertarMina();
+                        }
+
+                        return new Mensaje(Evento.JUGADA_REALIZADA, coords);
+                    } else {
+                        return new Mensaje(Evento.JUEGO_TERMINADO, null);
                     }
-
-                    return new Mensaje(Evento.JUGADA_REALIZADA, null);
                 } else {
-                    finalizarPartida();
-                    return new Mensaje(Evento.JUEGO_TERMINADO, null);
+                    return new Mensaje(Evento.JUGADA_NO_PERMITIDA, null);
                 }
             } else {
-                return new Mensaje(Evento.JUGADA_NO_PERMITIDA, null);
+                return new Mensaje(Evento.TURNO_INCORRECTO, null);
             }
-        } else {
+        } catch (NullPointerException n) {
             return new Mensaje(Evento.TURNO_INCORRECTO, null);
-        }
-    }
-
-    public boolean jugarCasillero(Jugador jugador, int x, int y) throws RemoteException {
-        Casillero xCasillero = (Casillero) this.tablero.obtenerCasillero(x, y);
-        if (xCasillero != null) {
-            xCasillero.setDescubierto(true);
-            return true;
         }
     }
 
@@ -211,7 +206,9 @@ public final class Partida {
         // cambiar estado a finalizada
         // pasar bolsa de apuesta a ganador
         // notificar a jugadores con cartelito
-        throw new NotImplementedException();
+        this.turnoJugador = null;
+//        Aca se pagan las apuestas
+
     }
 
     /**
@@ -221,10 +218,9 @@ public final class Partida {
      * @param jugador Jugador Actual
      */
     public void turnoJugadoPor(Jugador jugador) {
-        if (jugador == jugador1) {
+        if (jugador.getNombreUsuario().equals(jugador1.getNombreUsuario())) {
             this.turnoJugador = this.jugador2;
-        }
-        if (jugador == jugador2) {
+        } else {
             this.turnoJugador = this.jugador1;
         }
     }
@@ -233,12 +229,23 @@ public final class Partida {
         if (mensaje.getEvento() == Evento.CASILLERO_SELECCIONADO) {
             int[] coord = (int[]) mensaje.getAux();
             Casillero casilleroSeleccionado = (Casillero) this.tablero.obtenerCasillero(coord[0], coord[1]);
+            Mensaje m = jugarTurno(mensaje.getJugador(), casilleroSeleccionado);
             try {
-                if (casilleroSeleccionado.isDescubierto()) {
-                    notificarObservadores(null, new Mensaje(Evento.JUGADA_NO_PERMITIDA, "Jugada No permitida"));
-                } else {
-                    casilleroSeleccionado.setDescubierto(true);
-                    notificarObservadores(coord, new Mensaje(Evento.JUGADA_REALIZADA, null));
+                switch (m.getEvento()) {
+                    case JUGADA_REALIZADA:
+                        notificarObservadores(coord, new Mensaje(Evento.JUGADA_REALIZADA, null));
+                        break;
+                    case JUEGO_TERMINADO:
+                        notificarObservadores(this.turnoJugador, new Mensaje(Evento.JUEGO_TERMINADO, "Juego Terminado"));
+                        finalizarPartida();
+                        break;
+                    case JUGADA_NO_PERMITIDA:
+                        notificarObservadores(null, new Mensaje(Evento.JUGADA_NO_PERMITIDA, "Jugada No permitida"));
+                        break;
+                    case TURNO_INCORRECTO:
+                        notificarObservadores(null, new Mensaje(Evento.TURNO_INCORRECTO, "Turno Incorrecto"));
+                        break;
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();

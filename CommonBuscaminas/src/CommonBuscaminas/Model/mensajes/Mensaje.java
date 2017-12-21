@@ -5,20 +5,28 @@
  */
 package CommonBuscaminas.Model.mensajes;
 
+import CommonBuscaminas.Model.usuarios.Jugador;
 import java.io.Serializable;
 
 /**
  *
  * @author Federico
  */
-public class Mensaje implements Serializable{
+public class Mensaje implements Serializable {
 
     private Evento evento;
     private Object aux;
+    private Jugador jugador;
 
     public Mensaje(Evento evento, Object aux) {
         this.evento = evento;
         this.aux = aux;
+    }
+
+    public Mensaje(Evento evento, Object aux, Jugador jugador) {
+        this.evento = evento;
+        this.aux = aux;
+        this.jugador = jugador;
     }
 
     public Evento getEvento() {
@@ -35,6 +43,14 @@ public class Mensaje implements Serializable{
 
     public void setAux(Object aux) {
         this.aux = aux;
+    }
+
+    public Jugador getJugador() {
+        return jugador;
+    }
+
+    public void setJugador(Jugador jugador) {
+        this.jugador = jugador;
     }
 
 }

@@ -10,6 +10,7 @@ import CommonBuscaminas.Model.mensajes.Evento;
 import ClienteBuscaminas.View.ITableroView;
 import CommonBuscaminas.Interfaces.IObservadorRemoto;
 import CommonBuscaminas.Model.mensajes.Mensaje;
+import CommonBuscaminas.Model.usuarios.Jugador;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
@@ -50,7 +51,7 @@ public class PartidaController extends MouseAdapter implements IObservadorRemoto
     public void mouseClicked(MouseEvent click) {
         try {
             //Mensaje a envair
-            Mensaje myMensaje = new Mensaje(Evento.CASILLERO_SELECCIONADO, this.tablero.obtenerCeldaSeleccionada());
+            Mensaje myMensaje = new Mensaje(Evento.CASILLERO_SELECCIONADO, this.tablero.obtenerCeldaSeleccionada(), (Jugador) GestoraCliente.getInstance().getMyUsuario());
             //Obtengo la Fachada, a traves de la gestora cliente, 
             //y ejecuto el metodo remoto de Partida procesarMensajePartida
             GestoraCliente.getInstance().getFacade().procesarMensajePartida(idPartida, myMensaje);

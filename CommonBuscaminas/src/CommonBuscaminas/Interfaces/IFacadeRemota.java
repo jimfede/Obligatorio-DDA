@@ -54,7 +54,5 @@ public interface IFacadeRemota extends Remote {
     public boolean unirseAPartida(String idPartida, Jugador jugador) throws RemoteException;
 
     public boolean chequearSaldoInicio(Double monto, Jugador jugador) throws RemoteException;
-    
-    public Evento jugarTurno(String idPartida, Jugador jugador, int[] coordenadas) throws RemoteException;
 
 }

@@ -168,6 +168,7 @@ public class GestoraSingleton {
         Partida miPartida = obtenerPartida(idPartida);
         if (miPartida != null) {
             miPartida.setJugador2(jugador);
+            miPartida.setTurnoJugador(jugador);
             miPartida.comenzarPartida();
             return true;
         }

@@ -6,11 +6,15 @@
 package ClienteBuscaminas.View;
 
 import ClienteBuscaminas.Controller.PartidaController;
+import ClienteBuscaminas.GestoraCliente;
 import CommonBuscaminas.Model.mensajes.Evento;
 import CommonBuscaminas.Model.mensajes.Mensaje;
 import CommonBuscaminas.Model.partidas.Casillero;
+import CommonBuscaminas.Model.partidas.Mina;
 import CommonBuscaminas.Model.partidas.Partida;
 import CommonBuscaminas.Model.partidas.Tablero;
+import CommonBuscaminas.Model.usuarios.Jugador;
+import CommonBuscaminas.Model.usuarios.Usuario;
 import javax.swing.JOptionPane;
 //import javax.swing.JTable;
 
@@ -143,15 +147,33 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
             lblNotificacion.setText(mensaje.getAux().toString());
         } else if (mensaje.getEvento() == Evento.JUGADA_REALIZADA) {
             int[] coords = (int[]) arg;
+            int[] nuevaMina = (int[]) mensaje.getAux();
             Casillero miCasillero = (Casillero) jTableTableModel.getValueAt(coords[0], coords[1]);
             miCasillero.setDescubierto(true);
+            if (nuevaMina != null) {
+                ((Casillero) jTableTableModel.getValueAt(nuevaMina[0], nuevaMina[1])).setMina(new Mina());
+            }
             actualizarVista();
         }
+        if (mensaje.getEvento() == Evento.TURNO_INCORRECTO) {
+            lblNotificacion.setText(mensaje.getAux().toString());
+        }
+        if (mensaje.getEvento() == Evento.JUEGO_TERMINADO) {
+            String usuActual = GestoraCliente.getInstance().getMyUsuario().getNombreUsuario(); 
+            String usuMensaje = ((Jugador) arg).getNombreUsuario();
+            if (usuActual.equals(usuMensaje)) {
+                lblNotificacion.setText("Perdiste!");
+
+            } else {
+                lblNotificacion.setText("Ganaste!");
+            }
+        }
+
     }
 
     @Override
     public void agregarMouseListener(PartidaController partidaController) {
         this.jTableTablero.addMouseListener(partidaController);
     }
-    
+
 }
