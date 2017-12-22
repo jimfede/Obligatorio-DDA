@@ -218,7 +218,11 @@ public final class Partida {
         this.setGanador(this.turnoJugador == jugador1 ? jugador2 : jugador1);
         this.turnoJugador = null;
         this.pagarJugadorGanador(this.getGanador());
-
+        try{
+        notificarObservadores(this.turnoJugador, new Mensaje(Evento.JUEGO_TERMINADO, "Juego Terminado"));
+        }catch(Exception e){
+            
+        }
     }
 
     /**

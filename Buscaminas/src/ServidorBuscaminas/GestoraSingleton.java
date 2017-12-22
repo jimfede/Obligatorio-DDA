@@ -74,15 +74,17 @@ public class GestoraSingleton {
         if (!sesionIniciada(nombreUsuario)) {
             UsuarioVO vo = usrDao.leerUsuario(nombreUsuario);
             if (vo != null) {
-                if (vo.getRol().equals(Usuario.rol.jugador.toString())) {
-                    Jugador miJ = new Jugador(vo.getNombreUsuario(), vo.getClave(), vo.getNombreCompleto());
-                    miJ.setCredito(vo.getCredito());
-                    miJ.setRolUsuario(rol.jugador);
-                    miUser = (Usuario) miJ;
-                } else {
-                    Administrador miA = new Administrador(vo.getNombreUsuario(), vo.getClave(), vo.getNombreCompleto());
-                    miA.setRolUsuario(rol.administrador);
-                    miUser = (Usuario) miA;
+                if (vo.getNombreUsuario().equals(nombreUsuario) && vo.getClave().equals(clave)) {
+                    if (vo.getRol().equals(Usuario.rol.jugador.toString())) {
+                        Jugador miJ = new Jugador(vo.getNombreUsuario(), vo.getClave(), vo.getNombreCompleto());
+                        miJ.setCredito(vo.getCredito());
+                        miJ.setRolUsuario(rol.jugador);
+                        miUser = (Usuario) miJ;
+                    } else {
+                        Administrador miA = new Administrador(vo.getNombreUsuario(), vo.getClave(), vo.getNombreCompleto());
+                        miA.setRolUsuario(rol.administrador);
+                        miUser = (Usuario) miA;
+                    }
                 }
             }
         }
@@ -124,6 +126,7 @@ public class GestoraSingleton {
                     sesiones.remove(s);
                     //Busco una partida ya iniciada por el usuario. Si existe, 
                     //elimina de la partida al jugador y la partida actualiza su estado, dejando ganar al otro jugador
+                    BuscarPartidaAbandonadaIniciada(nombreUsuario);
                     BuscarPartidaAbandonada(nombreUsuario);
                     break;
                 }
@@ -201,6 +204,15 @@ public class GestoraSingleton {
 
     public void setPartidas(ArrayList<Partida> partidas) {
         GestoraSingleton.partidas = partidas;
+    }
+
+    private void BuscarPartidaAbandonadaIniciada(String nombreUsuario) {
+        for (Partida partida : partidas) {
+            if (partida.isPartidaIniciada() && partida.getJugador1().getNombreUsuario().equals(nombreUsuario)) {
+                partida.finalizarPartida();
+                break;
+            }
+        }
     }
 
 }
