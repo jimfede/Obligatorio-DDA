@@ -15,8 +15,10 @@ import CommonBuscaminas.Model.partidas.Partida;
 import CommonBuscaminas.Model.partidas.Tablero;
 import CommonBuscaminas.Model.usuarios.Jugador;
 import CommonBuscaminas.Model.usuarios.Usuario;
+import java.awt.Color;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
 //import javax.swing.JTable;
 
@@ -39,6 +41,9 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
         jTableTablero.setModel(this.jTableTableModel);
         jTableTablero.setDefaultRenderer(Object.class, new CasilleroCellRenderer());
         jTableTablero.setRowHeight(70);
+        this.setTitle("Partida Buscaminas");
+        this.lblJugador.setText(GestoraCliente.getInstance().getMyUsuario().getNombreCompleto());
+
     }
 
     /**
@@ -56,8 +61,9 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lblNotificacion = new javax.swing.JLabel();
+        lblJugador = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(0, 0));
 
         jTableTablero.setModel(new javax.swing.table.DefaultTableModel(
@@ -86,7 +92,7 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(177, 177, 177)
                         .addComponent(jLabel1))
@@ -94,7 +100,9 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
                         .addGap(42, 42, 42)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -111,7 +119,8 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -129,6 +138,7 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableTablero;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblJugador;
     private javax.swing.JLabel lblNotificacion;
     // End of variables declaration//GEN-END:variables
 
@@ -148,23 +158,24 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
         if (mensaje.getEvento() == Evento.JUGADA_NO_PERMITIDA) {
             lblNotificacion.setText(mensaje.getAux().toString());
         } else if (mensaje.getEvento() == Evento.JUGADA_REALIZADA) {
+            lblNotificacion.setText("");
             int[] coords = (int[]) arg;
             int[] nuevaMina = (int[]) mensaje.getAux();
             Casillero miCasillero = (Casillero) jTableTableModel.getValueAt(coords[0], coords[1]);
             miCasillero.setDescubierto(true);
             if (nuevaMina != null) {
-                ((Casillero) jTableTableModel.getValueAt(nuevaMina[0], nuevaMina[1])).setMina(new Mina());
+                ((Casillero) jTableTableModel.getValueAt(nuevaMina[0], nuevaMina[1])).setMina(new Mina(nuevaMina[0], nuevaMina[1]));
             }
             actualizarVista();
         }
         if (mensaje.getEvento() == Evento.TURNO_INCORRECTO) {
-            lblNotificacion.setText(mensaje.getAux().toString());
+            if (!((Usuario) arg).getNombreUsuario().equals(GestoraCliente.getInstance().getMyUsuario().getNombreUsuario())) {
+                lblNotificacion.setText(mensaje.getAux().toString());
+            }
         }
         if (mensaje.getEvento() == Evento.JUEGO_TERMINADO) {
-            MouseListener[] colMouses = this.jTableTablero.getMouseListeners();
-            for (int i = 0; i <= colMouses.length - 1; i++) {
-                this.jTableTablero.removeMouseListener(colMouses[i]);
-            }
+            mostrarMinas();
+            quitarMouseListeners();
 
             String usuActual = GestoraCliente.getInstance().getMyUsuario().getNombreUsuario();
             String usuMensaje = ((Jugador) arg).getNombreUsuario();
@@ -176,6 +187,24 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
             }
         }
 
+    }
+
+    public void mostrarMinas() {
+        Tablero miTablero = (Tablero) this.jTableTableModel.getModel();
+        for (Casillero casillero : miTablero.getCasilleros()) {
+            if (casillero.getMina() != null) {
+                ((CasilleroCellRenderer) this.jTableTablero.getCellRenderer(casillero.getCoordenadaX(), casillero.getCoordenadaY())).setBackground(Color.yellow);
+                actualizarVista();
+            }
+        }
+
+    }
+
+    public void quitarMouseListeners() {
+        MouseListener[] colMouses = this.jTableTablero.getMouseListeners();
+        for (int i = 0; i <= colMouses.length - 1; i++) {
+            this.jTableTablero.removeMouseListener(colMouses[i]);
+        }
     }
 
     @Override

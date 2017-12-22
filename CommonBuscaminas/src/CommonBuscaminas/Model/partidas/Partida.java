@@ -13,10 +13,7 @@ import CommonBuscaminas.Interfaces.IObservadorRemoto;
 import CommonBuscaminas.Model.usuarios.Jugador;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Observer;
 import java.util.UUID;
-import javafx.beans.Observable;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -95,7 +92,7 @@ public final class Partida {
      */
     public boolean nuevaApuesta(Jugador apostador, double monto) {
 
-        if (saldoSuficiente(apostador, monto) && this.turnoJugador == apostador) {
+        if (saldoSuficiente(apostador, monto)) {
             this.pozo.recibirApuesta(new Apuesta(apostador, monto));
             actualizarSaldo(apostador, monto);
             //this.timerApuesta = new TimerApuesta(5000);
@@ -194,6 +191,18 @@ public final class Partida {
         nuevaApuesta(this.jugador2, this.getApuestaInicial());
 //        notificarObservadores(new Mensaje(Evento.JUGADA_REALIZADA, "Comenzo partida"));
     }
+    
+    public void pagarJugadorGanador(Jugador jugador){
+        double montoGanador = 0;
+        for (Apuesta apuesta : pozo.getApuestas()) {
+            montoGanador+= apuesta.getMonto();
+        }
+        jugador.addCredito(montoGanador);
+    }
+    
+    public void pagarApuestas(){
+        
+    }
 
     public void finalizarPartida() {
         //TODO: Metodo finalizar partida sin terminar
@@ -207,7 +216,7 @@ public final class Partida {
         // pasar bolsa de apuesta a ganador
         // notificar a jugadores con cartelito
         this.turnoJugador = null;
-//        Aca se pagan las apuestas
+        this.pagarJugadorGanador(this.getGanador());
 
     }
 
@@ -237,13 +246,14 @@ public final class Partida {
                         break;
                     case JUEGO_TERMINADO:
                         notificarObservadores(this.turnoJugador, new Mensaje(Evento.JUEGO_TERMINADO, "Juego Terminado"));
+                        this.setGanador(this.turnoJugador == jugador1 ? jugador2 : jugador1);
                         finalizarPartida();
                         break;
                     case JUGADA_NO_PERMITIDA:
                         notificarObservadores(null, new Mensaje(Evento.JUGADA_NO_PERMITIDA, "Jugada No permitida"));
                         break;
                     case TURNO_INCORRECTO:
-                        notificarObservadores(null, new Mensaje(Evento.TURNO_INCORRECTO, "Turno Incorrecto"));
+                        notificarObservadores(this.turnoJugador, new Mensaje(Evento.TURNO_INCORRECTO, "Turno Incorrecto"));
                         break;
 
                 }

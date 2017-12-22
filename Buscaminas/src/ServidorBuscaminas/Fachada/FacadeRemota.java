@@ -24,7 +24,6 @@ import java.util.ArrayList;
  */
 public class FacadeRemota implements IFacadeRemota {
 
-    private ArrayList<IObservadorRemoto> observadores = new ArrayList<>();
     private static FacadeRemota miFacade;
 
     protected FacadeRemota() {

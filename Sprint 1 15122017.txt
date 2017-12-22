@@ -13,20 +13,25 @@ arreglar inicializarPartida, hay que separar el unirseAPartida que se llama al f
 
 Chequear mensajeria (faltan mensajes)
 
+- Mensajes de Apuestas
+
+
 arreglar UI
-		label de mensage generico
+		* label de mensage generico
 		etiquetas con nombre de jugadores
 		etiquetas con saldo de c/u
 		etiqueta con turno
 
+Modificar metodo de insertart mina (si sobra el tiempo), colocando en un arreglo de casilleros, los casilleros que esten sin mines y no descubiertos, y colocar una mina en uno de esos casilleros random, con maximo la longitud del arreglo
+
 ____________________________________
 
-OPCION A
-Chequear el update de la fachada para evitar que se notifiquen obervadores(PartidaController) que no corresponden
-mandando el id de partida en el mensaje.
+//OPCION A
+//Chequear el update de la fachada para evitar que se notifiquen obervadores(PartidaController) que no corresponden
+//mandando el id de partida en el mensaje.
 
-OPCION B
-Modificar agregarObservadores de fachada para que agregue los oberservadores (PartidaController) directamente a la partida que le corresponda.
+* OPCION B
+* Modificar agregarObservadores de fachada para que agregue los oberservadores (PartidaController) directamente a la partida que le corresponda.
 
 modificar saldo en la BD en metodo actualizar saldo
 

@@ -32,8 +32,8 @@ public class Tablero implements Serializable{
         this.casillerosY = casillerosY;
         int i = 0;
         int j = 0;
-        while (i <= casillerosX) {
-            while (j <= casillerosY) {
+        while (i <= casillerosX -1) {
+            while (j <= casillerosY -1) {
                 Casillero casillero = new Casillero(i, j);
                 this.casilleros.add(casillero);
                 j++;
@@ -75,11 +75,12 @@ public class Tablero implements Serializable{
     /**
      * Inserta una mina de manera aleatoria donde no hayan otras minas o la
      * casilla esté descubierta en el tablero actual.
+     * @return 
      */
     public int[] insertarMina() {
-        Mina nuevaMina = minaRandom(this.casillerosX, this.casillerosY);
         boolean minaInsertada = false;
         do {
+        Mina nuevaMina = minaRandom(this.casillerosX, this.casillerosY);
             for (Casillero k : casilleros) {
                 if (k.getMina() == null && !k.isDescubierto()) {
                     if (k.getCoordenadaX() == nuevaMina.getCoordenadaX() && k.getCoordenadaY() == nuevaMina.getCoordenadaY()) {

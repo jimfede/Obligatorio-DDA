@@ -7,11 +7,7 @@ package ClienteBuscaminas.View;
 
 import ClienteBuscaminas.GestoraCliente;
 import ClienteBuscaminas.Controller.LoginController;
-import CommonBuscaminas.Model.usuarios.Usuario;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +20,7 @@ public class LoginPanel extends javax.swing.JFrame {
      */
     public LoginPanel() {
         initComponents();
+                this.setTitle("Buscaminas - Login");
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 try {

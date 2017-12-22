@@ -35,5 +35,10 @@ public class TableroTableModel extends AbstractTableModel {
     public Object getValueAt(int x, int y) {
         return tablero.obtenerCasillero(x, y);
     }
+    
+    public Object getModel(){
+        return tablero;
+    }
+
 
 }

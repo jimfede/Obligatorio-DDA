@@ -79,4 +79,8 @@ public class Jugador extends Usuario implements Serializable{
         this.sesioniniciada = sesioniniciada;
     }
 
+    public void addCredito(double montoGanador) {
+        this.credito+= montoGanador;
+    }
+
 }

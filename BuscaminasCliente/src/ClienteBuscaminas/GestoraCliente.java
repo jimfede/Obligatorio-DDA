@@ -51,13 +51,13 @@ public class GestoraCliente {
     }
 
     public void unirseAPartida(String idPartida, Jugador jugador) {
-        try{
-        inicializarPartidaJugador(idPartida);
-        GestoraCliente.getInstance().getFacade().unirseAPartida(idPartida, (Jugador) GestoraCliente.getInstance().getMyUsuario());
-        }catch(Exception e){
+        try {
+            inicializarPartidaJugador(idPartida);
+            GestoraCliente.getInstance().getFacade().unirseAPartida(idPartida, (Jugador) GestoraCliente.getInstance().getMyUsuario());
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
 
     // 1 NUEVA PARTIDA
@@ -71,6 +71,14 @@ public class GestoraCliente {
             JOptionPane.showMessageDialog(null, "Saldo insuficiente");
         }
 
+    }
+
+    public boolean checkMedidasTablero(int casillerosX, int casillerosY) {
+        if ((casillerosX * casillerosY) >= 9 && (casillerosX * casillerosY) <= 100) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void setFacade(IFacadeRemota facade) {

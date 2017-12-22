@@ -6,13 +6,10 @@
 package ClienteBuscaminas.View;
 
 import ClienteBuscaminas.GestoraCliente;
-import ClienteBuscaminas.Controller.PartidaController;
-import CommonBuscaminas.Interfaces.IFacadeRemota;
-import CommonBuscaminas.Model.apuestas.Apuesta;
-import CommonBuscaminas.Model.partidas.Tablero;
 import CommonBuscaminas.Model.usuarios.Jugador;
 import java.rmi.RemoteException;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -25,7 +22,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        lblNombreUsu.setText(GestoraCliente.getInstance().getMyUsuario().getNombreCompleto());
+        this.setTitle("Crear nueva Partida");
     }
 
     /**
@@ -45,8 +42,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lblApuesta = new javax.swing.JLabel();
         txtApuesta = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        lblNombreUsu = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,10 +65,6 @@ public class Principal extends javax.swing.JFrame {
 
         lblApuesta.setText("Apuesta");
 
-        jLabel4.setText("Bienvenido: ");
-
-        lblNombreUsu.setText("jLabel5");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,23 +87,13 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(txtApuesta, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblApuesta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(146, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNombreUsu)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(lblNombreUsu))
-                        .addGap(127, 127, 127)
+                        .addGap(152, 152, 152)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -138,12 +119,21 @@ public class Principal extends javax.swing.JFrame {
     private void jbtnNuevaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNuevaPartidaActionPerformed
         int x = Integer.parseInt(txtX.getText());
         int y = Integer.parseInt(txtY.getText());
-        double apuesta = Double.parseDouble(txtApuesta.getText());
+        double apuesta;
         try {
-            GestoraCliente.getInstance().nuevaPartida((Jugador) GestoraCliente.getInstance().getMyUsuario(), x, y, apuesta);
-        } catch (Exception e) {
+            apuesta = Double.parseDouble(txtApuesta.getText());
+            if (GestoraCliente.getInstance().checkMedidasTablero(x, y)) {
+                GestoraCliente.getInstance().nuevaPartida((Jugador) GestoraCliente.getInstance().getMyUsuario(), x, y, apuesta);
+            } else {
+                JOptionPane.showMessageDialog(null, "La cantidad total de casilleros no puede ser menor a 9 o mayor a 100");
+            }
+
+        } catch (RemoteException e) {
             e.printStackTrace();
+        } catch (NumberFormatException n) {
+            JOptionPane.showMessageDialog(null, "Necesitas poner un monto a apostar");
         }
+
     }//GEN-LAST:event_jbtnNuevaPartidaActionPerformed
 
     /**
@@ -190,10 +180,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JButton jbtnNuevaPartida;
     private javax.swing.JLabel lblApuesta;
-    private javax.swing.JLabel lblNombreUsu;
     private javax.swing.JTextField txtApuesta;
     private javax.swing.JTextField txtX;
     private javax.swing.JTextField txtY;
