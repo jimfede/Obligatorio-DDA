@@ -15,6 +15,8 @@ import CommonBuscaminas.Model.partidas.Partida;
 import CommonBuscaminas.Model.partidas.Tablero;
 import CommonBuscaminas.Model.usuarios.Jugador;
 import CommonBuscaminas.Model.usuarios.Usuario;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 //import javax.swing.JTable;
 
@@ -159,7 +161,12 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
             lblNotificacion.setText(mensaje.getAux().toString());
         }
         if (mensaje.getEvento() == Evento.JUEGO_TERMINADO) {
-            String usuActual = GestoraCliente.getInstance().getMyUsuario().getNombreUsuario(); 
+            MouseListener[] colMouses = this.jTableTablero.getMouseListeners();
+            for (int i = 0; i <= colMouses.length - 1; i++) {
+                this.jTableTablero.removeMouseListener(colMouses[i]);
+            }
+
+            String usuActual = GestoraCliente.getInstance().getMyUsuario().getNombreUsuario();
             String usuMensaje = ((Jugador) arg).getNombreUsuario();
             if (usuActual.equals(usuMensaje)) {
                 lblNotificacion.setText("Perdiste!");
