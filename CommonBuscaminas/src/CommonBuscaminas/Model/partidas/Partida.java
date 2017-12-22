@@ -191,17 +191,17 @@ public final class Partida {
         nuevaApuesta(this.jugador2, this.getApuestaInicial());
 //        notificarObservadores(new Mensaje(Evento.JUGADA_REALIZADA, "Comenzo partida"));
     }
-    
-    public void pagarJugadorGanador(Jugador jugador){
+
+    public void pagarJugadorGanador(Jugador jugador) {
         double montoGanador = 0;
         for (Apuesta apuesta : pozo.getApuestas()) {
-            montoGanador+= apuesta.getMonto();
+            montoGanador += apuesta.getMonto();
         }
         jugador.addCredito(montoGanador);
     }
-    
-    public void pagarApuestas(){
-        
+
+    public void pagarApuestas() {
+
     }
 
     public void finalizarPartida() {
@@ -215,6 +215,7 @@ public final class Partida {
         // cambiar estado a finalizada
         // pasar bolsa de apuesta a ganador
         // notificar a jugadores con cartelito
+        this.setGanador(this.turnoJugador == jugador1 ? jugador2 : jugador1);
         this.turnoJugador = null;
         this.pagarJugadorGanador(this.getGanador());
 
@@ -246,7 +247,6 @@ public final class Partida {
                         break;
                     case JUEGO_TERMINADO:
                         notificarObservadores(this.turnoJugador, new Mensaje(Evento.JUEGO_TERMINADO, "Juego Terminado"));
-                        this.setGanador(this.turnoJugador == jugador1 ? jugador2 : jugador1);
                         finalizarPartida();
                         break;
                     case JUGADA_NO_PERMITIDA:
