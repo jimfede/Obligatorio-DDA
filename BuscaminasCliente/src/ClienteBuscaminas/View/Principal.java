@@ -117,10 +117,10 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnNuevaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNuevaPartidaActionPerformed
-        int x = Integer.parseInt(txtX.getText());
-        int y = Integer.parseInt(txtY.getText());
-        double apuesta;
         try {
+            int x = Integer.parseInt(txtX.getText());
+            int y = Integer.parseInt(txtY.getText());
+            double apuesta;
             apuesta = Double.parseDouble(txtApuesta.getText());
             if (GestoraCliente.getInstance().checkMedidasTablero(x, y)) {
                 GestoraCliente.getInstance().nuevaPartida((Jugador) GestoraCliente.getInstance().getMyUsuario(), x, y, apuesta);
@@ -131,7 +131,7 @@ public class Principal extends javax.swing.JFrame {
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NumberFormatException n) {
-            JOptionPane.showMessageDialog(null, "Necesitas poner un monto a apostar");
+            JOptionPane.showMessageDialog(null, "No pueden quedar campos vacios");
         }
 
     }//GEN-LAST:event_jbtnNuevaPartidaActionPerformed
