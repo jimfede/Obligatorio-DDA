@@ -7,12 +7,13 @@ package CommonBuscaminas.Model.partidas;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
  * @author Federico
  */
-public class Tablero implements Serializable{
+public class Tablero implements Serializable {
 
     private int casillerosX;
     private int casillerosY;
@@ -32,8 +33,8 @@ public class Tablero implements Serializable{
         this.casillerosY = casillerosY;
         int i = 0;
         int j = 0;
-        while (i <= casillerosX -1) {
-            while (j <= casillerosY -1) {
+        while (i <= casillerosX - 1) {
+            while (j <= casillerosY - 1) {
                 Casillero casillero = new Casillero(i, j);
                 this.casilleros.add(casillero);
                 j++;
@@ -75,36 +76,73 @@ public class Tablero implements Serializable{
     /**
      * Inserta una mina de manera aleatoria donde no hayan otras minas o la
      * casilla esté descubierta en el tablero actual.
-     * @return 
+     *
+     * @return
      */
     public int[] insertarMina() {
         boolean minaInsertada = false;
-        do {
-        Mina nuevaMina = minaRandom(this.casillerosX, this.casillerosY);
-            for (Casillero k : casilleros) {
-                if (k.getMina() == null && !k.isDescubierto()) {
-                    if (k.getCoordenadaX() == nuevaMina.getCoordenadaX() && k.getCoordenadaY() == nuevaMina.getCoordenadaY()) {
-                        k.setMina(nuevaMina);
-                        minaInsertada = true;
-                        return new int[]{k.getCoordenadaX(), k.getCoordenadaY()};
+        ArrayList<Casillero> casillerosLibres = obtenerCasillerosLibres();
+        if (casillerosLibres != null) {
+            do {
+                Mina nuevaMina = minaRandom(casillerosLibres);
+                for (Casillero k : casilleros) {
+                    if (k.getMina() == null && !k.isDescubierto()) {
+                        if (k.getCoordenadaX() == nuevaMina.getCoordenadaX() && k.getCoordenadaY() == nuevaMina.getCoordenadaY()) {
+                            k.setMina(nuevaMina);
+                            minaInsertada = true;
+                            return new int[]{k.getCoordenadaX(), k.getCoordenadaY()};
+                        }
                     }
                 }
-            }
-        } while (minaInsertada == false);
-        
+            } while (minaInsertada == false);
+
+        }
+
         return null;
+    }
+
+    public ArrayList<Casillero> obtenerCasillerosLibres() {
+        ArrayList<Casillero> misCasilleros = new ArrayList<>();
+        for (Casillero casillero : casilleros) {
+            if (!casillero.isDescubierto() && casillero.getMina() == null) {
+                misCasilleros.add(casillero);
+            }
+        }
+        return misCasilleros;
     }
 
     /**
      * Calcula de manera aleatoria, donde colocar la proxima mina, dentro de un
      * rango maximo de X e Y
      *
-     * @param casillerosX Cantidad de Casilleros en X
-     * @param casillerosY Cantidad de Casilleros en Y
      * @return Nuevo Objeto mina a colocar.
      */
-    public Mina minaRandom(int casillerosX, int casillerosY) {
-        Mina nuevaMina = new Mina((int) (Math.random() * casillerosX) + 1, (int) (Math.random() * casillerosY) + 1);
+    public Mina minaRandom() {
+        ArrayList<Casillero> misCasillas = obtenerCasillerosLibres();
+        Mina nuevaMina = null;
+
+        if (misCasillas != null) {
+            Casillero casillaRand = misCasillas.get(new Random().nextInt(misCasillas.size()));
+            nuevaMina = new Mina(casillaRand.getCoordenadaX(), casillaRand.getCoordenadaY());
+//            nuevaMina = new Mina((int) (Math.random() * casillerosX) + 1, (int) (Math.random() * casillerosY) + 1);
+        }
+        return nuevaMina;
+    }
+
+    /**
+     * Calcula de manera aleatoria, donde colocar la proxima mina, dentro de un
+     * rango maximo de X e Y
+     *
+     * @param misCasillas Arraylist<Casillero>
+     * @return Nuevo Objeto mina a colocar.
+     */
+    public Mina minaRandom(ArrayList<Casillero> misCasillas) {
+        Mina nuevaMina = null;
+
+        if (misCasillas != null) {
+            Casillero casillaRand = misCasillas.get(new Random().nextInt(misCasillas.size()));
+            nuevaMina = new Mina(casillaRand.getCoordenadaX(), casillaRand.getCoordenadaY());
+        }
         return nuevaMina;
     }
 
