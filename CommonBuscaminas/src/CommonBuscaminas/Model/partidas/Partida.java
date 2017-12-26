@@ -163,7 +163,6 @@ public final class Partida {
                         casillero.setDescubierto(true);
                         turnoJugadoPor(jugador);
                         this.turnosJugados++;
-
                         int[] coords = null;
                         if (this.turnosJugados % 2 == 0) {
                             coords = this.getTablero().insertarMina();
@@ -218,10 +217,10 @@ public final class Partida {
         this.setGanador(this.turnoJugador == jugador1 ? jugador2 : jugador1);
         this.turnoJugador = null;
         this.pagarJugadorGanador(this.getGanador());
-        try{
-        notificarObservadores(this.turnoJugador, new Mensaje(Evento.JUEGO_TERMINADO, "Juego Terminado"));
-        }catch(Exception e){
-            
+        try {
+            notificarObservadores(this.turnoJugador, new Mensaje(Evento.JUEGO_TERMINADO, "Juego Terminado"));
+        } catch (Exception e) {
+
         }
     }
 
@@ -247,7 +246,7 @@ public final class Partida {
             try {
                 switch (m.getEvento()) {
                     case JUGADA_REALIZADA:
-                        notificarObservadores(coord, new Mensaje(Evento.JUGADA_REALIZADA, null));
+                        notificarObservadores(coord, new Mensaje(Evento.JUGADA_REALIZADA, coord));
                         break;
                     case JUEGO_TERMINADO:
                         notificarObservadores(this.turnoJugador, new Mensaje(Evento.JUEGO_TERMINADO, "Juego Terminado"));

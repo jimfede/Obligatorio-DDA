@@ -144,6 +144,7 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
 
     private void actualizarVista() {
         this.jTableTableModel.fireTableDataChanged();
+        this.jTableTableModel.fireTableStructureChanged();
     }
 
     @Override
@@ -190,14 +191,16 @@ public class TableroView extends javax.swing.JFrame implements ITableroView {
     }
 
     public void mostrarMinas() {
-        Tablero miTablero = (Tablero) this.jTableTableModel.getModel();
-        for (Casillero casillero : miTablero.getCasilleros()) {
-            if (casillero.getMina() != null) {
-                ((CasilleroCellRenderer) this.jTableTablero.getCellRenderer(casillero.getCoordenadaX(), casillero.getCoordenadaY())).setBackground(Color.yellow);
-                actualizarVista();
-            }
-        }
 
+        this.jTableTablero.setDefaultRenderer(Object.class, new CasilleroCellRendererMinas());
+        //actualizarVista();
+//        Tablero miTablero = (Tablero) this.jTableTableModel.getModel();
+//        for (Casillero casillero : miTablero.getCasilleros()) {
+//            if (casillero.getMina() != null) {
+//                ((CasilleroCellRenderer) this.jTableTablero.getCellRenderer(casillero.getCoordenadaX(), casillero.getCoordenadaY())).setBackground(Color.yellow);
+        actualizarVista();
+//            }
+//        }
     }
 
     public void quitarMouseListeners() {
